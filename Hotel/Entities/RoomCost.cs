@@ -7,7 +7,7 @@ namespace Hotel.Entities
 {
     public class RoomCost
     {
-        public int CostID { get; set; }
+        public int RoomCostID { get; set; }
         public virtual Category Category { get; set; }
         public int NumberOfSeats { get; set; }
         public bool HasMiniBar { get; set; }
