@@ -28,6 +28,7 @@ namespace Hotel.Entities
             _connectionString = configuration.GetSection("ConnectionStrings").GetConnectionString("HotelContext");*/
             _connectionString = "data source=localhost;initial catalog=HotelProd;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;";
         }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Role> Roles { get; set; }
