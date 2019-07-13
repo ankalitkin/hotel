@@ -12,10 +12,8 @@ namespace Hotel.Entities
         public DateTime CheckInTime { get; set; }
         public DateTime CheckOutTime { get; set; }
 
-        [JsonIgnore]
-        public virtual User User { get; set; }
-        [JsonIgnore]
-        public virtual Room Room { get; set; }
+        [JsonIgnore] public virtual User User { get; set; }
+        [JsonIgnore] public virtual Room Room { get; set; }
 
         public int UserId { get; set; }
         public int RoomId { get; set; }

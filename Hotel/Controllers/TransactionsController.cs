@@ -28,7 +28,7 @@ namespace Hotel.Controllers
         }
 
         // GET: api/Transactions/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<Transaction>> GetTransaction(int id)
         {
             var transaction = await _context.Transactions.FindAsync(id);
@@ -42,7 +42,7 @@ namespace Hotel.Controllers
         }
 
         // PUT: api/Transactions/5
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> PutTransaction(int id, [FromBody]Transaction transaction)
         {
             if (id != transaction.TransactionId)
@@ -82,7 +82,7 @@ namespace Hotel.Controllers
         }
 
         // DELETE: api/Transactions/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult<Transaction>> DeleteTransaction(int id)
         {
             var transaction = await _context.Transactions.FindAsync(id);
@@ -102,17 +102,44 @@ namespace Hotel.Controllers
             return _context.Transactions.Any(e => e.TransactionId == id);
         }
 
-        [HttpGet("History/{UserId}")]
-        public async Task<ActionResult<IEnumerable<Transaction>>> GetHistory(int UserId)
+        // GET HISTORY: api/Transactions/History/3?isPaid=false
+        [HttpGet("History/{id:int}")]
+        public async Task<ActionResult<IEnumerable<Transaction>>> GetHistory(int id, bool IsOnlyPaid = false) // IsOnlyPaid == true  только оплаченные(т.е. только история проживаия, без бронироваия)
         {
-            return await _context.Transactions.AsNoTracking().Where(t=> t.UserId == UserId).ToListAsync();
+            return await _context.Transactions.AsNoTracking().Where(t=> t.UserId == id && (IsOnlyPaid? t.IsPaid : true)).ToListAsync();
         }
 
+        // GET INFO: api/Transactions/Info
         [HttpGet("Info")]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetInfo()
         {
             DateTime date = DateTime.Today;
             return await _context.Transactions.AsNoTracking().Where(t=> t.CheckOutTime >= date).ToListAsync();
+        }
+
+        // GET INFO: api/transactions/FinancialInformation?start=07%2F13%2F2019&end=07%2F16%2F2019&dividedByDay=true
+        [HttpGet("FinancialInformation")]
+        public async Task<ActionResult<IEnumerable<string>>> GetFinancialInformation(DateTime start, DateTime? end, bool dividedByDay = true) //dividedByDay == true - просто сумма за весь период
+        {
+            if (end == null)
+                end = DateTime.Now;
+
+            if (dividedByDay)
+            {
+                var result = _context.Transactions.AsNoTracking()
+                .Where(t => t.CheckInTime >= start && t.CheckInTime <= end)
+                .GroupBy(t => t.CheckInTime.Date)
+                .Select(g => new string ($"{g.Key} : {g.Sum(t => t.Cost)}"));
+
+                return await result.ToListAsync();
+            }
+            else
+            {
+                var result = await _context.Transactions.AsNoTracking()
+                    .Where(t => t.CheckInTime >= start && t.CheckInTime <= end)
+                    .SumAsync(t => t.Cost);
+                return  new string[] { result.ToString()};
+            }
         }
     }
 }
