@@ -18,6 +18,7 @@ namespace Hotel.Entities
         [StringLength(12)]
         public string ClientID { get; set; }
         public virtual Role Role { get; set; }
+        public int RoleId { get; set; }
         public bool IsDeleted { get; set; }
 
         [NotMapped] public bool CanEditRooms => Role.Rights.HasFlag(Role.AccessRights.CanEditRooms);
