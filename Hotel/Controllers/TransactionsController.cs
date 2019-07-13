@@ -43,7 +43,7 @@ namespace Hotel.Controllers
 
         // PUT: api/Transactions/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTransaction(int id, Transaction transaction)
+        public async Task<IActionResult> PutTransaction(int id, [FromBody]Transaction transaction)
         {
             if (id != transaction.TransactionId)
             {
@@ -73,7 +73,7 @@ namespace Hotel.Controllers
 
         // POST: api/Transactions
         [HttpPost]
-        public async Task<ActionResult<Transaction>> PostTransaction(Transaction transaction)
+        public async Task<ActionResult<Transaction>> PostTransaction([FromBody]Transaction transaction)
         {
             _context.Transactions.Add(transaction);
             await _context.SaveChangesAsync();
@@ -100,6 +100,19 @@ namespace Hotel.Controllers
         private bool TransactionExists(int id)
         {
             return _context.Transactions.Any(e => e.TransactionId == id);
+        }
+
+        [HttpGet("History/{UserId}")]
+        public async Task<ActionResult<IEnumerable<Transaction>>> GetHistory(int UserId)
+        {
+            return await _context.Transactions.AsNoTracking().Where(t=> t.UserId == UserId).ToListAsync();
+        }
+
+        [HttpGet("Info")]
+        public async Task<ActionResult<IEnumerable<Transaction>>> GetInfo()
+        {
+            DateTime date = DateTime.Today;
+            return await _context.Transactions.AsNoTracking().Where(t=> t.CheckOutTime >= date).ToListAsync();
         }
     }
 }
