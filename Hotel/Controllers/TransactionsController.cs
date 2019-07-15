@@ -109,37 +109,29 @@ namespace Hotel.Controllers
             return await _context.Transactions.AsNoTracking().Where(t=> t.UserId == id && (IsOnlyPaid? t.IsPaid : true)).ToListAsync();
         }
 
-        // GET INFO: api/Transactions/Info
+        // GET INFO: api/Transactions/Info?date=07%2F13%2F2019
         [HttpGet("Info")]
-        public async Task<ActionResult<IEnumerable<Transaction>>> GetInfo()
+        public async Task<ActionResult<IEnumerable<Transaction>>> GetInfo(DateTime? date)
         {
-            DateTime date = DateTime.Today;
+            if(date == null)
+                date = DateTime.Today;
+
             return await _context.Transactions.AsNoTracking().Where(t=> t.CheckOutTime >= date).ToListAsync();
         }
 
-        // GET INFO: api/transactions/FinancialInformation?start=07%2F13%2F2019&end=07%2F16%2F2019&dividedByDay=true
+
+        // GET INFO: api/transactions/FinancialInformation?start=07%2F13%2F2019&end=07%2F16%2F2019
         [HttpGet("FinancialInformation")]
-        public async Task<ActionResult<IEnumerable<string>>> GetFinancialInformation(DateTime start, DateTime? end, bool dividedByDay = true) //dividedByDay == true - просто сумма за весь период
+        public async Task<ActionResult<IEnumerable<Tuple<DateTime, int>>>> GetFinancialInformation(DateTime start, DateTime? end)
         {
             if (end == null)
                 end = DateTime.Now;
+            var result = _context.Transactions.AsNoTracking()
+            .Where(t => t.CheckInTime >= start && t.CheckInTime <= end)
+            .GroupBy(t => t.CheckInTime.Date)
+            .Select(g => new Tuple<DateTime, int>(g.Key, g.Sum(t => t.Cost)));
 
-            if (dividedByDay)
-            {
-                var result = _context.Transactions.AsNoTracking()
-                .Where(t => t.CheckInTime >= start && t.CheckInTime <= end)
-                .GroupBy(t => t.CheckInTime.Date)
-                .Select(g => new string ($"{g.Key} : {g.Sum(t => t.Cost)}"));
-
-                return await result.ToListAsync();
-            }
-            else
-            {
-                var result = await _context.Transactions.AsNoTracking()
-                    .Where(t => t.CheckInTime >= start && t.CheckInTime <= end)
-                    .SumAsync(t => t.Cost);
-                return  new string[] { result.ToString()};
-            }
+            return await result.ToListAsync();
         }
     }
 }
