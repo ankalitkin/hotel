@@ -116,20 +116,30 @@ namespace Hotel.Controllers
             if(date == null)
                 date = DateTime.Today;
 
-            return await _context.Transactions.AsNoTracking().Where(t=> t.CheckOutTime >= date).ToListAsync();
+            return await _context.Transactions.AsNoTracking().Where(t=> t.CheckOutTime >= date && !t.Iscanceled).ToListAsync();
         }
 
+        public class FinancialInfo
+        {
+            public DateTime dateTime;
+            public int Sum;
 
+            public FinancialInfo(DateTime dateTime, int Sum)
+            {
+                this.dateTime = dateTime;
+                this.Sum = Sum;
+            }
+        }
         // GET INFO: api/transactions/FinancialInformation?start=07%2F13%2F2019&end=07%2F16%2F2019
         [HttpGet("FinancialInformation")]
-        public async Task<ActionResult<IEnumerable<Tuple<DateTime, int>>>> GetFinancialInformation(DateTime start, DateTime? end)
+        public async Task<ActionResult<IEnumerable<FinancialInfo>>> GetFinancialInformation(DateTime start, DateTime? end)
         {
             if (end == null)
                 end = DateTime.Now;
             var result = _context.Transactions.AsNoTracking()
             .Where(t => t.CheckInTime >= start && t.CheckInTime <= end)
             .GroupBy(t => t.CheckInTime.Date)
-            .Select(g => new Tuple<DateTime, int>(g.Key, g.Sum(t => t.Cost)));
+            .Select(g => new FinancialInfo(g.Key, g.Sum(t => t.Cost)));
 
             return await result.ToListAsync();
         }
