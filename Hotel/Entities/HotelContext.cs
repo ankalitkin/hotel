@@ -76,7 +76,7 @@ namespace Hotel.Entities
             modelBuilder.Entity<Category>().HasData(Economy, Ordinary, Lux);
             modelBuilder.Entity<Room>().HasData(room1, room2, room3);
             modelBuilder.Entity<RoomCost>().HasData(room1Cost, room2Cost, room3Cost);
-
+            /*
             modelBuilder.Entity<Transaction>().HasData(
             new Transaction { TransactionId = 1, CheckInTime = DateTime.Now, CheckOutTime = DateTime.Now.AddDays(1), UserId = user3.UserId, RoomId = room1.RoomId, Cost = room1Cost.Cost, IsPaid = true });
             //*/

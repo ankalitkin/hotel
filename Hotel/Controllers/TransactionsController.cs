@@ -24,8 +24,18 @@ namespace Hotel.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetTransactions()
         {
-            return await _context.Transactions.AsNoTracking().ToListAsync();
+            var list = await _context.Transactions.AsNoTracking().ToListAsync();
+            // пробовал по-другому, с Join, но что-то не вышло(
+            foreach(Transaction t in list)
+            {
+                User user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == t.UserId);
+                Role role = await _context.Roles.FirstOrDefaultAsync(r => r.RoleId == user.RoleId);
+                user.Role = role;
+                t.User = user;
+            }
+            return list;
         }
+
 
         // GET: api/Transactions/5
         [HttpGet("{id:int}")]
@@ -86,6 +96,7 @@ namespace Hotel.Controllers
         public async Task<ActionResult<Transaction>> DeleteTransaction(int id)
         {
             var transaction = await _context.Transactions.FindAsync(id);
+
             if (transaction == null)
             {
                 return NotFound();
@@ -93,7 +104,6 @@ namespace Hotel.Controllers
 
             _context.Transactions.Remove(transaction);
             await _context.SaveChangesAsync();
-
             return transaction;
         }
 
@@ -116,7 +126,7 @@ namespace Hotel.Controllers
             if(date == null)
                 date = DateTime.Today;
 
-            return await _context.Transactions.AsNoTracking().Where(t=> t.CheckOutTime >= date && !t.Iscanceled).ToListAsync();
+            return await _context.Transactions.AsNoTracking().Where(t=> t.CheckOutTime >= date && !t.IsCanceled).ToListAsync();
         }
 
         public class FinancialInfo

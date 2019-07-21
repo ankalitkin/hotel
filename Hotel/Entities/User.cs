@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,7 +18,7 @@ namespace Hotel.Entities
         public string Email { get; set; }
         [StringLength(12)]
         public string ClientID { get; set; }
-        public virtual Role Role { get; set; }
+        [JsonIgnore] public virtual Role Role { get; set; }
         public int RoleId { get; set; }
         public bool IsDeleted { get; set; }
 

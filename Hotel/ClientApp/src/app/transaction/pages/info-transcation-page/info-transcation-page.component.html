@@ -1,0 +1,12 @@
+
+<ng-container *ngIf="isLoaded == true">
+  <info-transaction [transactions]="transactions"></info-transaction>
+</ng-container>
+<ng-container *ngIf="isLoaded != true">
+  <div align="center">
+    <span > Идёт загрузка данных.Пожалуйста подождите... </span>
+    <br />
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+</ng-container>
+

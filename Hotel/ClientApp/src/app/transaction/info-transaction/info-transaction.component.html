@@ -1,0 +1,104 @@
+
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.TheNoumber}} </td>
+    </ng-container>
+
+    <!-- UserName Column -->
+    <ng-container matColumnDef="userName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Пользователь </th>
+      <td mat-cell *matCellDef="let row"> {{row.UserName}} </td>
+    </ng-container>
+
+    <!-- DateComeIn Column -->
+    <ng-container matColumnDef="dateComeIn">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Дата въезда </th>
+      <td mat-cell *matCellDef="let row"> {{row.ComeIn}} </td>
+    </ng-container>
+
+    <!-- DateComeOut Column -->
+    <ng-container matColumnDef="dateComeOut">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Дата выезда </th>
+      <td mat-cell *matCellDef="let row"> {{row.ComeOut}} </td>
+    </ng-container>
+
+    <!-- Cost Column -->
+    <ng-container matColumnDef="cost">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Стоимость </th>
+      <td mat-cell *matCellDef="let row"> {{row.cost}} руб. </td>
+    </ng-container>
+
+    <!--Me-->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div class="element-detail"
+             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="element-description">
+            <table>
+              <tr>
+                <td><span> Информация о пользователе:</span></td>
+              </tr>
+              <tr>
+                <td><span>Пользователь: {{element.UserName}}</span></td>
+              </tr>
+              <tr>
+                <td><span>UserID: {{element.userId}}</span></td>
+              </tr>
+              <tr>
+                <td><span>Дата рождения: {{element.user.birthDate | date: "dd-mm-yyy"}}</span></td>
+              </tr>
+              <tr>
+                <td><span>Телефон: {{element.user.phone}}</span></td>
+              </tr>
+              <tr>
+                <td><span>Email: {{element.user.email}}</span></td>
+              </tr>
+              <tr>
+                <td><span>ClientID: {{element.user.clientID}}</span></td>
+              </tr>
+              <tr>
+                <td><span>Номер роли: {{element.user.roleId}}</span></td>
+              </tr>
+              <tr>
+                <td><span>Удален: </span> <mat-checkbox [labelPosition]="before" value="{{element.user.isDeleted}}" [disabled]="true"></mat-checkbox> </td>
+              </tr>
+            </table>
+
+          </div>
+
+          <span class="buttons">
+
+            <button mat-raised-button routerLink="."> Оплатить </button>
+
+            <button mat-raised-button> Редактировать </button>
+
+            <button mat-raised-button> Отменить </button>
+
+            <button mat-raised-button> Удалить </button>
+          </span>
+
+        </div>
+      </td>
+    </ng-container>
+    <!--Me-->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+        class="element-row"
+        [class.expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element"></tr>
+
+    <!--me-->
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+    <!--me-->
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
