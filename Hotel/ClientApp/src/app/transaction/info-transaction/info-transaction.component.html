@@ -1,0 +1,90 @@
+<router-outlet></router-outlet>
+
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+
+    <!-- Number Column -->
+    <ng-container matColumnDef="TheNoumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> № </th>
+      <td mat-cell *matCellDef="let row"> {{row.TheNoumber}} </td>
+    </ng-container>
+
+    <!-- UserName Column -->
+    <ng-container matColumnDef="UserID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID Пользователя </th>
+      <td mat-cell *matCellDef="let row"> {{row.userId}}</td>
+    </ng-container>
+
+    <!-- DateComeIn Column -->
+    <ng-container matColumnDef="ComeIn">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Дата въезда </th>
+      <td mat-cell *matCellDef="let row"> {{row.ComeIn}} </td>
+    </ng-container>
+
+    <!-- DateComeOut Column -->
+    <ng-container matColumnDef="ComeOut">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Дата выезда </th>
+      <td mat-cell *matCellDef="let row"> {{row.ComeOut}} </td>
+    </ng-container>
+
+    <!-- Cost Column -->
+    <ng-container matColumnDef="cost">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Стоимость </th>
+      <td mat-cell *matCellDef="let row"> {{row.cost}} руб. </td>
+    </ng-container>
+
+    <!--Me-->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div class="element-detail"
+             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+          <div>
+            <ng-container *ngIf="element == expandedElement && showInfoUser">
+              <app-expand-transaction-page (SaveTemp)="SaveTemp($event)" [id]="element.userId" [userInfo]="tempUserInfo"></app-expand-transaction-page>
+            </ng-container>
+          </div>
+
+          <div>
+            <button class="userInfoButton" mat-raised-button (click)="showInfoUser = !showInfoUser"> Пользователь </button>
+
+            <button mat-raised-button> Оплатить </button>
+
+            <button mat-raised-button [routerLink]="'./edit/' + element.transactionId" > Редактировать </button>
+
+            <button mat-raised-button> Отменить </button>
+
+            <button mat-raised-button> Удалить </button>
+
+          </div>
+
+
+
+
+          <!--<router-outlet></router-outlet> -->
+
+
+
+        </div>
+      </td>
+    </ng-container>
+    <!--Me-->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+        class="element-row"
+        [class.expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element"
+        (click)="showInfoUser = false"></tr>
+
+    <!--me-->
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+    <!--me-->
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+

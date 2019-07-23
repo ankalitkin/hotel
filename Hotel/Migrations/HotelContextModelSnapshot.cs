@@ -30,6 +30,23 @@ namespace Hotel.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            Name = "Economy"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            Name = "Ordinary"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            Name = "Lux"
+                        });
                 });
 
             modelBuilder.Entity("Hotel.Entities.Role", b =>
@@ -45,6 +62,26 @@ namespace Hotel.Migrations
                     b.HasKey("RoleId");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            Name = "Owner",
+                            Rights = 2047
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            Name = "Admin",
+                            Rights = 488
+                        },
+                        new
+                        {
+                            RoleId = 3,
+                            Name = "Visitor",
+                            Rights = 576
+                        });
                 });
 
             modelBuilder.Entity("Hotel.Entities.Room", b =>
@@ -63,22 +100,54 @@ namespace Hotel.Migrations
 
                     b.Property<int>("NumberOfSeats");
 
-                    b.Property<int?>("RoomTypeCategoryId");
+                    b.Property<int>("RoomTypeId");
 
                     b.HasKey("RoomId");
 
-                    b.HasIndex("RoomTypeCategoryId");
+                    b.HasIndex("RoomTypeId");
 
                     b.ToTable("Rooms");
+
+                    b.HasData(
+                        new
+                        {
+                            RoomId = 1,
+                            Floor = "Подвал",
+                            HasMiniBar = false,
+                            IsDeleted = false,
+                            Name = "101",
+                            NumberOfSeats = 2,
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            RoomId = 2,
+                            Floor = "3",
+                            HasMiniBar = false,
+                            IsDeleted = false,
+                            Name = "121",
+                            NumberOfSeats = 3,
+                            RoomTypeId = 2
+                        },
+                        new
+                        {
+                            RoomId = 3,
+                            Floor = "12",
+                            HasMiniBar = true,
+                            IsDeleted = false,
+                            Name = "14a",
+                            NumberOfSeats = 2,
+                            RoomTypeId = 3
+                        });
                 });
 
             modelBuilder.Entity("Hotel.Entities.RoomCost", b =>
                 {
-                    b.Property<int>("RoomCostID")
+                    b.Property<int>("RoomCostId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CategoryId");
+                    b.Property<int>("CategoryId");
 
                     b.Property<int>("Cost");
 
@@ -86,16 +155,42 @@ namespace Hotel.Migrations
 
                     b.Property<int>("NumberOfSeats");
 
-                    b.HasKey("RoomCostID");
+                    b.HasKey("RoomCostId");
 
                     b.HasIndex("CategoryId");
 
                     b.ToTable("RoomCosts");
+
+                    b.HasData(
+                        new
+                        {
+                            RoomCostId = 1,
+                            CategoryId = 1,
+                            Cost = 3500,
+                            HasMiniBar = false,
+                            NumberOfSeats = 2
+                        },
+                        new
+                        {
+                            RoomCostId = 2,
+                            CategoryId = 2,
+                            Cost = 5200,
+                            HasMiniBar = false,
+                            NumberOfSeats = 3
+                        },
+                        new
+                        {
+                            RoomCostId = 3,
+                            CategoryId = 3,
+                            Cost = 11700,
+                            HasMiniBar = true,
+                            NumberOfSeats = 2
+                        });
                 });
 
             modelBuilder.Entity("Hotel.Entities.Transaction", b =>
                 {
-                    b.Property<int>("TransactionID")
+                    b.Property<int>("TransactionId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -105,19 +200,34 @@ namespace Hotel.Migrations
 
                     b.Property<int>("Cost");
 
+                    b.Property<bool>("IsCanceled");
+
                     b.Property<bool>("IsPaid");
 
-                    b.Property<int?>("RoomId");
+                    b.Property<int>("RoomId");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int>("UserId");
 
-                    b.HasKey("TransactionID");
+                    b.HasKey("TransactionId");
 
                     b.HasIndex("RoomId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Transactions");
+
+                    b.HasData(
+                        new
+                        {
+                            TransactionId = 1,
+                            CheckInTime = new DateTime(2019, 7, 20, 2, 49, 42, 898, DateTimeKind.Local).AddTicks(5644),
+                            CheckOutTime = new DateTime(2019, 7, 21, 2, 49, 42, 899, DateTimeKind.Local).AddTicks(9265),
+                            Cost = 3500,
+                            IsCanceled = false,
+                            IsPaid = true,
+                            RoomId = 1,
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("Hotel.Entities.User", b =>
@@ -141,45 +251,88 @@ namespace Hotel.Migrations
 
                     b.Property<string>("Phone");
 
-                    b.Property<int?>("RoleId");
+                    b.Property<int>("RoleId");
 
                     b.HasKey("UserId");
 
                     b.HasIndex("RoleId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            BirthDate = new DateTime(1996, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientID = "123456789012",
+                            Email = "Tom@mail.ru",
+                            FirstName = "Tom",
+                            IsDeleted = false,
+                            LastName = "Timmi",
+                            Phone = "8-800-555-35-35",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            BirthDate = new DateTime(1999, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientID = "123456789013",
+                            Email = "Dik@mail.ru",
+                            FirstName = "Dik",
+                            IsDeleted = false,
+                            LastName = "Dom",
+                            Phone = "8-800-555-35-36",
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            BirthDate = new DateTime(1986, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientID = "123456789014",
+                            Email = "Jorge@mail.ru",
+                            FirstName = "Jorge",
+                            IsDeleted = false,
+                            LastName = "Vim",
+                            Phone = "8-800-555-35-37",
+                            RoleId = 3
+                        });
                 });
 
             modelBuilder.Entity("Hotel.Entities.Room", b =>
                 {
                     b.HasOne("Hotel.Entities.Category", "RoomType")
                         .WithMany()
-                        .HasForeignKey("RoomTypeCategoryId");
+                        .HasForeignKey("RoomTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Hotel.Entities.RoomCost", b =>
                 {
                     b.HasOne("Hotel.Entities.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Hotel.Entities.Transaction", b =>
                 {
                     b.HasOne("Hotel.Entities.Room", "Room")
                         .WithMany()
-                        .HasForeignKey("RoomId");
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Hotel.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Hotel.Entities.User", b =>
                 {
                     b.HasOne("Hotel.Entities.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId");
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

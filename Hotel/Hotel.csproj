@@ -3,11 +3,46 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ClientApp\src\app\transaction\Новая папка\**" />
+    <Content Remove="ClientApp\src\app\transaction\Новая папка\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\transaction\Новая папка\**" />
+    <None Remove="ClientApp\src\app\transaction\Новая папка\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\material-module.ts" />
+    <None Remove="ClientApp\src\app\transaction\models\transaction.ts" />
+    <None Remove="ClientApp\src\app\transaction\models\user.ts" />
+    <None Remove="ClientApp\src\app\transaction\services\data.service.transaction.ts" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Npm" Version="3.5.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\transaction\pages\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\material-module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\transaction\models\transaction.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\transaction\models\user.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\transaction\services\data.service.transaction.ts" />
   </ItemGroup>
 
 </Project>

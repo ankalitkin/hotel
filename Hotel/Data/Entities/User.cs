@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,6 +10,18 @@ namespace Hotel.Entities
 {
     public class User
     {
+        private string password;
+
+        public User() {}
+        public User(string firstname, string lastname, string email, string password, string phone)
+        {
+            FirstName = firstname;
+            LastName = lastname;
+            Email = email;
+            this.password = password;
+            Phone = phone;
+        }
+
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -17,7 +30,8 @@ namespace Hotel.Entities
         public string Email { get; set; }
         [StringLength(12)]
         public string ClientID { get; set; }
-        public virtual Role Role { get; set; }
+        [JsonIgnore] public virtual Role Role { get; set; }
+        public int RoleId { get; set; }
         public bool IsDeleted { get; set; }
 
         [NotMapped] public bool CanEditRooms => Role.Rights.HasFlag(Role.AccessRights.CanEditRooms);

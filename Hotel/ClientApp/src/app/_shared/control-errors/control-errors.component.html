@@ -1,0 +1,6 @@
+<mat-error *ngIf="errors?.required">
+  <span class="error">Это поле обязательно</span>
+</mat-error>
+<mat-error *ngIf="errors?.min">
+  <span class="error">Это поле не может быть отрицательным</span>
+</mat-error>
