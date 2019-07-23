@@ -13,6 +13,6 @@ export class RoomCreateComponent {
     room: Room = new Room();    // добавляемый объект
     constructor(private dataService: DataServiceRooms, private router: Router) { }
     save() {
-        this.dataService.createProduct(this.room).subscribe(data => this.router.navigateByUrl("/"));
+      this.dataService.createProduct(this.room).subscribe(data => this.router.navigateByUrl("/roommanager/rooms"));
     }
 }

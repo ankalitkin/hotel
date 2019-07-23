@@ -15,7 +15,7 @@ namespace Hotel.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -215,19 +215,6 @@ namespace Hotel.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Transactions");
-
-                    b.HasData(
-                        new
-                        {
-                            TransactionId = 1,
-                            CheckInTime = new DateTime(2019, 7, 20, 2, 49, 42, 898, DateTimeKind.Local).AddTicks(5644),
-                            CheckOutTime = new DateTime(2019, 7, 21, 2, 49, 42, 899, DateTimeKind.Local).AddTicks(9265),
-                            Cost = 3500,
-                            IsCanceled = false,
-                            IsPaid = true,
-                            RoomId = 1,
-                            UserId = 3
-                        });
                 });
 
             modelBuilder.Entity("Hotel.Entities.User", b =>
