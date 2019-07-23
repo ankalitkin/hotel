@@ -1,7 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <ngx-loading-bar></ngx-loading-bar>
+<mat-toolbar color="primary">
+  <span>HEAD</span>
+  <button mat-button routerLink="">Home</button>
+  <button mat-button routerLink="transactions/info">Transactions</button>
+</mat-toolbar>
+
 <div class="mat-app-background basic-container">
-  <app-info-transcation-page></app-info-transcation-page>
+  <router-outlet></router-outlet>
 </div>
 
-<router-outlet></router-outlet>
+

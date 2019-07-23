@@ -10,7 +10,6 @@ import { MaterialModule } from './material-module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
-//import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // For loading-progress
@@ -18,8 +17,13 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarHttpModule } from '@ngx-loading-bar/http';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router'
 
-import { InfoTransactionComponent } from './transaction/info-transaction/info-transaction.component';
 import { InfoTranscationPageComponent } from './transaction/pages/info-transcation-page/info-transcation-page.component';
+import { InfoTransactionComponent } from './transaction/info-transaction/info-transaction.component';
+import { EditTransactionComponent } from './transaction/edit-transaction/edit-transaction.component';
+import { ExpandTransactionComponent } from './transaction/expand-transaction/expand-transaction.component';
+import { ExpandTransactionPageComponent } from './transaction/pages/expand-transaction-page/expand-transaction-page.component';
+import { EditTransactionPageComponent } from './transaction/pages/edit-transaction-page/edit-transaction-page.component';
+import { ControlErrorsComponent } from './_shared/control-errors/control-errors.component';
 
 
 @NgModule({
@@ -27,7 +31,12 @@ import { InfoTranscationPageComponent } from './transaction/pages/info-transcati
   declarations: [
     AppComponent,
     InfoTransactionComponent,
-    InfoTranscationPageComponent
+    InfoTranscationPageComponent,
+    EditTransactionComponent,
+    ExpandTransactionComponent,
+    ExpandTransactionPageComponent,
+    EditTransactionPageComponent,
+    ControlErrorsComponent
   ],
   imports: [
     BrowserModule,

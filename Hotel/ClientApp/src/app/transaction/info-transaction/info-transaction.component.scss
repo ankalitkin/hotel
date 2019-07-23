@@ -62,7 +62,8 @@
   }
 
   .buttons {
-    height: 30px;
+    height: 50px;
+    flex: auto;
   }
 
   .mat-raised-button {
@@ -71,5 +72,18 @@
     margin-left: 5px;
     text-justify: auto;
     float: right;
+  }
+
+  .userInfoButton {
+    height: 30px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-left: 5px;
+    //text-justify: auto;
+  }
+
+  .userInfo
+    {
+    
   }
 }

@@ -24,13 +24,17 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   ],
 })
 export class InfoTransactionComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'userName', 'dateComeIn', 'dateComeOut', 'cost'];
+  displayedColumns: string[] = ['TheNoumber', 'UserID', 'ComeIn', 'ComeOut', 'cost'];
   dataSource: MatTableDataSource<Transaction>;
   @Input()
   transactions: Transaction[] | null | undefined;
   expandedElement: Transaction | null;
-  i: number = 1;
+  showInfoUser: Boolean = false;
+  tempUserInfo?: User;
 
+  SaveTemp(user: User) {
+    this.tempUserInfo = user;
+  }
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -42,8 +46,6 @@ export class InfoTransactionComponent implements OnInit {
 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
-    console.log(this.transactions.pop().checkInTime.getDate);
   }
 
   applyFilter(filterValue: string) {
@@ -53,7 +55,5 @@ export class InfoTransactionComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
-
 
 }

@@ -8,7 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Hotel.Entities;
 
 namespace Hotel.Controllers
-{
+{  
+
     [Route("api/[controller]")]
     [ApiController]
     public class TransactionsController : ControllerBase
@@ -24,6 +25,8 @@ namespace Hotel.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetTransactions()
         {
+            return await _context.Transactions.AsNoTracking().ToListAsync();
+            /*
             var list = await _context.Transactions.AsNoTracking().ToListAsync();
             // пробовал по-другому, с Join, но что-то не вышло(
             foreach(Transaction t in list)
@@ -34,6 +37,7 @@ namespace Hotel.Controllers
                 t.User = user;
             }
             return list;
+            */
         }
 
 
@@ -116,17 +120,17 @@ namespace Hotel.Controllers
         [HttpGet("History/{id:int}")]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetHistory(int id, bool IsOnlyPaid = false) // IsOnlyPaid == true  только оплаченные(т.е. только история проживаия, без бронироваия)
         {
-            return await _context.Transactions.AsNoTracking().Where(t=> t.UserId == id && (IsOnlyPaid? t.IsPaid : true)).ToListAsync();
+            return await _context.Transactions.AsNoTracking().Where(t => t.UserId == id && (IsOnlyPaid ? t.IsPaid : true)).ToListAsync();
         }
 
         // GET INFO: api/Transactions/Info?date=07%2F13%2F2019
         [HttpGet("Info")]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetInfo(DateTime? date)
         {
-            if(date == null)
+            if (date == null)
                 date = DateTime.Today;
 
-            return await _context.Transactions.AsNoTracking().Where(t=> t.CheckOutTime >= date && !t.IsCanceled).ToListAsync();
+            return await _context.Transactions.AsNoTracking().Where(t => t.CheckOutTime >= date && !t.IsCanceled).ToListAsync();
         }
 
         public class FinancialInfo
@@ -153,5 +157,23 @@ namespace Hotel.Controllers
 
             return await result.ToListAsync();
         }
+
+        // ПЕРЕМЕСТИТЬ В USER CONTROLLER
+        // GET: api/Transactions/User/5
+        [HttpGet("User/{id:int}")]
+        public async Task<ActionResult<User>> GetUser(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            Role role = await _context.Roles.FirstOrDefaultAsync(r => r.RoleId == user.RoleId);
+            user.Role = role;
+
+            return user;
+        }
+
     }
 }

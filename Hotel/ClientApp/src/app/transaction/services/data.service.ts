@@ -19,6 +19,8 @@ export class DataService {
   }
 
   PutTransaction(transaction: Transaction) {
+    console.log(this.url + '/' + transaction.transactionId);
+    console.log(transaction);
     return this.http.put(this.url + '/' + transaction.transactionId, transaction);
   }
 
@@ -31,10 +33,15 @@ export class DataService {
   }
 
   GetHistory(id: number, isOnlyPaid: boolean = false) {
-    return this.http.get(this.url + '/History' + id);
+    return this.http.get(this.url + '/History/' + id);
   }
 
+  
   GetInfo(date?: Date) {
-    return this.http.get(this.url + '/Info' + date);
+    return this.http.get(this.url + '/Info/' + date);
+  }
+
+  GetUser(UserId: number) {
+    return this.http.get(this.url + '/User/' + UserId);
   }
 }

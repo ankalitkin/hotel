@@ -1,4 +1,5 @@
 import { User } from './user';
+import { jsonIgnoreReplacer, jsonIgnore } from 'json-ignore';
 
 export class Transaction {
 
@@ -6,7 +7,6 @@ export class Transaction {
   public transactionId: number;
   public checkInTime: Date;
   public checkOutTime: Date;
-  public user: User;
   public userId: number;
   public roomId: number;
   public cost: number;
@@ -14,8 +14,8 @@ export class Transaction {
   public isCanceled: Boolean;
 
    // для фильтра
-  public UserName: string;
-  public ComeIn: string;
-  public ComeOut: string;
-  public TheNoumber: number;
+  @jsonIgnore() public UserName: string;
+  @jsonIgnore() public ComeIn: string;
+  @jsonIgnore() public ComeOut: string;
+  @jsonIgnore() public TheNoumber: number;
 }

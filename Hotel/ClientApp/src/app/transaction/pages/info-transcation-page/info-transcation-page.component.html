@@ -1,12 +1,18 @@
 
-<ng-container *ngIf="isLoaded == true">
-  <info-transaction [transactions]="transactions"></info-transaction>
+<ng-container *ngIf="isLoaded == true && editMode == false">
+  <info-transaction (setEditMode)="setEditMode($event)" [transactions]="transactions"></info-transaction>
 </ng-container>
+
 <ng-container *ngIf="isLoaded != true">
   <div align="center">
-    <span > Идёт загрузка данных.Пожалуйста подождите... </span>
+    <span> Идёт загрузка данных.Пожалуйста подождите... </span>
     <br />
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
 </ng-container>
+
+<ng-container *ngIf="editMode == true">
+  <router-outlet></router-outlet>
+</ng-container>
+
 

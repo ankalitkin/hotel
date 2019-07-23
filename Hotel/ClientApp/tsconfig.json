@@ -7,6 +7,7 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true, // for JsonIgore etc
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
@@ -17,7 +18,7 @@
     "lib": [
       "es2018",
       "dom"
-    ] /*,
+    ]/*,
     "paths": {
       "core-js/es6/reflect": [
         "../node_modules/core-js/es/reflect"
