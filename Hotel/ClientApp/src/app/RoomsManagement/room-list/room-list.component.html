@@ -1,0 +1,27 @@
+﻿<div>
+    <a routerLink="/CreateRoom" class="nav-link">Добавить</a>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Номер</td>
+            <td>Этаж</td>
+            <td>Категория</td>
+            <td>Кол-во мест</td>
+            <td>Наличие минибара</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let r of rooms">
+            <td>{{r?.name}}</td>
+            <td>{{r?.floor}}</td>
+            <td>{{r?.categoryId}}</td>
+            <td>{{r?.numberOfSeats}}</td>
+            <td>{{r?.hasMiniBar}}</td>
+            <td>
+                <a [routerLink]="['RoomEdit', r.id]" class="btn btn-sm btn-primary">Изменить</a>
+                <button (click)="delete(r.id)" class="btn btn-sm btn-danger">Удалить</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

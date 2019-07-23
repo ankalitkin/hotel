@@ -9,7 +9,10 @@ import { EditTransactionPageComponent } from './transaction/pages/edit-transacti
 import { ExpandTransactionComponent } from './transaction/expand-transaction/expand-transaction.component';
 import { ExpandTransactionPageComponent } from './transaction/pages/expand-transaction-page/expand-transaction-page.component';
 
-
+import { RoomListComponent } from './RoomsManagement/room-list/room-list.component';
+import { RoomFormComponent } from './RoomsManagement/room-form/room-form.component';
+import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.component';
+import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
 
 
 const routes: Routes = [
@@ -30,7 +33,17 @@ const routes: Routes = [
           }
         ]
       }
+
     ]
+  },
+  {
+    path: 'roommanager',
+    children: [
+      { path: 'rooms', component: RoomListComponent },
+      { path: 'createRoom', component: RoomCreateComponent },
+      { path: 'roomEdit/:id', component: RoomEditComponent }
+    ]
+  }
     //children: [
     //{
     //    path: 'user-info',
@@ -42,7 +55,6 @@ const routes: Routes = [
     //    ]
     //}
     //]
-  }
 ];
 
 @NgModule({

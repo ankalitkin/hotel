@@ -17,7 +17,7 @@
     <None Remove="ClientApp\src\app\material-module.ts" />
     <None Remove="ClientApp\src\app\transaction\models\transaction.ts" />
     <None Remove="ClientApp\src\app\transaction\models\user.ts" />
-    <None Remove="ClientApp\src\app\transaction\services\data.service.ts" />
+    <None Remove="ClientApp\src\app\transaction\services\data.service.transaction.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,7 +42,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\material-module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\transaction\models\transaction.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\transaction\models\user.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\transaction\services\data.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\transaction\services\data.service.transaction.ts" />
   </ItemGroup>
 
 </Project>

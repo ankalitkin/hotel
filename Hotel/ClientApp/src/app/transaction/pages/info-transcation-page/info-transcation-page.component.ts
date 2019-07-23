@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../services/data.service';
+import { DataServiceTransaction } from '../../services/data.service.transaction';
 import { Transaction } from '../../models/transaction';
 
 @Component({
   selector: 'app-info-transcation-page',
   templateUrl: './info-transcation-page.component.html',
   styleUrls: ['./info-transcation-page.component.scss'],
-  providers: [DataService]
+  providers: [DataServiceTransaction]
 })
 export class InfoTranscationPageComponent implements OnInit {
 
@@ -16,7 +16,7 @@ export class InfoTranscationPageComponent implements OnInit {
   editMode: Boolean = false;
   editedTransaction?: Transaction;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataServiceTransaction) { }
 
   ngOnInit() {
     this.loadTransactions();

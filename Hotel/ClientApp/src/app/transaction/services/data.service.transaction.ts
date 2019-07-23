@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Transaction } from '../models/transaction'
 
 @Injectable()
-export class DataService {
+export class DataServiceTransaction {
 
   private url = "/api/Transactions";
 

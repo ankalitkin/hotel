@@ -1,0 +1,31 @@
+<div class="element-description">
+  <table>
+    <tr>
+      <td><span> Информация о пользователе:</span></td>
+    </tr>
+    <tr>
+      <td><span>Пользователь: {{this.userInfo.firstName + ' ' + this.userInfo.lastName }}</span></td>
+    </tr>
+    <tr>
+      <td><span>UserID: {{this.userInfo.userId}}</span></td>
+    </tr>
+    <tr>
+      <td><span>Дата рождения: {{this.userInfo.birthDate | date: "dd-mm-yyy"}}</span></td>
+    </tr>
+    <tr>
+      <td><span>Телефон: {{this.userInfo.phone}}</span></td>
+    </tr>
+    <tr>
+      <td><span>Email: {{this.userInfo.email}}</span></td>
+    </tr>
+    <tr>
+      <td><span>ClientID: {{this.userInfo.clientID}}</span></td>
+    </tr>
+    <tr>
+      <td><span>Номер роли: {{this.userInfo.roleId}}</span></td>
+    </tr>
+    <tr>
+      <td><span>Удален: </span> <mat-checkbox [labelPosition]="before" value="{{this.userInfo.isDeleted}}" [disabled]="true"></mat-checkbox> </td>
+    </tr>
+  </table>
+</div>

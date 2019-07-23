@@ -25,6 +25,10 @@ import { ExpandTransactionPageComponent } from './transaction/pages/expand-trans
 import { EditTransactionPageComponent } from './transaction/pages/edit-transaction-page/edit-transaction-page.component';
 import { ControlErrorsComponent } from './_shared/control-errors/control-errors.component';
 
+import { RoomListComponent } from './RoomsManagement/room-list/room-list.component';
+import { RoomFormComponent } from './RoomsManagement/room-form/room-form.component';
+import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.component';
+import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
 
 @NgModule({
 
@@ -36,7 +40,11 @@ import { ControlErrorsComponent } from './_shared/control-errors/control-errors.
     ExpandTransactionComponent,
     ExpandTransactionPageComponent,
     EditTransactionPageComponent,
-    ControlErrorsComponent
+    ControlErrorsComponent,
+    RoomListComponent,
+    RoomFormComponent,
+    RoomCreateComponent,
+    RoomEditComponent
   ],
   imports: [
     BrowserModule,
