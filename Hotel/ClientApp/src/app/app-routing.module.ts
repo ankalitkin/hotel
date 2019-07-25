@@ -18,6 +18,7 @@ import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.compone
 const routes: Routes = [
   {
     path: 'transactions',
+   // runGuardsAndResolvers: 'always',
     children: [
       {
         path: 'info',

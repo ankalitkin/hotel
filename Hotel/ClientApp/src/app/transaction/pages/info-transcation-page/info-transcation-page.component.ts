@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataServiceTransaction } from '../../services/data.service.transaction';
 import { Transaction } from '../../models/transaction';
 
+
 @Component({
   selector: 'app-info-transcation-page',
   templateUrl: './info-transcation-page.component.html',
@@ -13,10 +14,8 @@ export class InfoTranscationPageComponent implements OnInit {
   transactions?: Transaction[];
   isLoaded: Boolean = false;
 
-  editMode: Boolean = false;
-  editedTransaction?: Transaction;
-
-  constructor(private dataService: DataServiceTransaction) { }
+  constructor(private dataService: DataServiceTransaction) {
+  }
 
   ngOnInit() {
     this.loadTransactions();
@@ -40,12 +39,13 @@ export class InfoTranscationPageComponent implements OnInit {
   CompleteLoad(data: Transaction[]) {
     this.transactions = data;
     for (let elem in this.transactions) {
-      //this.transactions[elem].UserName = this.transactions[elem].user.firstName + ' ' + this.transactions[elem].user.lastName;
       this.transactions[elem].ComeIn = this.parseDate(this.transactions[elem].checkInTime);
       this.transactions[elem].ComeOut = this.parseDate(this.transactions[elem].checkOutTime);
       this.transactions[elem].TheNoumber = +elem + 1;
+      this.transactions[elem].Loading = false;
     }
     this.isLoaded = true;
   }
+
 
 }

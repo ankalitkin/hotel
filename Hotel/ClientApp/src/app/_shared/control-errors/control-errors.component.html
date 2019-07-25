@@ -2,5 +2,8 @@
   <span class="error">Это поле обязательно</span>
 </mat-error>
 <mat-error *ngIf="errors?.min">
-  <span class="error">Это поле не может быть отрицательным</span>
+  <span class="error">Недопустимое значение</span>
+</mat-error>
+<mat-error *ngIf="errors?.pattern">
+  <span class="error">Неверный формат</span>
 </mat-error>

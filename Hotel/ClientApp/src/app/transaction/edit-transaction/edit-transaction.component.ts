@@ -12,7 +12,7 @@ export class EditTransactionComponent implements OnInit {
 
 
   @Input()
-  transaction?: Transaction;
+  EditedTransaction?: Transaction;
   @Output() transactionChange = new EventEmitter<Transaction>();
 
   _transactionForm: FormGroup;
@@ -23,37 +23,30 @@ export class EditTransactionComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    // сделать формат для даты
     this._transactionForm = this.fb.group({
-      userId: this.fb.control(this.transaction.userId, [Validators.required, Validators.min(0)]),
-      checkInTime: this.fb.control(this.transaction.checkInTime, [Validators.required]),
-      checkOutTime: this.fb.control(this.transaction.checkOutTime, [Validators.required]),
-      roomId: this.fb.control(this.transaction.roomId, [Validators.required, Validators.min(0)]),
-      cost: this.fb.control(this.transaction.cost, [Validators.required, Validators.min(0)]),
-      isPaid: this.fb.control(this.transaction.isPaid, [Validators.required]),
-      isCanceled: this.fb.control(this.transaction.isCanceled, [Validators.required])
+      userId: this.fb.control(this.EditedTransaction.userId, [Validators.required, Validators.min(0), Validators.pattern("[0-9]{1,}")]),
+      checkInTime: this.fb.control(this.EditedTransaction.checkInTime, [Validators.required]),
+      checkOutTime: this.fb.control(this.EditedTransaction.checkOutTime, [Validators.required]),
+      roomId: this.fb.control(this.EditedTransaction.roomId, [Validators.required, Validators.min(0), Validators.pattern("[0-9]{1,}")]),
+      cost: this.fb.control(this.EditedTransaction.cost, [Validators.required, Validators.min(0), Validators.pattern("[0-9]{1,}")]),
+      isPaid: this.fb.control(this.EditedTransaction.isPaid, [Validators.required]),
+      isCanceled: this.fb.control(this.EditedTransaction.isCanceled, [Validators.required])
     });
   }
 
-  //ngOnChanges(changes: SimpleChanges): void {
-  //  if ('transaction' in changes) {
-  //    if (this._transactionForm != undefined) {
-  //      this._transactionForm.setValue({
-  //        userId: this._transactionForm.get('userId'),
-  //        checkInTime: this._transactionForm.get('checkInTime')
-  //      });
-  //    } else {
-  //      this._transactionForm.reset();
-  //    }
-  //  }
-  //}
-
   handleSaveClick() {
     this.transactionChange.emit({
-      ...this.transaction,
+      ...this.EditedTransaction,
       ...this._transactionForm.value
     });
     this._transactionForm.reset();
   }
+
+  handleCancelClick() {
+    this.transactionChange.emit();
+    this._transactionForm.reset();
+  }
+
 
 }

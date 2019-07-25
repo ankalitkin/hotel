@@ -19,8 +19,6 @@ export class DataServiceTransaction {
   }
 
   PutTransaction(transaction: Transaction) {
-    console.log(this.url + '/' + transaction.transactionId);
-    console.log(transaction);
     return this.http.put(this.url + '/' + transaction.transactionId, transaction);
   }
 

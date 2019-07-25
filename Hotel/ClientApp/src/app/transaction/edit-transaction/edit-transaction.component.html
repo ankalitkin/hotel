@@ -1,6 +1,6 @@
-<p>Заполните все поля</p>
+<p>Редактирование</p>
 
-<ng-container *ngIf="transaction != undefined"
+<ng-container *ngIf="EditedTransaction != undefined"
               [formGroup]="_transactionForm">
   <div>
     <mat-form-field class="form">
@@ -68,10 +68,15 @@
 
 
 </ng-container>
-<button mat-raised-button
-        [disabled]="_transactionForm.invalid"
-        (click)="handleSaveClick()"
-        [routerLink]="'../../'">
-  Save
-</button>
+<div class="buttons">
+  <button mat-raised-button
+          [disabled]="_transactionForm.invalid"
+          (click)="handleSaveClick()">
+    Сохранить
+  </button>
+  <button mat-raised-button
+          (click)="handleCancelClick()">
+    Отмена
+  </button>
+</div>
 

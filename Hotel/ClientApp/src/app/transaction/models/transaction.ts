@@ -14,8 +14,8 @@ export class Transaction {
   public isCanceled: Boolean;
 
    // для фильтра
-  @jsonIgnore() public UserName: string;
   @jsonIgnore() public ComeIn: string;
   @jsonIgnore() public ComeOut: string;
   @jsonIgnore() public TheNoumber: number;
+  @jsonIgnore() public Loading: Boolean;
 }

@@ -1,8 +1,9 @@
-<p>Редактировать транзакцию</p>
+
 <ng-container *ngIf="isLoaded == true">
-  <edit-transaction [transaction]="transaction" (transactionChange)="handleTransactionChange($event)"></edit-transaction>
+  <edit-transaction [EditedTransaction]="EditedTransaction" (transactionChange)="handleTransactionChange($event)"></edit-transaction>
 </ng-container>
 <ng-container *ngIf="isLoaded != true">
+  <span> Загрузка...</span>
   <mat-spinner></mat-spinner>
 </ng-container>
 

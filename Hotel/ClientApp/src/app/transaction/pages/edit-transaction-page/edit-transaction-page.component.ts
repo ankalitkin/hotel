@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Transaction } from '../../models/transaction';
 import { DataServiceTransaction } from '../../services/data.service.transaction';
+import { Router } from '@angular/router';
+import { InteractionService } from '../../services/edit-transaction-interaction.service';
 
 @Component({
   selector: 'app-edit-transaction-page',
@@ -12,10 +14,11 @@ import { DataServiceTransaction } from '../../services/data.service.transaction'
 export class EditTransactionPageComponent implements OnInit {
 
 
-  constructor(private dataService: DataServiceTransaction, private activeRoute: ActivatedRoute) {
+  constructor(private dataService: DataServiceTransaction, private activeRoute: ActivatedRoute, private router: Router,
+    @Optional() private interactionService?: InteractionService) {
   }
 
-  transaction?: Transaction;
+  EditedTransaction?: Transaction;
   isLoaded: Boolean = false;
 
   ngOnInit() {
@@ -35,19 +38,29 @@ export class EditTransactionPageComponent implements OnInit {
 
   saveTransaction() {
     console.log("save...");
-    this.dataService.PutTransaction(this.transaction)
-      .subscribe((data: any) => { console.log(data); });
+    this.dataService.PutTransaction(this.EditedTransaction)
+      .subscribe((data: any) => { this.CompleteSave() });
   }
 
   CompleteLoad(data: Transaction) {
-    this.transaction = data;
+    this.EditedTransaction = data;
     this.isLoaded = true;
-    console.log(this.transaction);
   }
 
-  handleTransactionChange(transaction: Transaction) {
-    this.transaction = transaction;
-    this.saveTransaction();
+  handleTransactionChange(transaction?: Transaction) {
+    if (transaction != undefined && transaction != this.EditedTransaction) {
+      this.EditedTransaction = transaction;
+      this.saveTransaction();
+    }
+    this.router.navigate(['transactions/info']);
   }
+
+  CompleteSave() {
+    if (this.interactionService != undefined) { // передача данных в родительский компонент
+      this.interactionService.setTemp(this.EditedTransaction.transactionId);
+      this.interactionService.sendMessage();
+    }
+  }
+    
 
 }
