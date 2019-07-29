@@ -55,9 +55,9 @@ namespace Hotel.Entities
             Role Admin = new Role { RoleId = 2, Name = "Admin", Rights = Role.AccessRights.CanRegisterClients | Role.AccessRights.CanBookRooms | Role.AccessRights.CanCheckInOut | Role.AccessRights.CanGetAnyHistory | Role.AccessRights.CanGetInfo };
             Role Visitor = new Role { RoleId = 3, Name = "Visitor", Rights = Role.AccessRights.CanCheckInOut | Role.AccessRights.CanGetOwnHistory };
 
-            User user1 = new User { UserId = 1, FirstName = "Tom", LastName = "Timmi", BirthDate = DateTime.Parse("01.05.1996"), Phone = "8-800-555-35-35", Email = "Tom@mail.ru", ClientID = "123456789012", RoleId = Owner.RoleId, IsDeleted = false };
-            User user2 = new User { UserId = 2, FirstName = "Dik", LastName = "Dom", BirthDate = DateTime.Parse("05.07.1999"), Phone = "8-800-555-35-36", Email = "Dik@mail.ru", ClientID = "123456789013", RoleId = Admin.RoleId, IsDeleted = false };
-            User user3 = new User { UserId = 3, FirstName = "Jorge", LastName = "Vim", BirthDate = DateTime.Parse("11.05.1986"), Phone = "8-800-555-35-37", Email = "Jorge@mail.ru", ClientID = "123456789014", RoleId = Visitor.RoleId, IsDeleted = false };
+            User user1 = new User { UserId = 1, FirstName = "Tom", LastName = "Timmi", BirthDate = DateTime.Parse("01.05.1996"), Phone = "8-800-555-35-35", Email = "Tom@mail.ru", ClientId = "123456789012", RoleId = Owner.RoleId, IsDeleted = false };
+            User user2 = new User { UserId = 2, FirstName = "Dik", LastName = "Dom", BirthDate = DateTime.Parse("05.07.1999"), Phone = "8-800-555-35-36", Email = "Dik@mail.ru", ClientId = "123456789013", RoleId = Admin.RoleId, IsDeleted = false };
+            User user3 = new User { UserId = 3, FirstName = "Jorge", LastName = "Vim", BirthDate = DateTime.Parse("11.05.1986"), Phone = "8-800-555-35-37", Email = "Jorge@mail.ru", ClientId = "123456789014", RoleId = Visitor.RoleId, IsDeleted = false };
 
             Category Economy = new Category { CategoryId = 1, Name = "Economy" };
             Category Ordinary = new Category { CategoryId = 2, Name = "Ordinary" };

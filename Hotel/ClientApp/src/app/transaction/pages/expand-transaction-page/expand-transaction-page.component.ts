@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DataServiceTransaction } from '../../services/data.service.transaction';
-import { User } from '../../models/user';
+import { User } from '../../../_models/user';
 
 @Component({
   selector: 'app-expand-transaction-page',

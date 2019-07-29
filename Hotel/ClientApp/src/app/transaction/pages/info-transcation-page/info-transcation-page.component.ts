@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataServiceTransaction } from '../../services/data.service.transaction';
-import { Transaction } from '../../models/transaction';
+import { Transaction } from '../../../_models/transaction';
 
 @Component({
   selector: 'app-info-transcation-page',

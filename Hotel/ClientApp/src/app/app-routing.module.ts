@@ -32,8 +32,7 @@ const routes: Routes = [
               }]
           }
         ]
-      }
-
+      },
     ]
   },
   {
@@ -43,8 +42,13 @@ const routes: Routes = [
       { path: 'createRoom', component: RoomCreateComponent },
       { path: 'roomEdit/:id', component: RoomEditComponent }
     ]
-  }
-    //children: [
+  },
+  {
+    path: 'customers',
+    loadChildren: () => import('./customers-management/customers-management.module').then(mod => mod.CustomersManagementModule)
+  },
+
+  //children: [
     //{
     //    path: 'user-info',
     //    children: [
@@ -52,7 +56,7 @@ const routes: Routes = [
     //        path: ':id',
     //        component: ExpandTransactionPageComponent,
     //      }
-    //    ]
+    //
     //}
     //]
 ];

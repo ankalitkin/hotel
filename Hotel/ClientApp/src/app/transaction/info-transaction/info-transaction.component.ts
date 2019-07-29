@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Transaction } from '../models/transaction';
-import { User } from '../models/user';
+import { Transaction } from '../../_models/transaction';
+import { User } from '../../_models/user';
 
 
 import { animate, state, style, transition, trigger } from '@angular/animations';

@@ -1,5 +1,4 @@
-import { User } from './user';
-import { jsonIgnoreReplacer, jsonIgnore } from 'json-ignore';
+import {jsonIgnore } from 'json-ignore';
 
 export class Transaction {
 
@@ -10,8 +9,8 @@ export class Transaction {
   public userId: number;
   public roomId: number;
   public cost: number;
-  public isPaid: Boolean;
-  public isCanceled: Boolean;
+  public isPaid: boolean;
+  public isCanceled: boolean;
 
    // для фильтра
   @jsonIgnore() public UserName: string;

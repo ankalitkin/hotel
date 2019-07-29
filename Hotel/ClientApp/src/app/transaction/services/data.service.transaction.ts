@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Transaction } from '../models/transaction'
+import { Transaction } from '../../_models/transaction'
 
 @Injectable()
 export class DataServiceTransaction {
@@ -36,7 +36,7 @@ export class DataServiceTransaction {
     return this.http.get(this.url + '/History/' + id);
   }
 
-  
+
   GetInfo(date?: Date) {
     return this.http.get(this.url + '/Info/' + date);
   }

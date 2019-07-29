@@ -1,0 +1,87 @@
+<ng-container [formGroup]="customerForm">
+
+  <h2 *ngIf="customer.userId; else register">
+    Редактирование клиента
+  </h2>
+
+  <ng-template #register>
+    <h2>
+      Регистрация клиента
+    </h2>
+  </ng-template>
+
+  <p>
+    <mat-form-field>
+      <label>
+        <input matInput formControlName="lastName" required pattern="(?:[a-zA-Z\-]+|[А-я]+)" placeholder="Фамилия">
+      </label>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field>
+      <label>
+        <input matInput formControlName="firstName" required pattern="(?:[a-zA-Z\-]+|[А-я]+)" placeholder="Имя">
+      </label>
+    </mat-form-field>
+  </p>
+
+  <mat-form-field>
+    <label>
+      <input formControlName="birthDate" [matDatepicker]="picker" matInput placeholder="Дата рождения" required>
+    </label>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <p>
+    <mat-form-field>
+      <label>
+        <input matInput formControlName="email" pattern="[\w.]+@[\w]+.[\w.]+" placeholder="E-mail">
+      </label>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field>
+      <label>
+        <input type="tel" matInput formControlName="phone" pattern="\+?[\d()\- ]+" placeholder="Номер телефона">
+      </label>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field>
+      <label>
+        <input matInput formControlName="clientId" required minlength="12" maxlength="12" pattern="\d{12}"
+               placeholder="Личный код">
+      </label>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field>
+      <mat-select placeholder="Роль" formControlName="roleId">
+        <mat-option *ngFor="let role of roles" value="{{role.roleId}}">{{role.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field>
+      <label>
+        <input matInput formControlName="password" type="password" placeholder="Пароль">
+      </label>
+    </mat-form-field>
+  </p>
+
+  <p *ngIf="customer.userId">
+    <mat-checkbox formControlName="isDeleted">Удалён</mat-checkbox>
+  </p>
+
+  <button mat-raised-button color="primary"
+          [disabled]="customerForm.invalid"
+          (click)="handleSaveClick()">Сохранить
+  </button>
+
+</ng-container>
