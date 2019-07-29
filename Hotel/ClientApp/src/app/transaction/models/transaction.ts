@@ -19,3 +19,13 @@ export class Transaction {
   @jsonIgnore() public TheNoumber: number;
   @jsonIgnore() public Loading: Boolean;
 }
+
+export class TransactionFilter {
+  constructor() { }
+
+  public clientId: number;
+  public checkInTime: Date;
+  public checkOutTime: Date;
+  public type: String;
+
+}

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Transaction } from '../models/transaction'
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Transaction } from '../models/transaction';
+import { TransactionFilter } from '../models/transaction';
 
 @Injectable()
 export class DataServiceTransaction {
@@ -12,6 +13,24 @@ export class DataServiceTransaction {
 
   GetTransactions() {
     return this.http.get(this.url);
+  }
+
+  GetFilteredTransactions(filter: TransactionFilter) {
+
+
+    let checkInTime = '';
+    if (filter.checkInTime != undefined)
+      checkInTime = this.parseDate(filter.checkInTime, '%2F');
+    let checkOutTime = '';
+    if (filter.checkOutTime != undefined)
+      checkOutTime = this.parseDate(filter.checkOutTime, '%2F');
+    let type = filter.type.toString();
+    let clientId = '';
+    if (filter.clientId != undefined)
+      clientId = filter.clientId.toString();
+
+    return this.http.get(this.url + '/Filter?' + 'start=' + checkInTime + '&' + 'end=' + checkOutTime + '&'
+      + 'type=' + type + '&' + 'id=' + clientId);
   }
 
   GetTransaction(transactionId: number) {
@@ -34,12 +53,23 @@ export class DataServiceTransaction {
     return this.http.get(this.url + '/History/' + id);
   }
 
-  
+
   GetInfo(date?: Date) {
     return this.http.get(this.url + '/Info/' + date);
   }
 
   GetUser(UserId: number) {
     return this.http.get(this.url + '/User/' + UserId);
+  }
+
+  parseDate(input, separator?: string) {
+    if (separator == undefined)
+      separator = '%2F';
+
+    let newDate: Date = new Date(input);
+    let day: string = ((newDate.getDate() > 9) ? newDate.getDate() : "0" + newDate.getDate()).toString();
+    let mouth: string = ((newDate.getMonth() > 9) ? newDate.getMonth() : "0" + newDate.getMonth()).toString();
+
+    return mouth + separator + day + separator + newDate.getFullYear();
   }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Hotel.Entities;
 
 namespace Hotel.Controllers
-{  
+{
 
     [Route("api/[controller]")]
     [ApiController]
@@ -26,18 +26,6 @@ namespace Hotel.Controllers
         public async Task<ActionResult<IEnumerable<Transaction>>> GetTransactions()
         {
             return await _context.Transactions.AsNoTracking().ToListAsync();
-            /*
-            var list = await _context.Transactions.AsNoTracking().ToListAsync();
-            // пробовал по-другому, с Join, но что-то не вышло(
-            foreach(Transaction t in list)
-            {
-                User user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == t.UserId);
-                Role role = await _context.Roles.FirstOrDefaultAsync(r => r.RoleId == user.RoleId);
-                user.Role = role;
-                t.User = user;
-            }
-            return list;
-            */
         }
 
 
@@ -116,6 +104,7 @@ namespace Hotel.Controllers
             return _context.Transactions.Any(e => e.TransactionId == id);
         }
 
+        // не нужно 
         // GET HISTORY: api/Transactions/History/3?isPaid=false
         [HttpGet("History/{id:int}")]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetHistory(int id, bool IsOnlyPaid = false) // IsOnlyPaid == true  только оплаченные(т.е. только история проживаия, без бронироваия)
@@ -173,6 +162,36 @@ namespace Hotel.Controllers
             user.Role = role;
 
             return user;
+        }
+
+        // GET: api/Transactions......
+        [HttpGet("Filter")]
+        public async Task<ActionResult<IEnumerable<Transaction>>> GetFilteredTransactions(DateTime? start, DateTime? end, string type, string id)
+        {
+            bool isPaid = false, isCanceled = false, all = false;
+            if (type == "isPaid")
+                isPaid = true;
+            if (type == "isCanceled")
+                isCanceled = true;
+            if (type == "all")
+                all = true;
+
+            int userId = -1;
+            if (id != null)
+            {
+                var user = _context.Users.Where(u => u.ClientID == id).FirstOrDefault();
+                userId = user != null ? user.UserId : userId;
+            }
+
+
+            var list = _context.Transactions.AsNoTracking().Where(t =>
+            id != null && userId >= 0 ? t.UserId == userId : true).Where(t =>
+            start != null ? t.CheckInTime >= start : true).Where(t =>
+            end != null ? t.CheckOutTime <= end : true).Where(t =>
+            all ? true : t.IsPaid == isPaid &&
+             t.IsCanceled == isCanceled).ToList();
+
+            return list;
         }
 
     }

@@ -31,10 +31,10 @@ export class ExpandTransactionPageComponent implements OnInit {
     if (this.userInfo != undefined && this.userInfo.userId == this.id)
       this.isLoaded = true;
     else
-      this.loadTransaction();
+      this.loadData();
   }
 
-  loadTransaction() {
+  loadData() {
     this.dataService.GetUser(this.id)
       .subscribe((data: User) => { this.CompleteLoad(data); });
   }

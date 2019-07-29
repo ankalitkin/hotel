@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Transaction } from '../models/transaction';
+
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({
@@ -11,7 +13,7 @@ import { Transaction } from '../models/transaction';
 export class EditTransactionComponent implements OnInit {
 
 
-  @Input()
+ // @Input()
   EditedTransaction?: Transaction;
   @Output() transactionChange = new EventEmitter<Transaction>();
 
@@ -19,7 +21,10 @@ export class EditTransactionComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<EditTransactionComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Transaction) {
+    this.EditedTransaction = data;
+    console.log(this.EditedTransaction);
   }
 
   ngOnInit() {
@@ -34,18 +39,35 @@ export class EditTransactionComponent implements OnInit {
       isCanceled: this.fb.control(this.EditedTransaction.isCanceled, [Validators.required])
     });
   }
-
+  /*
   handleSaveClick() {
-    this.transactionChange.emit({
+    console.log("save");
+    this.EditedTransaction = {
       ...this.EditedTransaction,
       ...this._transactionForm.value
-    });
-    this._transactionForm.reset();
+    }
+
+    this.data = this.EditedTransaction;
+    console.log(this.EditedTransaction);
   }
 
+
+  /*
   handleCancelClick() {
     this.transactionChange.emit();
     this._transactionForm.reset();
+  }
+  */
+
+  CancelClick(): void {
+    this.dialogRef.close();
+  }
+
+  closeDialog() {
+    this.dialogRef.close({
+      ...this.EditedTransaction,
+      ...this._transactionForm.value
+    });
   }
 
 

@@ -68,9 +68,9 @@
 
             <button mat-raised-button [routerLink]="'./edit/' + element.transactionId"> Редактировать </button>
 
-            <button mat-raised-button> Отменить </button>
+            <button mat-raised-button [disabled]="element.isCanceled == true || element.checkInTime < currentDate" (click)="element.isCanceled = true; putTransaction(element);"> Отменить </button>
 
-            <button mat-raised-button> Удалить </button>
+            <button mat-raised-button [disabled]="true"> Удалить </button>
 
           </div>
         </div>

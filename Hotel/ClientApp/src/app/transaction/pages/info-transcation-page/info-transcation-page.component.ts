@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataServiceTransaction } from '../../services/data.service.transaction';
 import { Transaction } from '../../models/transaction';
+import { TransactionFilter } from '../../models/transaction';
 
 
 @Component({
@@ -21,14 +22,24 @@ export class InfoTranscationPageComponent implements OnInit {
     this.loadTransactions();
   }
 
-  loadTransactions() {
-    this.dataService.GetTransactions()
+  loadTransactions(filter?: TransactionFilter) {
+    this.isLoaded = false;
+     if (filter == undefined) {
+       this.dataService.GetTransactions()
+         .subscribe((data: Transaction[]) => { this.CompleteLoad(data); });
+     } else {
+
+
+    this.dataService.GetFilteredTransactions(filter)
       .subscribe((data: Transaction[]) => { this.CompleteLoad(data); });
+    }
   }
 
   // для фильтра (знаю, что криво)
-  parseDate(input) {
-    let separator: string = '-';
+  parseDate(input, separator?: string) {
+    if (separator == undefined)
+      separator = '-';
+
     let newDate: Date = new Date(input);
     let day: string = ((newDate.getDate() > 9) ? newDate.getDate() : "0" + newDate.getDate()).toString();
     let mouth: string = ((newDate.getMonth() > 9) ? newDate.getMonth() : "0" + newDate.getMonth()).toString();
@@ -45,6 +56,11 @@ export class InfoTranscationPageComponent implements OnInit {
       this.transactions[elem].Loading = false;
     }
     this.isLoaded = true;
+  }
+
+  changeFilter(filter: TransactionFilter) {
+    console.log("Accpet filter");
+    this.loadTransactions(filter);
   }
 
 

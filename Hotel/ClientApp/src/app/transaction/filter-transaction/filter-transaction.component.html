@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row justify-content-end">
+    <div class="col-3">
+      <p>dos</p>
+      </div>
+      <div class="col-3">
+      </div>
+        <div class="col-6">
+          <p>Фильтр</p>
+          <ng-container [formGroup]="_filterForm">
+
+            <mat-form-field class="form">
+              <mat-label> ID Клиента </mat-label>
+              <input matInput formControlName="clientId">
+              <app-control-errors name="clientId"></app-control-errors>
+            </mat-form-field>
+
+
+
+            <mat-form-field>
+              <mat-label>Выбирите тип</mat-label>
+              <mat-select formControlName="type" [(ngModel)]="typeSelect">
+                <mat-option *ngFor="let type of typeList" [value]="type.value">
+                  {{type.viewValue}}
+                </mat-option>
+              </mat-select>
+              <app-control-errors name="type"></app-control-errors>
+            </mat-form-field>
+
+
+            <div>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker"
+                       formControlName="checkInTime">
+                <mat-label>Дата въезда </mat-label>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <app-control-errors name="checkInTime">
+                </app-control-errors>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker1"
+                       formControlName="checkOutTime">
+                <mat-label>Дата выезда </mat-label>
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                <app-control-errors name="checkOutTime">
+                </app-control-errors>
+              </mat-form-field>
+            </div>
+
+          </ng-container>
+
+          <div class="buttons">
+            <button mat-raised-button
+                    (click)="handleRefreshClick()"
+                    [disabled]="_filterForm.invalid">
+              Обновить
+            </button>
+          </div>
+
+        </div>
+      </div>
+  </div>

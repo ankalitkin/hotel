@@ -29,6 +29,8 @@ import { RoomListComponent } from './RoomsManagement/room-list/room-list.compone
 import { RoomFormComponent } from './RoomsManagement/room-form/room-form.component';
 import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.component';
 import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
+import { FilterTransactionComponent } from './transaction/filter-transaction/filter-transaction.component';
+import { EditTransactionDialogComponent } from './transaction/edit-transaction/edit-transaction-dialog/edit-transaction-dialog.component';
 
 @NgModule({
 
@@ -44,8 +46,11 @@ import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.compone
     RoomListComponent,
     RoomFormComponent,
     RoomCreateComponent,
-    RoomEditComponent
+    RoomEditComponent,
+    FilterTransactionComponent,
+    EditTransactionDialogComponent
   ],
+  entryComponents: [EditTransactionComponent, EditTransactionPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

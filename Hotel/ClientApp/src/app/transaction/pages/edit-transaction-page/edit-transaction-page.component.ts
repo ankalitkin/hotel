@@ -3,7 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Transaction } from '../../models/transaction';
 import { DataServiceTransaction } from '../../services/data.service.transaction';
 import { Router } from '@angular/router';
-import { InteractionService } from '../../services/edit-transaction-interaction.service';
+import { InteractionService } from '../../services/interaction.service';
+
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { EditTransactionComponent } from '../../edit-transaction/edit-transaction.component'
+import { Overlay, ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-edit-transaction-page',
@@ -14,7 +18,7 @@ import { InteractionService } from '../../services/edit-transaction-interaction.
 export class EditTransactionPageComponent implements OnInit {
 
 
-  constructor(private dataService: DataServiceTransaction, private activeRoute: ActivatedRoute, private router: Router,
+  constructor(private dataService: DataServiceTransaction, public dialog: MatDialog, private activeRoute: ActivatedRoute, private router: Router,
     @Optional() private interactionService?: InteractionService) {
   }
 
@@ -45,9 +49,11 @@ export class EditTransactionPageComponent implements OnInit {
   CompleteLoad(data: Transaction) {
     this.EditedTransaction = data;
     this.isLoaded = true;
+    this.openDialog();
   }
 
   handleTransactionChange(transaction?: Transaction) {
+
     if (transaction != undefined && transaction != this.EditedTransaction) {
       this.EditedTransaction = transaction;
       this.saveTransaction();
@@ -60,6 +66,18 @@ export class EditTransactionPageComponent implements OnInit {
       this.interactionService.setTemp(this.EditedTransaction.transactionId);
       this.interactionService.sendMessage();
     }
+  }
+
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EditTransactionComponent, {
+      width: '90%',
+      data: this.EditedTransaction
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.handleTransactionChange(result);
+    });
   }
     
 

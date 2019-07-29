@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Transaction } from '../models/transaction';
 import { User } from '../models/user';
 import { DataServiceTransaction } from '../services/data.service.transaction';
-import { InteractionService } from '../services/edit-transaction-interaction.service';
+import { InteractionService } from '../services/interaction.service';
 
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -34,6 +34,7 @@ export class InfoTransactionComponent implements OnInit {
   expandedElement: Transaction | null;
   showInfoUser: Boolean = false;
   tempUserInfo?: User;
+  currentDate: Date = new Date();
 
   SaveTemp(user: User) {
     this.tempUserInfo = user;
@@ -64,6 +65,7 @@ export class InfoTransactionComponent implements OnInit {
 
   // обновление элемента в списке
   putTransaction(transaction: Transaction) {
+    //console.log(transaction);
     transaction.Loading = true;
     this.dataService.PutTransaction(transaction)
       .subscribe(() => { transaction.Loading = false; });
@@ -76,6 +78,7 @@ export class InfoTransactionComponent implements OnInit {
   }
 
   updateTransaction(id: number) {
+
     // нахождение индекса обновленной транзакции в списке
     const transaction = this.dataSource.data.find((t) => t.transactionId == id);
     const index = this.dataSource.data.indexOf(transaction);
@@ -85,11 +88,23 @@ export class InfoTransactionComponent implements OnInit {
     this.dataService.GetTransaction(id)
       .subscribe((data: Transaction) => {
         transaction.Loading = false;
-        data.ComeIn = transaction.ComeIn;
-        data.ComeOut = transaction.ComeOut;
+        data.ComeIn = this.parseDate(data.checkInTime);
+        data.ComeOut = this.parseDate(data.checkOutTime);
         data.TheNoumber = transaction.TheNoumber;
+        data.Loading = false;
         this.dataSource.data[index] = data;
-        this.dataSource._updateChangeSubscription(); });
+        this.dataSource._updateChangeSubscription();
+      });
+  }
+
+  // для фильтра(котрый в списке) (знаю, что криво)
+  parseDate(input) {
+    let separator: string = '-';
+    let newDate: Date = new Date(input);
+    let day: string = ((newDate.getDate() > 9) ? newDate.getDate() : "0" + newDate.getDate()).toString();
+    let mouth: string = ((newDate.getMonth() > 9) ? newDate.getMonth() : "0" + newDate.getMonth()).toString();
+
+    return day + separator + mouth + separator + newDate.getFullYear();
   }
 
 

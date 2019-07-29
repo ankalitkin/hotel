@@ -1,5 +1,10 @@
+
+<ng-container>
+  <filter-transaction (changeFilter)="changeFilter($event)"></filter-transaction>
+</ng-container>
+
 <ng-container *ngIf="isLoaded == true">
-  <info-transaction [transactions]="transactions" ></info-transaction>
+  <info-transaction [transactions]="transactions"></info-transaction>
 </ng-container>
 
 <ng-container *ngIf="isLoaded != true">
