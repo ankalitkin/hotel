@@ -104,22 +104,12 @@ namespace Hotel.Controllers
             return _context.Transactions.Any(e => e.TransactionId == id);
         }
 
-        // не нужно 
-        // GET HISTORY: api/Transactions/History/3?isPaid=false
-        [HttpGet("History/{id:int}")]
-        public async Task<ActionResult<IEnumerable<Transaction>>> GetHistory(int id, bool IsOnlyPaid = false) // IsOnlyPaid == true  только оплаченные(т.е. только история проживаия, без бронироваия)
+        // GET HISTORY: api/Transactions/myHistory
+        [HttpGet("myHistory")]
+        public async Task<ActionResult<IEnumerable<Transaction>>> GetMyHistory()
         {
-            return await _context.Transactions.AsNoTracking().Where(t => t.UserId == id && (IsOnlyPaid ? t.IsPaid : true)).ToListAsync();
-        }
-
-        // GET INFO: api/Transactions/Info?date=07%2F13%2F2019
-        [HttpGet("Info")]
-        public async Task<ActionResult<IEnumerable<Transaction>>> GetInfo(DateTime? date)
-        {
-            if (date == null)
-                date = DateTime.Today;
-
-            return await _context.Transactions.AsNoTracking().Where(t => t.CheckOutTime >= date && !t.IsCanceled).ToListAsync();
+            int id = 1; // TODO: когда будет регистрация
+            return await _context.Transactions.AsNoTracking().Where(t => t.UserId == id).ToListAsync();
         }
 
         public class FinancialInfo
@@ -133,6 +123,7 @@ namespace Hotel.Controllers
                 this.Sum = Sum;
             }
         }
+
         // GET INFO: api/transactions/FinancialInformation?start=07%2F13%2F2019&end=07%2F16%2F2019
         [HttpGet("FinancialInformation")]
         public async Task<ActionResult<IEnumerable<FinancialInfo>>> GetFinancialInformation(DateTime? start, DateTime? end)
@@ -149,10 +140,10 @@ namespace Hotel.Controllers
             return await result.ToListAsync();
         }
 
-        // ПЕРЕМЕСТИТЬ В USER CONTROLLER
+        //TODO: получение не только пользователя, но и номер комнаты и т.д (и по id транзакции)
         // GET: api/Transactions/User/5
         [HttpGet("User/{id:int}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<User>> GetExpandData(int id)
         {
             var user = await _context.Users.FindAsync(id);
 
@@ -166,34 +157,49 @@ namespace Hotel.Controllers
             return user;
         }
 
-        // GET: api/Transactions/Filter ....
-        [HttpGet("Filter")]
-        public async Task<ActionResult<IEnumerable<Transaction>>> GetFilteredTransactions(DateTime? start, DateTime? end, string type, string id)
+        // GET: api/Transactions/Filter?start=07%2F13%2F2019&end=07%2F16%2F2019&type=all&id=123456789012
+        [HttpGet("Info")]
+        public async Task<ActionResult<IEnumerable<Transaction>>> GetInfo(DateTime? start, DateTime? end, string type, string id)
         {
             bool isPaid = false, isCanceled = false, all = false;
-            if (type == "isPaid")
-                isPaid = true;
-            if (type == "isCanceled")
-                isCanceled = true;
+
             if (type == "all")
                 all = true;
+            else if (type == "isPaid")
+                isPaid = true;
+            else if (type == "isCanceled")
+                isCanceled = true;
 
             int userId = -1;
             if (id != null)
             {
-                var user = _context.Users.Where(u => u.ClientID == id).FirstOrDefault();
+                var user = await _context.Users.Where(u => u.ClientID == id).FirstOrDefaultAsync();
                 userId = user != null ? user.UserId : userId;
             }
 
-
-            var list = _context.Transactions.AsNoTracking().Where(t =>
-            id != null && userId >= 0 ? t.UserId == userId : true).Where(t =>
-            start != null ? t.CheckInTime >= start : true).Where(t =>
-            end != null ? t.CheckOutTime <= end : true).Where(t =>
-            all ? true : t.IsPaid == isPaid &&
-             t.IsCanceled == isCanceled).ToList();
+            var list = await _context.Transactions.AsNoTracking()
+                .Where(t => (id == null || userId < 0) || t.UserId == userId)
+                .Where(t => start == null || t.CheckInTime >= start)
+                .Where(t => end == null || t.CheckOutTime <= end)
+                .Where(t => all || t.IsPaid == isPaid && t.IsCanceled == isCanceled)
+                .ToListAsync();
 
             return list;
+        }
+
+        // GET: api/Transactions/FreeRooms?start=07%2F13%2F2019&end=07%2F16%2F2019&type=3
+        [HttpGet("FreeRooms")]
+        public async Task<ActionResult<IEnumerable<Room>>> GetFreeRooms(DateTime start, DateTime end, int type)
+        {
+            var list = from room in _context.Rooms
+                       join trans in _context.Transactions
+                       on room.RoomId equals trans.RoomId
+                       where trans.CheckInTime <= start && trans.CheckInTime <= start
+                       || trans.CheckInTime >= end && trans.CheckInTime >= end
+                       select room;
+
+
+            return await list.ToListAsync();
         }
 
     }

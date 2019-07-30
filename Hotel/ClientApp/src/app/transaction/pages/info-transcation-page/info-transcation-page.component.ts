@@ -15,8 +15,7 @@ export class InfoTranscationPageComponent implements OnInit {
   transactions?: Transaction[];
   isLoaded: Boolean = false;
 
-  constructor(private dataService: DataServiceTransaction) {
-  }
+  constructor(private dataService: DataServiceTransaction) { }
 
   ngOnInit() {
     this.loadTransactions();
@@ -28,28 +27,14 @@ export class InfoTranscationPageComponent implements OnInit {
        this.dataService.GetTransactions()
          .subscribe((data: Transaction[]) => { this.CompleteLoad(data); });
      } else {
-    this.dataService.GetFilteredTransactions(filter)
+    this.dataService.GetInfo(filter)
       .subscribe((data: Transaction[]) => { this.CompleteLoad(data); });
     }
-  }
-
-  // для фильтра (знаю, что криво)
-  parseDate(input, separator?: string) {
-    if (separator == undefined)
-      separator = '-';
-
-    let newDate: Date = new Date(input);
-    let day: string = ((newDate.getDate() > 9) ? newDate.getDate() : "0" + newDate.getDate()).toString();
-    let mouth: string = ((newDate.getMonth() > 9) ? newDate.getMonth() : "0" + newDate.getMonth()).toString();
-
-    return day + separator + mouth + separator + newDate.getFullYear();
   }
 
   CompleteLoad(data: Transaction[]) {
     this.transactions = data;
     for (let elem in this.transactions) {
-      this.transactions[elem].ComeIn = this.parseDate(this.transactions[elem].checkInTime);
-      this.transactions[elem].ComeOut = this.parseDate(this.transactions[elem].checkOutTime);
       this.transactions[elem].TheNoumber = +elem + 1;
       this.transactions[elem].Loading = false;
     }
@@ -57,7 +42,6 @@ export class InfoTranscationPageComponent implements OnInit {
   }
 
   changeFilter(filter: TransactionFilter) {
-    console.log("Accpet filter");
     this.loadTransactions(filter);
   }
 

@@ -15,7 +15,7 @@ export class DataServiceTransaction {
     return this.http.get(this.url);
   }
 
-  GetFilteredTransactions(filter: TransactionFilter) {
+  GetInfo(filter: TransactionFilter) {
 
 
     let checkInTime = '';
@@ -29,7 +29,7 @@ export class DataServiceTransaction {
     if (filter.clientId != undefined)
       clientId = filter.clientId.toString();
 
-    return this.http.get(this.url + '/Filter?' + 'start=' + checkInTime + '&' + 'end=' + checkOutTime + '&'
+    return this.http.get(this.url + '/Info?' + 'start=' + checkInTime + '&' + 'end=' + checkOutTime + '&'
       + 'type=' + type + '&' + 'id=' + clientId);
     // P.S. по-хорошему через параметры не получилось дату передать в нужном формате
   }
@@ -50,8 +50,9 @@ export class DataServiceTransaction {
     return this.http.delete(this.url + '/' + transactionId);
   }
 
-  GetHistory(id: number, isOnlyPaid: boolean = false) {
-    return this.http.get(this.url + '/History/' + id);
+  GetMyHistory() {
+    console.log(this.url + '/myHistory');
+    return this.http.get(this.url + '/myHistory');
   }
 
 
@@ -64,7 +65,6 @@ export class DataServiceTransaction {
     if (end != undefined)
       _end = this.parseDate(end, '%2F');
 
-    console.log(this.url + '/FinancialInformation/' + '?start=' + _start + '&end=' + _end);
     return this.http.get(this.url + '/FinancialInformation/' + '?start=' + _start + '&end=' + _end);
   }
 
@@ -72,7 +72,7 @@ export class DataServiceTransaction {
     return this.http.get(this.url + '/User/' + UserId);
   }
 
-  parseDate(input, separator?: string) {
+  parseDate(input, separator?: string) { //TODO: сделать нормально
     if (separator == undefined)
       separator = '%2F';
 

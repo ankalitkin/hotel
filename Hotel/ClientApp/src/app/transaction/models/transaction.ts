@@ -46,3 +46,4 @@ export class FinancicalInfoFilter {
   public end: Date;
 
 }
+

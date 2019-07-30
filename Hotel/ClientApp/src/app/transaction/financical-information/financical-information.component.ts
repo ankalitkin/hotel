@@ -41,7 +41,7 @@ export class FinancicalInformationComponent implements OnInit {
     }
   }
 
-  // для быстрого фильтра(котрый в списке) (знаю, что криво)
+  // для быстрого фильтра(котрый в списке) TODO: сделать нормально
   parseDate(input) {
     let separator: string = '-';
     let newDate: Date = new Date(input);

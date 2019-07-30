@@ -32,6 +32,8 @@ import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.compone
 import { FilterTransactionComponent } from './transaction/filter-transaction/filter-transaction.component';
 import { FinancicalInformationPageComponent } from './transaction/pages/financical-information-page/financical-information-page.component';
 import { FinancicalInformationComponent } from './transaction/financical-information/financical-information.component';
+import { UserTransactionPageComponent } from './transaction/pages/user-transaction-page/user-transaction-page.component';
+import { UserTransactionComponent } from './transaction/user-transaction/user-transaction.component';
 
 @NgModule({
 
@@ -50,7 +52,9 @@ import { FinancicalInformationComponent } from './transaction/financical-informa
     RoomEditComponent,
     FilterTransactionComponent,
     FinancicalInformationPageComponent,
-    FinancicalInformationComponent
+    FinancicalInformationComponent,
+    UserTransactionPageComponent,
+    UserTransactionComponent
   ],
   entryComponents: [EditTransactionComponent, EditTransactionPageComponent],
   imports: [

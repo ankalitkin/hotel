@@ -17,6 +17,8 @@ import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.compone
 import { FinancicalInformationPageComponent } from './transaction/pages/financical-information-page/financical-information-page.component';
 import { FinancicalInformationComponent } from './transaction/financical-information/financical-information.component';
 
+import { UserTransactionPageComponent } from './transaction/pages/user-transaction-page/user-transaction-page.component';
+
 
 const routes: Routes = [
   {
@@ -40,6 +42,10 @@ const routes: Routes = [
       {
         path: 'financicalInfo',
         component: FinancicalInformationPageComponent
+      },
+      {
+        path: 'ownHistory',
+        component: UserTransactionPageComponent
       }
 
     ]
