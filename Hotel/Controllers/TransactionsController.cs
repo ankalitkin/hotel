@@ -193,9 +193,10 @@ namespace Hotel.Controllers
         {
             var list = from room in _context.Rooms
                        join trans in _context.Transactions
-                       on room.RoomId equals trans.RoomId
-                       where trans.CheckInTime <= start && trans.CheckOutTime <= start
-                       || trans.CheckInTime >= end && trans.CheckOutTime >= end
+                       on room.RoomId equals trans.RoomId into p
+                       from t in p.DefaultIfEmpty()
+                       where t == null || (t.CheckInTime <= start && t.CheckOutTime <= start
+                        || t.CheckInTime >= end && t.CheckOutTime >= end)
                        select room;
 
 
