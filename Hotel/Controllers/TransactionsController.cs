@@ -192,6 +192,7 @@ namespace Hotel.Controllers
         public async Task<ActionResult<IEnumerable<Room>>> GetFreeRooms(DateTime start, DateTime end, int type)
         {
             var list = from room in _context.Rooms
+                       where room.RoomTypeId == type
                        join trans in _context.Transactions
                        on room.RoomId equals trans.RoomId into p
                        from t in p.DefaultIfEmpty()
