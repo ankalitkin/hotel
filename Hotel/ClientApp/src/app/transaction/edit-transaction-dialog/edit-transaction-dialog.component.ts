@@ -2,15 +2,15 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Transaction } from '../models/transaction';
 
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({
-  selector: 'edit-transaction',
-  templateUrl: './edit-transaction.component.html',
-  styleUrls: ['./edit-transaction.component.scss']
+  selector: 'edit-transaction-dialog',
+  templateUrl: './edit-transaction-dialog.component.html',
+  styleUrls: ['./edit-transaction-dialog.component.scss']
 })
-export class EditTransactionComponent implements OnInit {
+export class EditTransactionDialogComponent implements OnInit {
 
   EditedTransaction?: Transaction;
   @Output() transactionChange = new EventEmitter<Transaction>();
@@ -19,14 +19,16 @@ export class EditTransactionComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<EditTransactionComponent>,
+  constructor(
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<EditTransactionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Transaction) {
+
     this.EditedTransaction = data;
-    console.log(this.EditedTransaction);
   }
 
   ngOnInit() {
-    // сделать формат для даты
+    // TODO: сделать шаблон для даты и провреку, чтобы checkInTime <= checkOutTime
     this._transactionForm = this.fb.group({
       userId: this.fb.control(this.EditedTransaction.userId, [Validators.required, Validators.min(0), Validators.pattern("[0-9]{1,}")]),
       checkInTime: this.fb.control(this.EditedTransaction.checkInTime, [Validators.required]),

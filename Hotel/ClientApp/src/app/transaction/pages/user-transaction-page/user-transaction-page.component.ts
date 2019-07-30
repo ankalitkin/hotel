@@ -35,7 +35,6 @@ export class UserTransactionPageComponent implements OnInit {
     }
 
     this.isLoaded = true;
-    console.log(this.transactions);
   }
 
 }

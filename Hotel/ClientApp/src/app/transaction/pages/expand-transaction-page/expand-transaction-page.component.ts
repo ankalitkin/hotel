@@ -16,16 +16,11 @@ export class ExpandTransactionPageComponent implements OnInit {
   @Input()
   id?: number;
 
-
   @Output()
   SaveTemp: EventEmitter<User> = new EventEmitter<User>();
 
-  SaveUserInfo() {
-    this.SaveTemp.emit(this.userInfo);
-  }
-  constructor(private dataService: DataServiceTransaction) {
 
-  }
+  constructor(private dataService: DataServiceTransaction) { }
 
   ngOnInit() {
     if (this.userInfo != undefined && this.userInfo.userId == this.id)
@@ -34,8 +29,12 @@ export class ExpandTransactionPageComponent implements OnInit {
       this.loadData();
   }
 
+  SaveUserInfo() {
+    this.SaveTemp.emit(this.userInfo);
+  }
+
   loadData() {
-    this.dataService.GetUser(this.id)
+    this.dataService.GetExpandData(this.id)
       .subscribe((data: User) => { this.CompleteLoad(data); });
   }
 

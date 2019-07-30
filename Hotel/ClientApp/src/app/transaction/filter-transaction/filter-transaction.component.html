@@ -1,8 +1,9 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row justify-content-center">
-    <div class="col-6">
+    <div class="col-xl-5 col-lg-6 col-8">
       <div class="data">
         <p align="center">Фильтр</p>
+
         <ng-container [formGroup]="_filterForm">
 
           <mat-form-field class="form">
@@ -10,8 +11,6 @@
             <input matInput formControlName="clientId">
             <app-control-errors name="clientId"></app-control-errors>
           </mat-form-field>
-
-
 
           <mat-form-field class="form">
             <mat-label>Выбирите тип</mat-label>
@@ -23,11 +22,9 @@
             <app-control-errors name="type"></app-control-errors>
           </mat-form-field>
 
-
           <div align="center" class="form">
             <mat-form-field class="form1">
-              <input matInput [matDatepicker]="picker"
-                     formControlName="checkInTime">
+              <input matInput [matDatepicker]="picker" formControlName="checkInTime">
               <mat-label>Дата въезда </mat-label>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
@@ -36,8 +33,7 @@
             </mat-form-field>
 
             <mat-form-field class="form1">
-              <input matInput [matDatepicker]="picker1"
-                     formControlName="checkOutTime">
+              <input matInput [matDatepicker]="picker1" formControlName="checkOutTime">
               <mat-label>Дата выезда </mat-label>
               <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
               <mat-datepicker #picker1></mat-datepicker>
@@ -49,16 +45,12 @@
         </ng-container>
 
         <div align="center" class="buttons">
-          <button mat-raised-button
-                  (click)="handleRefreshClick()"
-                  [disabled]="_filterForm.invalid">
+          <button mat-raised-button (click)="handleRefreshClick()" [disabled]="_filterForm.invalid">
             Обновить
           </button>
         </div>
 
       </div>
-
     </div>
-
   </div>
 </div>

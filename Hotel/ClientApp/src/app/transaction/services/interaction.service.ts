@@ -1,8 +1,8 @@
-import { Injectable, EventEmitter, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class InteractionService {
-  // сделано как-то не-похорошему, наверное, но зато просто :)
+  // сделано как-то не по-хорошему, наверное, но зато просто :)
   // есть компонент родительский(recipient), который получает данные(temp) от дочернего
   private recipient: any;
   private temp: any;
@@ -22,10 +22,6 @@ export class InteractionService {
 
   getTemp(): any {
     return this.temp;
-  }
-
-  ngOnDestroy() {
-    console.log("destroy");
   }
 
 }

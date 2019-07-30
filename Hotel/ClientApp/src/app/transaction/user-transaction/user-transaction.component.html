@@ -13,15 +13,15 @@
     </ng-container>
 
     <!-- DateComeIn Column -->
-    <ng-container matColumnDef="ComeIn">
+    <ng-container matColumnDef="checkInTime">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Дата въезда </th>
-      <td mat-cell *matCellDef="let row"> {{row.ComeIn}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.checkInTime | date: 'shortDate'}} </td>
     </ng-container>
 
     <!-- DateComeOut Column -->
-    <ng-container matColumnDef="ComeOut">
+    <ng-container matColumnDef="checkOutTime">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Дата выезда </th>
-      <td mat-cell *matCellDef="let row"> {{row.ComeOut}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.checkOutTime | date: 'shortDate'}} </td>
     </ng-container>
 
     <!-- Cost Column -->

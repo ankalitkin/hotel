@@ -1,9 +1,7 @@
-import { User } from './user';
 import { jsonIgnoreReplacer, jsonIgnore } from 'json-ignore';
 
 export class Transaction {
 
-  constructor() { }
   public transactionId: number;
   public checkInTime: Date;
   public checkOutTime: Date;
@@ -13,25 +11,20 @@ export class Transaction {
   public isPaid: Boolean;
   public isCanceled: Boolean;
 
-  // для фильтра
-  @jsonIgnore() public ComeIn: string;
-  @jsonIgnore() public ComeOut: string;
   @jsonIgnore() public TheNoumber: number;
   @jsonIgnore() public Loading: Boolean;
 }
 
-export class TransactionFilter {
-  constructor() { }
+export interface TransactionFilter {
 
-  public clientId: number;
-  public checkInTime: Date;
-  public checkOutTime: Date;
-  public type: String;
+  clientId: number;
+  checkInTime: Date;
+  checkOutTime: Date;
+  type: String;
 
 }
 
 export class FinancicalInformation {
-  constructor() { }
 
   public dateTime: Date;
   public sum: Number;
@@ -39,11 +32,10 @@ export class FinancicalInformation {
   @jsonIgnore() public TheNoumber: number;
 }
 
-export class FinancicalInfoFilter {
-  constructor() { }
+export interface FinancicalInfoFilter {
 
-  public start: Date;
-  public end: Date;
+  start: Date;
+  end: Date;
 
 }
 

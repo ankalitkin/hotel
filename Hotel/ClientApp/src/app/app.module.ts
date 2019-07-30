@@ -19,7 +19,7 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router'
 
 import { InfoTranscationPageComponent } from './transaction/pages/info-transcation-page/info-transcation-page.component';
 import { InfoTransactionComponent } from './transaction/info-transaction/info-transaction.component';
-import { EditTransactionComponent } from './transaction/edit-transaction/edit-transaction.component';
+import { EditTransactionDialogComponent } from './transaction/edit-transaction-dialog/edit-transaction-dialog.component';
 import { ExpandTransactionComponent } from './transaction/expand-transaction/expand-transaction.component';
 import { ExpandTransactionPageComponent } from './transaction/pages/expand-transaction-page/expand-transaction-page.component';
 import { EditTransactionPageComponent } from './transaction/pages/edit-transaction-page/edit-transaction-page.component';
@@ -40,8 +40,7 @@ import { UserTransactionComponent } from './transaction/user-transaction/user-tr
   declarations: [
     AppComponent,
     InfoTransactionComponent,
-    InfoTranscationPageComponent,
-    EditTransactionComponent,
+    InfoTranscationPageComponent,    EditTransactionDialogComponent,
     ExpandTransactionComponent,
     ExpandTransactionPageComponent,
     EditTransactionPageComponent,
@@ -56,7 +55,7 @@ import { UserTransactionComponent } from './transaction/user-transaction/user-tr
     UserTransactionPageComponent,
     UserTransactionComponent
   ],
-  entryComponents: [EditTransactionComponent, EditTransactionPageComponent],
+  entryComponents: [EditTransactionDialogComponent, EditTransactionPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

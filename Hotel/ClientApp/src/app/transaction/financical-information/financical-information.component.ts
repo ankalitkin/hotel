@@ -12,7 +12,7 @@ import { FinancicalInformation } from '../models/transaction';
 })
 export class FinancicalInformationComponent implements OnInit {
 
-  displayedColumns: string[] = ['TheNoumber', 'Date', 'Sum'];
+  displayedColumns: string[] = ['TheNoumber', 'dateTime', 'sum'];
   dataSource: MatTableDataSource<FinancicalInformation>;
   @Input()
   financicalInformation: FinancicalInformation[] | null | undefined;
@@ -23,14 +23,9 @@ export class FinancicalInformationComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.financicalInformation);
-    // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.financicalInformation);
-
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
-    console.log(this.dataSource.data);
   }
 
   applyFilter(filterValue: string) {
@@ -40,15 +35,4 @@ export class FinancicalInformationComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
-  // для быстрого фильтра(котрый в списке) TODO: сделать нормально
-  parseDate(input) {
-    let separator: string = '-';
-    let newDate: Date = new Date(input);
-    let day: string = ((newDate.getDate() > 9) ? newDate.getDate() : "0" + newDate.getDate()).toString();
-    let mouth: string = ((newDate.getMonth() > 9) ? newDate.getMonth() : "0" + newDate.getMonth()).toString();
-
-    return day + separator + mouth + separator + newDate.getFullYear();
-  }
-
 }

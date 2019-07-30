@@ -1,85 +1,85 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Transaction } from '../models/transaction';
+import { Transaction, FinancicalInformation } from '../models/transaction';
 import { TransactionFilter } from '../models/transaction';
+import { Observable } from 'rxjs';
+import { User } from '../models/user';
 
 @Injectable()
 export class DataServiceTransaction {
 
-  private url = "/api/Transactions";
+  private baseUrl = "/api/Transactions";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) { }
+
+  GetTransactions(): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.baseUrl);
   }
 
-  GetTransactions() {
-    return this.http.get(this.url);
-  }
-
-  GetInfo(filter: TransactionFilter) {
-
+  GetInfo(filter?: TransactionFilter): Observable<Transaction[]> {
 
     let checkInTime = '';
     if (filter.checkInTime != undefined)
-      checkInTime = this.parseDate(filter.checkInTime, '%2F');
+      checkInTime = filter.checkInTime.toISOString().substr(0,10);
     let checkOutTime = '';
     if (filter.checkOutTime != undefined)
-      checkOutTime = this.parseDate(filter.checkOutTime, '%2F');
+      checkOutTime = filter.checkOutTime.toISOString().substr(0, 10);
     let type = filter.type.toString();
     let clientId = '';
     if (filter.clientId != undefined)
       clientId = filter.clientId.toString();
 
-    return this.http.get(this.url + '/Info?' + 'start=' + checkInTime + '&' + 'end=' + checkOutTime + '&'
-      + 'type=' + type + '&' + 'id=' + clientId);
-    // P.S. по-хорошему через параметры не получилось дату передать в нужном формате
+    let params = new HttpParams();
+
+    params = params
+      .append('start', checkInTime)
+      .append('end', checkOutTime)
+      .append('type', type)
+      .append('id', clientId);
+
+
+    return this.http.get<Transaction[]>(this.baseUrl +'/Info' , { params });
   }
 
-  GetTransaction(transactionId: number) {
-    return this.http.get(this.url + '/' + transactionId);
+  GetTransaction(transactionId: number): Observable<Transaction> {
+    return this.http.get <Transaction>(this.baseUrl + '/' + transactionId);
   }
 
-  PutTransaction(transaction: Transaction) {
-    return this.http.put(this.url + '/' + transaction.transactionId, transaction);
+  PutTransaction(transaction: Transaction): Observable<void> {
+    return this.http.put<void>(this.baseUrl + '/' + transaction.transactionId, transaction);
   }
 
-  PostTransaction(transaction: Transaction) {
-    return this.http.post(this.url, transaction);
+  PostTransaction(transaction: Transaction): Observable<Transaction> {
+    return this.http.post<Transaction>(this.baseUrl, transaction);
   }
 
-  DeleteTransaction(transactionId: number) {
-    return this.http.delete(this.url + '/' + transactionId);
+  DeleteTransaction(transactionId: number): Observable<Transaction> {
+    return this.http.delete<Transaction>(this.baseUrl + '/' + transactionId);
   }
 
-  GetMyHistory() {
-    console.log(this.url + '/myHistory');
-    return this.http.get(this.url + '/myHistory');
+  GetMyHistory(): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.baseUrl + '/myHistory');
   }
 
-
-  GetFinancicalInfo(start?: Date, end?: Date) {
+  GetFinancicalInfo(start?: Date, end?: Date): Observable<FinancicalInformation[]> {
     let _start = '';
     if (start != undefined)
-      _start = this.parseDate(start, '%2F');
+      _start = start.toISOString().substr(0, 10);;
 
     let _end = '';
     if (end != undefined)
-      _end = this.parseDate(end, '%2F');
+      _end = end.toISOString().substr(0, 10);
 
-    return this.http.get(this.url + '/FinancialInformation/' + '?start=' + _start + '&end=' + _end);
+    let params = new HttpParams();
+
+    params = params
+      .append('start', _start)
+      .append('end', _end);
+
+    return this.http.get<FinancicalInformation[]>(this.baseUrl + '/FinancialInformation', { params });
   }
 
-  GetUser(UserId: number) {
-    return this.http.get(this.url + '/User/' + UserId);
-  }
-
-  parseDate(input, separator?: string) { //TODO: сделать нормально
-    if (separator == undefined)
-      separator = '%2F';
-
-    let newDate: Date = new Date(input);
-    let day: string = ((newDate.getDate() > 9) ? newDate.getDate() : "0" + newDate.getDate()).toString();
-    let mouth: string = ((newDate.getMonth() > 9) ? newDate.getMonth() : "0" + newDate.getMonth()).toString();
-
-    return mouth + separator + day + separator + newDate.getFullYear();
+  GetExpandData(UserId: number): Observable<User> {
+    return this.http.get<User>(this.baseUrl + '/User/' + UserId);
   }
 }

@@ -7,8 +7,7 @@
 
           <div align="center" class="form">
             <mat-form-field class="form1">
-              <input matInput [matDatepicker]="picker"
-                     formControlName="start">
+              <input matInput [matDatepicker]="picker" formControlName="start">
               <mat-label>Дата начала </mat-label>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
@@ -17,8 +16,7 @@
             </mat-form-field>
 
             <mat-form-field class="form1">
-              <input matInput [matDatepicker]="picker1"
-                     formControlName="end">
+              <input matInput [matDatepicker]="picker1" formControlName="end">
               <mat-label>Дата конца </mat-label>
               <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
               <mat-datepicker #picker1></mat-datepicker>
@@ -30,17 +28,13 @@
         </ng-container>
 
         <div align="center" class="buttons">
-          <button mat-raised-button
-                  (click)="changeFilter()"
-                  [disabled]="_filterForm.invalid">
+          <button mat-raised-button (click)="changeFilter()" [disabled]="_filterForm.invalid">
             Обновить
           </button>
         </div>
 
       </div>
-
     </div>
-
   </div>
 </div>
 
@@ -57,8 +51,9 @@
     <div class="row justify-content-center">
       <div class="col-8">
         <div align="center">
-          <span> Идёт загрузка данных.Пожалуйста подождите... </span>
-          <br />
+          <div class="message">
+            <span> Идёт загрузка данных.Пожалуйста подождите... </span>
+          </div>
           <mat-progress-bar mode="indeterminate"></mat-progress-bar>
         </div>
       </div>

@@ -4,21 +4,15 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Transaction } from '../models/transaction';
 import { User } from '../models/user';
-import { DataServiceTransaction } from '../services/data.service.transaction';
-import { InteractionService } from '../services/interaction.service';
 
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
-/*
- * @title Data table with sorting, pagination, and filtering and expanded.
- */
 @Component({
   selector: 'info-transaction',
   styleUrls: ['info-transaction.component.scss'],
   templateUrl: 'info-transaction.component.html',
-  providers: [DataServiceTransaction, InteractionService],
-  animations: [
+  animations: [ // для раскрываемого списка
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({ height: '*' })),
@@ -27,32 +21,31 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   ],
 })
 export class InfoTransactionComponent implements OnInit {
-  displayedColumns: string[] = ['TheNoumber', 'UserID', 'ComeIn', 'ComeOut', 'cost'];
+  displayedColumns: string[] = ['TheNoumber', 'userId', 'checkInTime', 'checkOutTime', 'cost'];
   dataSource: MatTableDataSource<Transaction>;
+
   @Input()
   transactions: Transaction[] | null | undefined;
+
+  @Output()
+  putTransactionEvent = new EventEmitter<Transaction>();
+
   expandedElement: Transaction | null;
   showInfoUser: Boolean = false;
   tempUserInfo?: User;
-  currentDate: Date = new Date();
-
-  editMode: Boolean = false;
+  currentDate: Date = new Date(); // чтобы не горела кнопка "отменить"
 
   SaveTemp(user: User) {
     this.tempUserInfo = user;
   }
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private dataService: DataServiceTransaction,
-    private interactionService: InteractionService) {
-    interactionService.setRecipient(this); // установка в качестве получателя(получает от дочернего эл-та)
-  }
+  constructor() { }
 
   ngOnInit() {
-    // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.transactions);
-
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -65,52 +58,15 @@ export class InfoTransactionComponent implements OnInit {
     }
   }
 
-  // обновление элемента в списке
+  // запрос к родителю на обновление элемента в базе
   putTransaction(transaction: Transaction) {
-    //console.log(transaction);
-    transaction.Loading = true;
-    this.dataService.PutTransaction(transaction)
-      .subscribe(() => { transaction.Loading = false; });
+    this.putTransactionEvent.emit(transaction);
   }
 
-  // Получение редактируемого объекта, чтобы в списке обновить только его одного
-  getMessage() {
-    const id = this.interactionService.getTemp();
-    this.updateTransaction(id);
-  }
-
-  updateTransaction(id: number) {
-
-    // нахождение индекса обновленной транзакции в списке
-    const transaction = this.dataSource.data.find((t) => t.transactionId == id);
-    const index = this.dataSource.data.indexOf(transaction);
-    transaction.Loading = true;
-
-    // взятие из базы и обновление в списке
-    this.dataService.GetTransaction(id)
-      .subscribe((data: Transaction) => {
-        transaction.Loading = false;
-        data.ComeIn = this.parseDate(data.checkInTime);
-        data.ComeOut = this.parseDate(data.checkOutTime);
-        data.TheNoumber = transaction.TheNoumber;
-        data.Loading = false;
-        this.dataSource.data[index] = data;
-        this.dataSource._updateChangeSubscription();
-      });
-  }
-
-  // для быстрого фильтра(котрый в списке) TODO: сделать нормально
-  parseDate(input) {
-    let separator: string = '-';
-    let newDate: Date = new Date(input);
-    let day: string = ((newDate.getDate() > 9) ? newDate.getDate() : "0" + newDate.getDate()).toString();
-    let mouth: string = ((newDate.getMonth() > 9) ? newDate.getMonth() : "0" + newDate.getMonth()).toString();
-
-    return day + separator + mouth + separator + newDate.getFullYear();
-  }
-
-  EditMode() {
-    this.editMode = true;
+  // обновление транзакции в списке (после редактирования)
+  updateTransaction(transaction: Transaction, index: number) {
+    this.dataSource.data[index] = transaction;
+    this.dataSource._updateChangeSubscription();
   }
 
 }

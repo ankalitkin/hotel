@@ -1,21 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataServiceTransaction } from '../../services/data.service.transaction';
+import { InteractionService } from '../../services/interaction.service';
 import { Transaction } from '../../models/transaction';
 import { TransactionFilter } from '../../models/transaction';
+import { InfoTransactionComponent } from '../../info-transaction/info-transaction.component';
 
 
 @Component({
   selector: 'app-info-transcation-page',
   templateUrl: './info-transcation-page.component.html',
   styleUrls: ['./info-transcation-page.component.scss'],
-  providers: [DataServiceTransaction]
+  providers: [DataServiceTransaction, InteractionService]
 })
 export class InfoTranscationPageComponent implements OnInit {
 
   transactions?: Transaction[];
   isLoaded: Boolean = false;
+  @ViewChild(InfoTransactionComponent, { static: false }) infoTrans: InfoTransactionComponent;
 
-  constructor(private dataService: DataServiceTransaction) { }
+  constructor(private dataService: DataServiceTransaction, private interactionService: InteractionService) {
+    interactionService.setRecipient(this); // установка в качестве получателя(получает от дочернего эл-та)
+  }
 
   ngOnInit() {
     this.loadTransactions();
@@ -23,12 +28,12 @@ export class InfoTranscationPageComponent implements OnInit {
 
   loadTransactions(filter?: TransactionFilter) {
     this.isLoaded = false;
-     if (filter == undefined) {
-       this.dataService.GetTransactions()
-         .subscribe((data: Transaction[]) => { this.CompleteLoad(data); });
-     } else {
-    this.dataService.GetInfo(filter)
-      .subscribe((data: Transaction[]) => { this.CompleteLoad(data); });
+    if (filter == undefined) {
+      this.dataService.GetTransactions()
+        .subscribe((data: Transaction[]) => { this.CompleteLoad(data); });
+    } else {
+      this.dataService.GetInfo(filter)
+        .subscribe((data: Transaction[]) => { this.CompleteLoad(data); });
     }
   }
 
@@ -45,5 +50,30 @@ export class InfoTranscationPageComponent implements OnInit {
     this.loadTransactions(filter);
   }
 
+  // обновление элемента в базе
+  putTransaction(transaction: Transaction) {
+    transaction.Loading = true;
+    this.dataService.PutTransaction(transaction)
+      .subscribe(() => { transaction.Loading = false; });
+  }
 
+  // Получение id редактируемого объекта, чтобы в списке обновить только его одного
+  getMessage() {
+    const id = this.interactionService.getTemp();
+
+    // нахождение индекса обновленной транзакции в списке
+    const old_transaction = this.infoTrans.dataSource.data.find((t) => t.transactionId == id);
+    old_transaction.Loading = true;
+    const index = this.infoTrans.dataSource.data.indexOf(old_transaction);
+
+    // Загрузка транзакции из базы по индексу (можно было и без этого, напрямую передав объект)
+    //( всё только ради кружочка загрузки только ОДНОГО элемнта :-)
+    this.dataService.GetTransaction(id)
+      .subscribe((data) => {
+        data.Loading = false;
+        data.TheNoumber = old_transaction.TheNoumber;
+        // обновление транзакции в списке дочернего элемента
+        this.infoTrans.updateTransaction(data, index);
+      });
+  }
 }

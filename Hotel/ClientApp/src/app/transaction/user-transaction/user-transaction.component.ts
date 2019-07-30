@@ -12,7 +12,7 @@ import { Transaction } from '../models/transaction';
 })
 export class UserTransactionComponent implements OnInit {
 
-  displayedColumns: string[] = ['TheNoumber', 'ComeIn', 'ComeOut', 'cost'];
+  displayedColumns: string[] = ['TheNoumber', 'checkInTime', 'checkOutTime', 'cost'];
   dataSource: MatTableDataSource<Transaction>;
   @Input()
   transactions: Transaction[] | null | undefined;
@@ -23,10 +23,7 @@ export class UserTransactionComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
-    // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.transactions);
-
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

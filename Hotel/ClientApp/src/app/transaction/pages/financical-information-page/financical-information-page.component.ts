@@ -20,8 +20,7 @@ export class FinancicalInformationPageComponent implements OnInit {
   _filterForm: FormGroup;
   filter: FinancicalInfoFilter;
 
-  constructor(private dataService: DataServiceTransaction, private fb: FormBuilder) {
-  }
+  constructor(private dataService: DataServiceTransaction, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.loadFinancicalInfo();
@@ -41,18 +40,6 @@ export class FinancicalInformationPageComponent implements OnInit {
       this.dataService.GetFinancicalInfo(filter.start, filter.end)
         .subscribe((data: FinancicalInformation[]) => { this.CompleteLoad(data); });
     }
-  }
-
-  // для фильтра (знаю, что криво)
-  parseDate(input, separator?: string) {
-    if (separator == undefined)
-      separator = '-';
-
-    let newDate: Date = new Date(input);
-    let day: string = ((newDate.getDate() > 9) ? newDate.getDate() : "0" + newDate.getDate()).toString();
-    let mouth: string = ((newDate.getMonth() > 9) ? newDate.getMonth() : "0" + newDate.getMonth()).toString();
-
-    return day + separator + mouth + separator + newDate.getFullYear();
   }
 
   CompleteLoad(data: FinancicalInformation[]) {

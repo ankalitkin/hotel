@@ -124,7 +124,7 @@ namespace Hotel.Controllers
             }
         }
 
-        // GET INFO: api/transactions/FinancialInformation?start=07%2F13%2F2019&end=07%2F16%2F2019
+        // GET INFO: api/transactions/FinancialInformation?start=2019-07-13&end=2019-07-16
         [HttpGet("FinancialInformation")]
         public async Task<ActionResult<IEnumerable<FinancialInfo>>> GetFinancialInformation(DateTime? start, DateTime? end)
         {
@@ -157,7 +157,7 @@ namespace Hotel.Controllers
             return user;
         }
 
-        // GET: api/Transactions/Filter?start=07%2F13%2F2019&end=07%2F16%2F2019&type=all&id=123456789012
+        // GET: api/Transactions/Info?start=2019-07-13&end=2019-07-16&type=all&id=123456789012
         [HttpGet("Info")]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetInfo(DateTime? start, DateTime? end, string type, string id)
         {
@@ -187,7 +187,7 @@ namespace Hotel.Controllers
             return list;
         }
         // мб стоит добавить в парметры кол-во мест и минибар?
-        // GET: api/Transactions/FreeRooms?start=07%2F13%2F2019&end=07%2F16%2F2019&type=3
+        // GET: api/Transactions/FreeRooms?start=2019-07-13&end=2019-07-16&type=3
         [HttpGet("FreeRooms")]
         public async Task<ActionResult<IEnumerable<Room>>> GetFreeRooms(DateTime start, DateTime end, int type)
         {
