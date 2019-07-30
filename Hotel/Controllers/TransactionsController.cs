@@ -186,7 +186,7 @@ namespace Hotel.Controllers
 
             return list;
         }
-
+        // мб стоит добавить в парметры кол-во мест и минибар?
         // GET: api/Transactions/FreeRooms?start=07%2F13%2F2019&end=07%2F16%2F2019&type=3
         [HttpGet("FreeRooms")]
         public async Task<ActionResult<IEnumerable<Room>>> GetFreeRooms(DateTime start, DateTime end, int type)
