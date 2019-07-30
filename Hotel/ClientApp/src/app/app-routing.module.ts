@@ -14,6 +14,9 @@ import { RoomFormComponent } from './RoomsManagement/room-form/room-form.compone
 import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.component';
 import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
 
+import { FinancicalInformationPageComponent } from './transaction/pages/financical-information-page/financical-information-page.component';
+import { FinancicalInformationComponent } from './transaction/financical-information/financical-information.component';
+
 
 const routes: Routes = [
   {
@@ -33,6 +36,10 @@ const routes: Routes = [
               }]
           }
         ]
+      },
+      {
+        path: 'financicalInfo',
+        component: FinancicalInformationPageComponent
       }
 
     ]

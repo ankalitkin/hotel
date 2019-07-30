@@ -13,7 +13,7 @@ export class Transaction {
   public isPaid: Boolean;
   public isCanceled: Boolean;
 
-   // для фильтра
+  // для фильтра
   @jsonIgnore() public ComeIn: string;
   @jsonIgnore() public ComeOut: string;
   @jsonIgnore() public TheNoumber: number;
@@ -27,5 +27,22 @@ export class TransactionFilter {
   public checkInTime: Date;
   public checkOutTime: Date;
   public type: String;
+
+}
+
+export class FinancicalInformation {
+  constructor() { }
+
+  public dateTime: Date;
+  public sum: Number;
+
+  @jsonIgnore() public TheNoumber: number;
+}
+
+export class FinancicalInfoFilter {
+  constructor() { }
+
+  public start: Date;
+  public end: Date;
 
 }

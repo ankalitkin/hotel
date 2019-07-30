@@ -36,6 +36,8 @@ export class InfoTransactionComponent implements OnInit {
   tempUserInfo?: User;
   currentDate: Date = new Date();
 
+  editMode: Boolean = false;
+
   SaveTemp(user: User) {
     this.tempUserInfo = user;
   }
@@ -54,7 +56,7 @@ export class InfoTransactionComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
+  
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -97,7 +99,7 @@ export class InfoTransactionComponent implements OnInit {
       });
   }
 
-  // для фильтра(котрый в списке) (знаю, что криво)
+  // для быстрого фильтра(котрый в списке) (знаю, что криво)
   parseDate(input) {
     let separator: string = '-';
     let newDate: Date = new Date(input);
@@ -107,5 +109,8 @@ export class InfoTransactionComponent implements OnInit {
     return day + separator + mouth + separator + newDate.getFullYear();
   }
 
+  EditMode() {
+    this.editMode = true;
+  }
 
 }

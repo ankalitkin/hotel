@@ -5,43 +5,24 @@
         <p align="center">Фильтр</p>
         <ng-container [formGroup]="_filterForm">
 
-          <mat-form-field class="form">
-            <mat-label> ID Клиента </mat-label>
-            <input matInput formControlName="clientId">
-            <app-control-errors name="clientId"></app-control-errors>
-          </mat-form-field>
-
-
-
-          <mat-form-field class="form">
-            <mat-label>Выбирите тип</mat-label>
-            <mat-select formControlName="type" [(ngModel)]="typeSelect">
-              <mat-option *ngFor="let type of typeList" [value]="type.value">
-                {{type.viewValue}}
-              </mat-option>
-            </mat-select>
-            <app-control-errors name="type"></app-control-errors>
-          </mat-form-field>
-
-
           <div align="center" class="form">
             <mat-form-field class="form1">
               <input matInput [matDatepicker]="picker"
-                     formControlName="checkInTime">
-              <mat-label>Дата въезда </mat-label>
+                     formControlName="start">
+              <mat-label>Дата начала </mat-label>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
-              <app-control-errors name="checkInTime">
+              <app-control-errors name="start">
               </app-control-errors>
             </mat-form-field>
 
             <mat-form-field class="form1">
               <input matInput [matDatepicker]="picker1"
-                     formControlName="checkOutTime">
-              <mat-label>Дата выезда </mat-label>
+                     formControlName="end">
+              <mat-label>Дата конца </mat-label>
               <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
               <mat-datepicker #picker1></mat-datepicker>
-              <app-control-errors name="checkOutTime">
+              <app-control-errors name="end">
               </app-control-errors>
             </mat-form-field>
           </div>
@@ -50,7 +31,7 @@
 
         <div align="center" class="buttons">
           <button mat-raised-button
-                  (click)="handleRefreshClick()"
+                  (click)="changeFilter()"
                   [disabled]="_filterForm.invalid">
             Обновить
           </button>
@@ -62,3 +43,28 @@
 
   </div>
 </div>
+
+
+
+
+
+<ng-container *ngIf="isLoaded == true">
+  <financical-information [financicalInformation]="financicalInformation"></financical-information>
+</ng-container>
+
+<ng-container *ngIf="isLoaded != true">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <div align="center">
+          <span> Идёт загрузка данных.Пожалуйста подождите... </span>
+          <br />
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+
+

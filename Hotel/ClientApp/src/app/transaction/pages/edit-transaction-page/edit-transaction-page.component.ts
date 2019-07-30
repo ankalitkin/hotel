@@ -29,13 +29,13 @@ export class EditTransactionPageComponent implements OnInit {
     this.activeRoute.paramMap.subscribe(params => {
       const id = params.get('id') as string;
       this.loadTransactions(Number.parseInt(id));
-    });
+    }).unsubscribe();
 
   }
 
   loadTransactions(id: number) {
+
     this.isLoaded = false;
-    window.scrollTo(0, 0);
     this.dataService.GetTransaction(id)
       .subscribe((data: Transaction) => { this.CompleteLoad(data); });
   }
@@ -67,11 +67,11 @@ export class EditTransactionPageComponent implements OnInit {
       this.interactionService.sendMessage();
     }
   }
-
+  
 
   openDialog(): void {
     const dialogRef = this.dialog.open(EditTransactionComponent, {
-      width: '90%',
+      width: '60%',
       data: this.EditedTransaction
     });
 

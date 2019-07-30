@@ -31,6 +31,7 @@ export class DataServiceTransaction {
 
     return this.http.get(this.url + '/Filter?' + 'start=' + checkInTime + '&' + 'end=' + checkOutTime + '&'
       + 'type=' + type + '&' + 'id=' + clientId);
+    // P.S. по-хорошему через параметры не получилось дату передать в нужном формате
   }
 
   GetTransaction(transactionId: number) {
@@ -54,8 +55,17 @@ export class DataServiceTransaction {
   }
 
 
-  GetInfo(date?: Date) {
-    return this.http.get(this.url + '/Info/' + date);
+  GetFinancicalInfo(start?: Date, end?: Date) {
+    let _start = '';
+    if (start != undefined)
+      _start = this.parseDate(start, '%2F');
+
+    let _end = '';
+    if (end != undefined)
+      _end = this.parseDate(end, '%2F');
+
+    console.log(this.url + '/FinancialInformation/' + '?start=' + _start + '&end=' + _end);
+    return this.http.get(this.url + '/FinancialInformation/' + '?start=' + _start + '&end=' + _end);
   }
 
   GetUser(UserId: number) {

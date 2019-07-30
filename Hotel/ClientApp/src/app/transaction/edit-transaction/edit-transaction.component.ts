@@ -12,8 +12,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 })
 export class EditTransactionComponent implements OnInit {
 
-
- // @Input()
   EditedTransaction?: Transaction;
   @Output() transactionChange = new EventEmitter<Transaction>();
 
@@ -39,25 +37,7 @@ export class EditTransactionComponent implements OnInit {
       isCanceled: this.fb.control(this.EditedTransaction.isCanceled, [Validators.required])
     });
   }
-  /*
-  handleSaveClick() {
-    console.log("save");
-    this.EditedTransaction = {
-      ...this.EditedTransaction,
-      ...this._transactionForm.value
-    }
 
-    this.data = this.EditedTransaction;
-    console.log(this.EditedTransaction);
-  }
-
-
-  /*
-  handleCancelClick() {
-    this.transactionChange.emit();
-    this._transactionForm.reset();
-  }
-  */
 
   CancelClick(): void {
     this.dialogRef.close();

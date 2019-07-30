@@ -30,7 +30,8 @@ import { RoomFormComponent } from './RoomsManagement/room-form/room-form.compone
 import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.component';
 import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
 import { FilterTransactionComponent } from './transaction/filter-transaction/filter-transaction.component';
-import { EditTransactionDialogComponent } from './transaction/edit-transaction/edit-transaction-dialog/edit-transaction-dialog.component';
+import { FinancicalInformationPageComponent } from './transaction/pages/financical-information-page/financical-information-page.component';
+import { FinancicalInformationComponent } from './transaction/financical-information/financical-information.component';
 
 @NgModule({
 
@@ -48,7 +49,8 @@ import { EditTransactionDialogComponent } from './transaction/edit-transaction/e
     RoomCreateComponent,
     RoomEditComponent,
     FilterTransactionComponent,
-    EditTransactionDialogComponent
+    FinancicalInformationPageComponent,
+    FinancicalInformationComponent
   ],
   entryComponents: [EditTransactionComponent, EditTransactionPageComponent],
   imports: [

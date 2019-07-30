@@ -135,8 +135,10 @@ namespace Hotel.Controllers
         }
         // GET INFO: api/transactions/FinancialInformation?start=07%2F13%2F2019&end=07%2F16%2F2019
         [HttpGet("FinancialInformation")]
-        public async Task<ActionResult<IEnumerable<FinancialInfo>>> GetFinancialInformation(DateTime start, DateTime? end)
+        public async Task<ActionResult<IEnumerable<FinancialInfo>>> GetFinancialInformation(DateTime? start, DateTime? end)
         {
+            if (start == null)
+                start = DateTime.MinValue;
             if (end == null)
                 end = DateTime.Now;
             var result = _context.Transactions.AsNoTracking()
@@ -164,7 +166,7 @@ namespace Hotel.Controllers
             return user;
         }
 
-        // GET: api/Transactions......
+        // GET: api/Transactions/Filter ....
         [HttpGet("Filter")]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetFilteredTransactions(DateTime? start, DateTime? end, string type, string id)
         {

@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter, OnDestroy } from '@angular/core';
 
 @Injectable()
 export class InteractionService {
@@ -22,6 +22,10 @@ export class InteractionService {
 
   getTemp(): any {
     return this.temp;
+  }
+
+  ngOnDestroy() {
+    console.log("destroy");
   }
 
 }

@@ -28,8 +28,6 @@ export class InfoTranscationPageComponent implements OnInit {
        this.dataService.GetTransactions()
          .subscribe((data: Transaction[]) => { this.CompleteLoad(data); });
      } else {
-
-
     this.dataService.GetFilteredTransactions(filter)
       .subscribe((data: Transaction[]) => { this.CompleteLoad(data); });
     }
