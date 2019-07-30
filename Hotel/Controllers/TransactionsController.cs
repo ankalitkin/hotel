@@ -194,8 +194,8 @@ namespace Hotel.Controllers
             var list = from room in _context.Rooms
                        join trans in _context.Transactions
                        on room.RoomId equals trans.RoomId
-                       where trans.CheckInTime <= start && trans.CheckInTime <= start
-                       || trans.CheckInTime >= end && trans.CheckInTime >= end
+                       where trans.CheckInTime <= start && trans.CheckOutTime <= start
+                       || trans.CheckInTime >= end && trans.CheckOutTime >= end
                        select room;
 
 
