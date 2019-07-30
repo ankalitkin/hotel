@@ -11,27 +11,28 @@ namespace Hotel.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class CustomersController : ControllerBase
     {
         private readonly HotelContext _context;
 
-        public UsersController(HotelContext context)
+        public CustomersController(HotelContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Customers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.Include(u => u.Role).ToListAsync();
+            return await _context.Users.Where(u => u.Role.Rights.HasFlag(Role.AccessRights.IsCustomer)).Include(u => u.Role).ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Customers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.Users.Where(u => u.UserId == id).Include(u => u.Role).FirstOrDefaultAsync();
+            var user = await _context.Users.Where(u => u.Role.Rights.HasFlag(Role.AccessRights.IsCustomer))
+                .Where(u => u.UserId == id).Include(u => u.Role).FirstOrDefaultAsync();
 
             if (user == null)
             {
@@ -41,11 +42,17 @@ namespace Hotel.Controllers
             return user;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Customers/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.UserId)
+            {
+                return BadRequest();
+            }
+
+            Role role = _context.Roles.Find(user.RoleId);
+            if (role == null || !role.Rights.HasFlag(Role.AccessRights.IsCustomer))
             {
                 return BadRequest();
             }
@@ -71,22 +78,34 @@ namespace Hotel.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Customers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            Role role = _context.Roles.Find(user.RoleId);
+            if (role == null || !role.Rights.HasFlag(Role.AccessRights.IsCustomer))
+            {
+                return BadRequest();
+            }
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Customers/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null)
+            {
+                return NotFound();
+            }
+
+            Role role = _context.Roles.Find(user.RoleId);
+            if (role == null || !role.Rights.HasFlag(Role.AccessRights.IsCustomer))
             {
                 return NotFound();
             }

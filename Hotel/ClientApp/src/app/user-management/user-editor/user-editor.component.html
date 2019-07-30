@@ -1,15 +1,4 @@
-<ng-container [formGroup]="customerForm">
-
-  <h2 *ngIf="customer.userId; else register">
-    Редактирование клиента
-  </h2>
-
-  <ng-template #register>
-    <h2>
-      Регистрация клиента
-    </h2>
-  </ng-template>
-
+<form [formGroup]="formGroup">
   <p>
     <mat-form-field>
       <label>
@@ -37,7 +26,8 @@
   <p>
     <mat-form-field>
       <label>
-        <input matInput formControlName="email" pattern="[\w.]+@[\w]+.[\w.]+" placeholder="E-mail">
+        <input [required]="!formGroup.value.phone" formControlName="email" matInput pattern="[\w.]+@[\w]+.[\w.]+"
+               placeholder="E-mail">
       </label>
     </mat-form-field>
   </p>
@@ -45,12 +35,13 @@
   <p>
     <mat-form-field>
       <label>
-        <input type="tel" matInput formControlName="phone" pattern="\+?[\d()\- ]+" placeholder="Номер телефона">
+        <input [required]="!formGroup.value.email" formControlName="phone" matInput pattern="\+?[\d()\- ]+"
+               placeholder="Номер телефона" type="tel">
       </label>
     </mat-form-field>
   </p>
 
-  <p>
+  <p *ngIf="isCustomer">
     <mat-form-field>
       <label>
         <input matInput formControlName="clientId" required minlength="12" maxlength="12" pattern="\d{12}"
@@ -61,7 +52,7 @@
 
   <p>
     <mat-form-field>
-      <mat-select placeholder="Роль" formControlName="roleId">
+      <mat-select formControlName="roleId" placeholder="Роль">
         <mat-option *ngFor="let role of roles" value="{{role.roleId}}">{{role.name}}</mat-option>
       </mat-select>
     </mat-form-field>
@@ -75,13 +66,13 @@
     </mat-form-field>
   </p>
 
-  <p *ngIf="customer.userId">
+  <p *ngIf="user.userId">
     <mat-checkbox formControlName="isDeleted">Удалён</mat-checkbox>
   </p>
 
   <button mat-raised-button color="primary"
-          [disabled]="customerForm.invalid"
+          [disabled]="formGroup.invalid"
           (click)="handleSaveClick()">Сохранить
   </button>
 
-</ng-container>
+</form>

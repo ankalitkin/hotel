@@ -1,18 +1,12 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { InfoTransactionComponent } from './transaction/info-transaction/info-transaction.component';
-import { EditTransactionComponent } from './transaction/edit-transaction/edit-transaction.component';
+import {InfoTranscationPageComponent} from './transaction/pages/info-transcation-page/info-transcation-page.component';
+import {EditTransactionPageComponent} from './transaction/pages/edit-transaction-page/edit-transaction-page.component';
 
-import { InfoTranscationPageComponent } from './transaction/pages/info-transcation-page/info-transcation-page.component';
-import { EditTransactionPageComponent } from './transaction/pages/edit-transaction-page/edit-transaction-page.component';
-import { ExpandTransactionComponent } from './transaction/expand-transaction/expand-transaction.component';
-import { ExpandTransactionPageComponent } from './transaction/pages/expand-transaction-page/expand-transaction-page.component';
-
-import { RoomListComponent } from './RoomsManagement/room-list/room-list.component';
-import { RoomFormComponent } from './RoomsManagement/room-form/room-form.component';
-import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.component';
-import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
+import {RoomListComponent} from './RoomsManagement/room-list/room-list.component';
+import {RoomCreateComponent} from './RoomsManagement/room-create/room-create.component';
+import {RoomEditComponent} from './RoomsManagement/room-edit/room-edit.component';
 
 
 const routes: Routes = [
@@ -45,11 +39,18 @@ const routes: Routes = [
   },
   {
     path: 'customers',
-    loadChildren: () => import('./customers-management/customers-management.module').then(mod => mod.CustomersManagementModule)
+    loadChildren: () => import('./customers-management-pages/customers-management-pages.module')
+      .then(mod => mod.CustomersManagementPagesModule)
   },
+  {
+    path: 'staff',
+    loadChildren: () => import('./staff-management-pages/staff-management-pages.module')
+      .then(mod => mod.StaffManagementPagesModule)
+  }
 
-  //children: [
-    //{
+
+  // children: [
+  // {
     //    path: 'user-info',
     //    children: [
     //      {
@@ -57,8 +58,8 @@ const routes: Routes = [
     //        component: ExpandTransactionPageComponent,
     //      }
     //
-    //}
-    //]
+  // }
+  // ]
 ];
 
 @NgModule({
