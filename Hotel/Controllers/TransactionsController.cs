@@ -204,6 +204,8 @@ namespace Hotel.Controllers
         [HttpGet("Info")]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetInfo(DateTime? start, DateTime? end, string type, string id)
         {
+            // TODO: если запрос от пользователя, то выдать только его транзакции(т.е. присвоить нужное значение id)
+
             bool isPaid = false, isCanceled = false, all = false;
 
             if (type == "all")

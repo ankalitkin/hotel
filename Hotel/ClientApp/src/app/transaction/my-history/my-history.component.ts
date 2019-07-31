@@ -6,11 +6,11 @@ import { Transaction } from '../models/transaction';
 
 
 @Component({
-  selector: 'user-transaction',
-  templateUrl: './user-transaction.component.html',
-  styleUrls: ['./user-transaction.component.scss']
+  selector: 'my-history',
+  templateUrl: './my-history.component.html',
+  styleUrls: ['./my-history.component.scss']
 })
-export class UserTransactionComponent implements OnInit {
+export class MyHistoryComponent implements OnInit {
 
   displayedColumns: string[] = ['TheNoumber', 'checkInTime', 'checkOutTime', 'cost'];
   dataSource: MatTableDataSource<Transaction>;

@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { InfoTranscationPageComponent } from './transaction/pages/info-transcation-page/info-transcation-page.component';
 import { EditTransactionPageComponent } from './transaction/pages/edit-transaction-page/edit-transaction-page.component';
 import { FinancicalInformationPageComponent } from './transaction/pages/financical-information-page/financical-information-page.component';
-import { UserTransactionPageComponent } from './transaction/pages/user-transaction-page/user-transaction-page.component';
+import { MyHistoryPageComponent } from './transaction/pages/my-history-page/my-history-page.component';
 
 import { RoomListComponent } from './RoomsManagement/room-list/room-list.component';
 import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.component';
@@ -37,8 +37,8 @@ const routes: Routes = [
         component: FinancicalInformationPageComponent
       },
       {
-        path: 'ownHistory',
-        component: UserTransactionPageComponent
+        path: 'myHistory',
+        component: MyHistoryPageComponent
       }
 
     ]

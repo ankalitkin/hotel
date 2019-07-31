@@ -5,12 +5,12 @@ import { Transaction } from '../../models/transaction';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-user-transaction-page',
-  templateUrl: './user-transaction-page.component.html',
-  styleUrls: ['./user-transaction-page.component.scss'],
+  selector: 'app-my-history-page',
+  templateUrl: './my-history-page.component.html',
+  styleUrls: ['./my-history-page.component.scss'],
   providers: [DataServiceTransaction]
 })
-export class UserTransactionPageComponent implements OnInit {
+export class MyHistoryPageComponent implements OnInit {
 
   transactions?: Transaction[];
   isLoaded: Boolean = false;
