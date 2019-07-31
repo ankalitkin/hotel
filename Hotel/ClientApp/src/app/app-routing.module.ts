@@ -14,6 +14,8 @@ import { RoomFormComponent } from './RoomsManagement/room-form/room-form.compone
 import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.component';
 import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
 
+import { RegistrationComponent } from './user/registration/registration.component';
+
 
 const routes: Routes = [
   {
@@ -43,18 +45,14 @@ const routes: Routes = [
       { path: 'createRoom', component: RoomCreateComponent },
       { path: 'roomEdit/:id', component: RoomEditComponent }
     ]
-  }
-    //children: [
-    //{
-    //    path: 'user-info',
-    //    children: [
-    //      {
-    //        path: ':id',
-    //        component: ExpandTransactionPageComponent,
-    //      }
-    //    ]
-    //}
-    //]
+  },
+{
+  path: 'user',
+    children: [
+      { path: 'registration', component: RegistrationComponent }
+    ]
+  },
+  
 ];
 
 @NgModule({

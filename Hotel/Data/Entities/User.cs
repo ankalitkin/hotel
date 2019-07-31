@@ -13,13 +13,13 @@ namespace Hotel.Entities
         private string password;
 
         public User() {}
-        public User(string firstname, string lastname, string email, string password, string phone)
+        public User(string firstname, string lastname, string email, string password)
         {
             FirstName = firstname;
             LastName = lastname;
             Email = email;
             this.password = password;
-            Phone = phone;
+           // Phone = phone;
         }
 
         public int UserId { get; set; }

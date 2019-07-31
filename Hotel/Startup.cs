@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Hotel.Entities;
+using Hotel.Services;
 
 namespace Hotel
 {
@@ -28,10 +29,12 @@ namespace Hotel
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddScoped<HotelContext>();
+            services.AddTransient<DataService>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
+              
                 configuration.RootPath = "ClientApp/dist";
             });
         }

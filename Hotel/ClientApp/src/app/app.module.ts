@@ -29,6 +29,8 @@ import { RoomListComponent } from './RoomsManagement/room-list/room-list.compone
 import { RoomFormComponent } from './RoomsManagement/room-form/room-form.component';
 import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.component';
 import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
+import { RegistrationComponent } from './user/registration/registration.component';
+import { UserService } from './_shared/user.service';
 
 @NgModule({
 
@@ -44,7 +46,8 @@ import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.compone
     RoomListComponent,
     RoomFormComponent,
     RoomCreateComponent,
-    RoomEditComponent
+    RoomEditComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,7 @@ import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.compone
     //LoadingBarHttpModule,
     LoadingBarRouterModule,
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

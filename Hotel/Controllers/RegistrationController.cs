@@ -29,7 +29,7 @@ namespace Hotel.Controllers
             ViewData["password"] = password;
             ViewData["phone"] = phone;
 
-            User userx = new User(firstname,lastname, email,password,phone);
+            User userx = new User(firstname,lastname, email,password);
             //userx.FirstName = firstname;
             //userx.LastName = lastname;
             //userx.Password = password;
