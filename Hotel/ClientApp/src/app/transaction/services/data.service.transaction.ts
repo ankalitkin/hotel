@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Transaction, FinancicalInformation } from '../models/transaction';
-import { TransactionFilter } from '../models/transaction';
-import { Observable } from 'rxjs';
-import { User } from '../models/user';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {FinancicalInformation, Transaction, TransactionFilter} from '../../_models/transaction';
+import {Observable} from 'rxjs';
+import {User} from '../../_models/user';
 
 @Injectable()
 export class DataServiceTransaction {
 
-  private baseUrl = "/api/Transactions";
+  private baseUrl = '/api/Transactions';
 
   constructor(private http: HttpClient) { }
 

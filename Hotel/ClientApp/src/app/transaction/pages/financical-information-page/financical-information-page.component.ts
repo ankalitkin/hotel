@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { DataServiceTransaction } from '../../services/data.service.transaction';
-import { FinancicalInformation } from '../../models/transaction';
-import { FinancicalInfoFilter } from '../../models/transaction';
+import {Component, OnInit} from '@angular/core';
+import {DataServiceTransaction} from '../../services/data.service.transaction';
+import {FinancicalInfoFilter, FinancicalInformation} from '../../../_models/transaction';
 
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 
 @Component({

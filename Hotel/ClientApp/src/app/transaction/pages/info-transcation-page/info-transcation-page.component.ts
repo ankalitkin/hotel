@@ -1,10 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataServiceTransaction } from '../../services/data.service.transaction';
-import { InteractionService } from '../../services/interaction.service';
-import { Transaction } from '../../models/transaction';
-import { TransactionFilter } from '../../models/transaction';
-import { InfoTransactionComponent } from '../../info-transaction/info-transaction.component';
-
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {DataServiceTransaction} from '../../services/data.service.transaction';
+import {InteractionService} from '../../services/interaction.service';
+import {Transaction, TransactionFilter} from '../../../_models/transaction';
+import {InfoTransactionComponent} from '../../info-transaction/info-transaction.component';
 
 @Component({
   selector: 'app-info-transcation-page',

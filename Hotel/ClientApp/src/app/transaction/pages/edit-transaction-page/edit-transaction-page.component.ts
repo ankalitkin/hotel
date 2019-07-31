@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Optional } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Transaction } from '../../models/transaction';
+import { Transaction } from '../../../_models/transaction';
 import { DataServiceTransaction } from '../../services/data.service.transaction';
 import { Router } from '@angular/router';
 import { InteractionService } from '../../services/interaction.service';

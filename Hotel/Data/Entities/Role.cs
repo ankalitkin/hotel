@@ -20,7 +20,8 @@ namespace Hotel.Entities
             CanGetInfo = 128,
             CanGetAnyHistory = 256,
             CanGetOwnHistory = 512,
-            CanGetFinancialInformation = 1024
+            CanGetFinancialInformation = 1024,
+            IsCustomer = 2048
         }
 
         public int RoleId { get; set; }

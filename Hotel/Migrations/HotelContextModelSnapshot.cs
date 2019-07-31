@@ -15,7 +15,7 @@ namespace Hotel.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -215,19 +215,6 @@ namespace Hotel.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Transactions");
-
-                    b.HasData(
-                        new
-                        {
-                            TransactionId = 1,
-                            CheckInTime = new DateTime(2019, 7, 20, 2, 49, 42, 898, DateTimeKind.Local).AddTicks(5644),
-                            CheckOutTime = new DateTime(2019, 7, 21, 2, 49, 42, 899, DateTimeKind.Local).AddTicks(9265),
-                            Cost = 3500,
-                            IsCanceled = false,
-                            IsPaid = true,
-                            RoomId = 1,
-                            UserId = 3
-                        });
                 });
 
             modelBuilder.Entity("Hotel.Entities.User", b =>
@@ -238,7 +225,7 @@ namespace Hotel.Migrations
 
                     b.Property<DateTime>("BirthDate");
 
-                    b.Property<string>("ClientID")
+                    b.Property<string>("ClientId")
                         .HasMaxLength(12);
 
                     b.Property<string>("Email");
@@ -264,7 +251,7 @@ namespace Hotel.Migrations
                         {
                             UserId = 1,
                             BirthDate = new DateTime(1996, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientID = "123456789012",
+                            ClientId = "123456789012",
                             Email = "Tom@mail.ru",
                             FirstName = "Tom",
                             IsDeleted = false,
@@ -276,7 +263,7 @@ namespace Hotel.Migrations
                         {
                             UserId = 2,
                             BirthDate = new DateTime(1999, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientID = "123456789013",
+                            ClientId = "123456789013",
                             Email = "Dik@mail.ru",
                             FirstName = "Dik",
                             IsDeleted = false,
@@ -288,7 +275,7 @@ namespace Hotel.Migrations
                         {
                             UserId = 3,
                             BirthDate = new DateTime(1986, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientID = "123456789014",
+                            ClientId = "123456789014",
                             Email = "Jorge@mail.ru",
                             FirstName = "Jorge",
                             IsDeleted = false,

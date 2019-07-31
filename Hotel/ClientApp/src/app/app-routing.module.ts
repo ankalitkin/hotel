@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-
 import { InfoTranscationPageComponent } from './transaction/pages/info-transcation-page/info-transcation-page.component';
 import { EditTransactionPageComponent } from './transaction/pages/edit-transaction-page/edit-transaction-page.component';
 import { FinancicalInformationPageComponent } from './transaction/pages/financical-information-page/financical-information-page.component';
@@ -40,7 +39,6 @@ const routes: Routes = [
         path: 'ownHistory',
         component: UserTransactionPageComponent
       }
-
     ]
   },
   {
@@ -50,6 +48,16 @@ const routes: Routes = [
       { path: 'createRoom', component: RoomCreateComponent },
       { path: 'roomEdit/:id', component: RoomEditComponent }
     ]
+  },
+  {
+    path: 'customers',
+    loadChildren: () => import('./customers-management-pages/customers-management-pages.module')
+      .then(mod => mod.CustomersManagementPagesModule)
+  },
+  {
+    path: 'staff',
+    loadChildren: () => import('./staff-management-pages/staff-management-pages.module')
+      .then(mod => mod.StaffManagementPagesModule)
   }
 ];
 

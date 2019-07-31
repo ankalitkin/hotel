@@ -11,4 +11,4 @@ var Room = /** @class */ (function () {
     return Room;
 }());
 export { Room };
-//# sourceMappingURL=Room.js.map
+//# sourceMappingURL=room.js.map
