@@ -16,6 +16,7 @@ namespace Hotel.Data
                 await db.Users.AddAsync(userx);
                // await db.Users.Add()
                 await db.SaveChangesAsync();
+                
             }
         }
     }

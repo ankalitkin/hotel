@@ -46,6 +46,8 @@ export class UserService {
   }
   
   login(formData) {
-    return this.http.post(this.BaseUrl + '/Login', formData);
+
+    console.log(formData.Email + "  " + formData.Password);
+    return this.http.post(this.BaseUrl + "/Login", formData);
   }
 }

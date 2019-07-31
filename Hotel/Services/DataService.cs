@@ -36,7 +36,7 @@ namespace Hotel.Services
             using (HotelContext db = new HotelContext())
             {
                 var userlist = db.Users.ToList();
-                if (userlist.FirstOrDefault(v => v.Email == _email && v.password == _password)!=null)
+                if (userlist.FirstOrDefault(v => v.Email == _email && v.Password == _password)!=null)
                 {
                     return true;
                 }
