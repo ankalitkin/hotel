@@ -7,7 +7,7 @@ import{HttpClient} from '@angular/common/http';
 })
 export class UserService {
   
-  readonly BaseUrl="user/Registration";
+  readonly BaseUrl="user";
   constructor(private fb:FormBuilder, private http:HttpClient) { }
   formModel = this.fb.group({
     UserName: ['', Validators.required],
@@ -42,7 +42,10 @@ export class UserService {
     };
 
     console.log(this.formModel.value.UserName);
-    return this.http.post(this.BaseUrl, body);
+    return this.http.post(this.BaseUrl+"/Registration", body);
   }
   
+  login(formData) {
+    return this.http.post(this.BaseUrl + '/Login', formData);
+  }
 }

@@ -10,7 +10,7 @@ namespace Hotel.Entities
 {
     public class User
     {
-        private string password;
+        public string password;
 
         public User() {}
         public User(string firstname, string lastname, string email, string password)

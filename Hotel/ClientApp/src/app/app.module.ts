@@ -30,6 +30,7 @@ import { RoomFormComponent } from './RoomsManagement/room-form/room-form.compone
 import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.component';
 import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
 import { RegistrationComponent } from './user/registration/registration.component';
+import { LoginComponent } from './user/login/login.component';
 import { UserService } from './_shared/user.service';
 
 @NgModule({
@@ -47,7 +48,8 @@ import { UserService } from './_shared/user.service';
     RoomFormComponent,
     RoomCreateComponent,
     RoomEditComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -58,8 +60,6 @@ import { UserService } from './_shared/user.service';
     HttpClientModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    //LoadingBarHttpClientModule,
-    //LoadingBarHttpModule,
     LoadingBarRouterModule,
   ],
   providers: [UserService],

@@ -15,6 +15,7 @@ import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.c
 import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
 
 import { RegistrationComponent } from './user/registration/registration.component';
+import { LoginComponent } from './user/login/login.component';
 
 
 const routes: Routes = [
@@ -49,7 +50,8 @@ const routes: Routes = [
 {
   path: 'user',
     children: [
-      { path: 'registration', component: RegistrationComponent }
+      { path: 'registration', component: RegistrationComponent },
+      { path: 'login', component: LoginComponent }
     ]
   },
   
