@@ -20,6 +20,7 @@ namespace Hotel.Entities
         public int Cost { get; set; }
         public bool IsPaid { get; set; }
         public bool IsCanceled { get; set; }
+        public bool isEvicted { get; set; }
 
     }
 }

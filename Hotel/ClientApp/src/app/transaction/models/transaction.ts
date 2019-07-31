@@ -10,6 +10,7 @@ export class Transaction {
   public cost: number;
   public isPaid: Boolean;
   public isCanceled: Boolean;
+  public isEvicted: Boolean;
 
   @jsonIgnore() public TheNoumber: number;
   @jsonIgnore() public Loading: Boolean;
@@ -36,6 +37,24 @@ export interface FinancicalInfoFilter {
 
   start: Date;
   end: Date;
+
+}
+
+export interface ExpandData {
+
+  transactionId: Number;
+
+  userName: String;
+  birthDate: Date;
+  email: String;
+  phone: String;
+  clientID: String;
+
+  roomName: String;
+  floor: String;
+  roomTypeId: Number;
+  numberOfSeats: Number;
+  hasMiniBar: Boolean;
 
 }
 

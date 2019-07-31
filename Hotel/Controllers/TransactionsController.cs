@@ -140,21 +140,64 @@ namespace Hotel.Controllers
             return await result.ToListAsync();
         }
 
-        //TODO: получение не только пользователя, но и номер комнаты и т.д (и по id транзакции)
-        // GET: api/Transactions/User/5
-        [HttpGet("User/{id:int}")]
-        public async Task<ActionResult<User>> GetExpandData(int id)
+        public class ExpandData
         {
-            var user = await _context.Users.FindAsync(id);
+            public ExpandData(User user, Room room, int transactionId)
+            {
+                TransactionId = transactionId;
 
-            if (user == null)
+                UserName = user.FirstName + ' ' + user.LastName;
+                BirthDate = user.BirthDate;
+                Email = user.Email;
+                Phone = user.Phone;
+                ClientID = user.ClientID;
+
+                RoomName = room.Name;
+                Floor = room.Floor;
+                RoomTypeId = room.RoomTypeId;
+                NumberOfSeats = room.NumberOfSeats;
+                HasMiniBar = room.HasMiniBar;
+            }
+
+            public int TransactionId;
+
+            public string UserName;
+            public DateTime BirthDate;
+            public string Email;
+            public string Phone;
+            public string ClientID;
+
+            public string RoomName;
+            public string Floor;
+            public int RoomTypeId;
+            public int NumberOfSeats;
+            public bool HasMiniBar;
+
+        }
+
+        // GET: api/Transactions/ExpandData/3
+        [HttpGet("ExpandData/{id:int}")]
+        public async Task<ActionResult<ExpandData>> GetExpandData(int id)
+        {
+            var transaction = await _context.Transactions.FindAsync(id);
+
+            if (transaction == null)
             {
                 return NotFound();
             }
+
+            var user = await _context.Users.FindAsync(transaction.UserId);
+            var room = await _context.Rooms.FindAsync(transaction.RoomId);
+
+            if (user == null || room == null)
+            {
+                return NotFound();
+            }
+            // чтобы визуалка не ругалась :)
             Role role = await _context.Roles.FirstOrDefaultAsync(r => r.RoleId == user.RoleId);
             user.Role = role;
 
-            return user;
+            return new ExpandData(user, room, transaction.TransactionId);
         }
 
         // GET: api/Transactions/Info?start=2019-07-13&end=2019-07-16&type=all&id=123456789012
@@ -186,13 +229,15 @@ namespace Hotel.Controllers
 
             return list;
         }
-        // мб стоит добавить в парметры кол-во мест и минибар?
-        // GET: api/Transactions/FreeRooms?start=2019-07-13&end=2019-07-16&type=3
+
+        // GET: api/Transactions/FreeRooms?start=2019-07-13&end=2019-07-16&type=3&seats=2&minibar=true
         [HttpGet("FreeRooms")]
-        public async Task<ActionResult<IEnumerable<Room>>> GetFreeRooms(DateTime start, DateTime end, int type)
+        public async Task<ActionResult<IEnumerable<Room>>> GetFreeRooms(DateTime start, DateTime end, int? type, int? seats, bool? minibar)
         {
             var list = from room in _context.Rooms
-                       where room.RoomTypeId == type
+                       where type == null || room.RoomTypeId == type &&
+                       seats == null || room.NumberOfSeats == seats &&
+                       minibar == null || room.HasMiniBar == minibar
                        join trans in _context.Transactions
                        on room.RoomId equals trans.RoomId into p
                        from t in p.DefaultIfEmpty()

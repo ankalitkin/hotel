@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Transaction } from '../models/transaction';
-import { User } from '../models/user';
+import { ExpandData } from '../models/transaction';
 
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -31,12 +31,12 @@ export class InfoTransactionComponent implements OnInit {
   putTransactionEvent = new EventEmitter<Transaction>();
 
   expandedElement: Transaction | null;
-  showInfoUser: Boolean = false;
-  tempUserInfo?: User;
+  showExpandData: Boolean = false;
+  tempExpandData?: ExpandData;
   currentDate: Date = new Date(); // чтобы не горела кнопка "отменить"
 
-  SaveTemp(user: User) {
-    this.tempUserInfo = user;
+  SaveTemp(expandData: ExpandData) {
+    this.tempExpandData = expandData;
   }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

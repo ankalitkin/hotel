@@ -208,6 +208,8 @@ namespace Hotel.Migrations
 
                     b.Property<int>("UserId");
 
+                    b.Property<bool>("isEvicted");
+
                     b.HasKey("TransactionId");
 
                     b.HasIndex("RoomId");
@@ -215,19 +217,6 @@ namespace Hotel.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Transactions");
-
-                    b.HasData(
-                        new
-                        {
-                            TransactionId = 1,
-                            CheckInTime = new DateTime(2019, 7, 20, 2, 49, 42, 898, DateTimeKind.Local).AddTicks(5644),
-                            CheckOutTime = new DateTime(2019, 7, 21, 2, 49, 42, 899, DateTimeKind.Local).AddTicks(9265),
-                            Cost = 3500,
-                            IsCanceled = false,
-                            IsPaid = true,
-                            RoomId = 1,
-                            UserId = 3
-                        });
                 });
 
             modelBuilder.Entity("Hotel.Entities.User", b =>

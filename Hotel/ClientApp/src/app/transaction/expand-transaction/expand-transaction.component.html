@@ -2,30 +2,28 @@
   <table>
     <tr>
       <td><span> Информация о пользователе:</span></td>
+      <td><span>  Информация о комнате:</span> </td>
     </tr>
     <tr>
-      <td><span>Пользователь: {{this.userInfo.firstName + ' ' + this.userInfo.lastName }}</span></td>
+      <td><span>Пользователь: {{this.expandData.userName }}</span></td>
+      <td><span>Номер комнаты: {{this.expandData.roomName }}</span></td>
     </tr>
     <tr>
-      <td><span>UserID: {{this.userInfo.userId}}</span></td>
+      <td><span>ClientID: {{this.expandData.clientID}}</span></td>
+      <td><span>Этаж: {{this.expandData.floor}}</span></td>
     </tr>
     <tr>
-      <td><span>Дата рождения: {{this.userInfo.birthDate | date: "dd-mm-yyy"}}</span></td>
+      <td><span>Дата рождения: {{this.expandData.birthDate | date: 'shortDate'}}</span></td>
+      <td><span>Тип: {{this.expandData.roomTypeId}}</span></td>
     </tr>
     <tr>
-      <td><span>Телефон: {{this.userInfo.phone}}</span></td>
+      <td><span>Телефон: {{this.expandData.phone}}</span></td>
+      <td><span>Кол-во мест: {{this.expandData.numberOfSeats}}</span></td>
     </tr>
     <tr>
-      <td><span>Email: {{this.userInfo.email}}</span></td>
+      <td><span>Email: {{this.expandData.email}}</span></td>
+      <td><span>Наличие минибара: {{this.expandData.hasMiniBar}}</span></td>
     </tr>
-    <tr>
-      <td><span>ClientID: {{this.userInfo.clientID}}</span></td>
-    </tr>
-    <tr>
-      <td><span>Номер роли: {{this.userInfo.roleId}}</span></td>
-    </tr>
-    <tr>
-      <td><span>Удален: </span> <mat-checkbox [labelPosition]="before" value="{{this.userInfo.isDeleted}}" [disabled]="true"></mat-checkbox> </td>
-    </tr>
+
   </table>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../models/user';
+import { ExpandData } from '../models/transaction';
 
 @Component({
   selector: 'expand-transaction',
@@ -9,13 +9,10 @@ import { User } from '../models/user';
 export class ExpandTransactionComponent implements OnInit {
 
   @Input()
-  userInfo?: User;
+  expandData?: ExpandData;
 
-  constructor() {
-  }
+  constructor() { }
 
-
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

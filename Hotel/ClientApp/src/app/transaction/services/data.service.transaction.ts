@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Transaction, FinancicalInformation } from '../models/transaction';
 import { TransactionFilter } from '../models/transaction';
 import { Observable } from 'rxjs';
-import { User } from '../models/user';
+import { ExpandData } from '../models/transaction';
 
 @Injectable()
 export class DataServiceTransaction {
@@ -79,7 +79,7 @@ export class DataServiceTransaction {
     return this.http.get<FinancicalInformation[]>(this.baseUrl + '/FinancialInformation', { params });
   }
 
-  GetExpandData(UserId: number): Observable<User> {
-    return this.http.get<User>(this.baseUrl + '/User/' + UserId);
+  GetExpandData(transactionId: Number): Observable<ExpandData> {
+    return this.http.get<ExpandData>(this.baseUrl + '/ExpandData/' + transactionId);
   }
 }

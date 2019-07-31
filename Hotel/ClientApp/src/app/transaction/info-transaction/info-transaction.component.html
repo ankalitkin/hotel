@@ -56,7 +56,9 @@
             <div class="row justify-content-center">
               <div class="col-10">
                 <div align="center">
-                  <button mat-raised-button [disabled]="element.isPaid == true" (click)="element.isPaid = true; putTransaction(element);"> Оплатить </button>
+                  <button mat-raised-button [disabled]="element.isPaid == true || element.isEvicted == true" (click)="element.isPaid = true; putTransaction(element);"> Оплатить </button>
+
+                  <button mat-raised-button [disabled]="element.isPaid != true || element.isEvicted == true" (click)="element.isEvicted = true; putTransaction(element);"> Выселить </button>
 
                   <button mat-raised-button [routerLink]="'./edit/' + element.transactionId"> Редактировать </button>
 
@@ -70,9 +72,9 @@
             <div class="row justify-content-center">
               <div class="col-10">
                 <div align="center">
-                  <button class="userInfoButton" mat-raised-button (click)="showInfoUser = !showInfoUser"> Пользователь </button>
-                  <ng-container *ngIf="element == expandedElement && showInfoUser">
-                    <app-expand-transaction-page (SaveTemp)="SaveTemp($event)" [id]="element.userId" [userInfo]="tempUserInfo"></app-expand-transaction-page>
+                  <button class="userInfoButton" mat-raised-button (click)="showExpandData = !showExpandData"> <span *ngIf="!showExpandData">Больше информации</span> <span *ngIf="showExpandData">Меньше информации</span></button>
+                  <ng-container *ngIf="element == expandedElement && showExpandData">
+                    <app-expand-transaction-page (SaveTemp)="SaveTemp($event)" [transactionId]="element.transactionId" [expandData]="tempExpandData"></app-expand-transaction-page>
                   </ng-container>
                 </div>
               </div>
@@ -89,8 +91,8 @@
     <tr mat-row *matRowDef="let element; columns: displayedColumns;"
         class="element-row"
         [class.expanded-row]="expandedElement === element"
-        (click)="expandedElement = expandedElement === element ? null : element"
-        (click)="showInfoUser = false"></tr>
+        (click)="expandedElement = expandedElement === element ? null : element; showExpandData = false">
+        </tr>
 
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
 

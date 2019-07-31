@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DataServiceTransaction } from '../../services/data.service.transaction';
-import { User } from '../../models/user';
+import { ExpandData } from '../../models/transaction';
 
 @Component({
   selector: 'app-expand-transaction-page',
@@ -11,37 +11,38 @@ import { User } from '../../models/user';
 export class ExpandTransactionPageComponent implements OnInit {
 
   @Input()
-  userInfo?: User;
+  expandData?: ExpandData;
   isLoaded: Boolean = false;
   @Input()
-  id?: number;
+  transactionId?: Number;
 
   @Output()
-  SaveTemp: EventEmitter<User> = new EventEmitter<User>();
+  SaveTemp: EventEmitter<ExpandData> = new EventEmitter<ExpandData>();
 
 
   constructor(private dataService: DataServiceTransaction) { }
 
   ngOnInit() {
-    if (this.userInfo != undefined && this.userInfo.userId == this.id)
+    if (this.expandData != undefined && this.expandData.transactionId == this.transactionId)
       this.isLoaded = true;
     else
       this.loadData();
   }
 
-  SaveUserInfo() {
-    this.SaveTemp.emit(this.userInfo);
+  SaveExpandData() {
+    this.SaveTemp.emit(this.expandData);
   }
 
   loadData() {
-    this.dataService.GetExpandData(this.id)
-      .subscribe((data: User) => { this.CompleteLoad(data); });
+    console.log(this.transactionId);
+    this.dataService.GetExpandData(this.transactionId)
+      .subscribe((data: ExpandData) => { this.CompleteLoad(data); });
   }
 
-  CompleteLoad(data: User) {
-    this.userInfo = data;
+  CompleteLoad(data: ExpandData) {
+    this.expandData = data;
     this.isLoaded = true;
-    this.SaveUserInfo();
+    this.SaveExpandData();
   }
 
 }

@@ -36,7 +36,8 @@ export class EditTransactionDialogComponent implements OnInit {
       roomId: this.fb.control(this.EditedTransaction.roomId, [Validators.required, Validators.min(0), Validators.pattern("[0-9]{1,}")]),
       cost: this.fb.control(this.EditedTransaction.cost, [Validators.required, Validators.min(0), Validators.pattern("[0-9]{1,}")]),
       isPaid: this.fb.control(this.EditedTransaction.isPaid, [Validators.required]),
-      isCanceled: this.fb.control(this.EditedTransaction.isCanceled, [Validators.required])
+      isCanceled: this.fb.control(this.EditedTransaction.isCanceled, [Validators.required]),
+      isEvicted: this.fb.control(this.EditedTransaction.isEvicted, [Validators.required])
     });
   }
 
