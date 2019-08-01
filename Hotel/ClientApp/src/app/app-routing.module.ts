@@ -21,6 +21,16 @@ const routes: Routes = [
       { path: 'createRoom', component: RoomCreateComponent },
       { path: 'roomEdit/:id', component: RoomEditComponent }
     ]
+  },
+  {
+    path: 'customers',
+    loadChildren: () => import('./customers-management-pages/customers-management-pages.module')
+      .then(mod => mod.CustomersManagementPagesModule)
+  },
+  {
+    path: 'staff',
+    loadChildren: () => import('./staff-management-pages/staff-management-pages.module')
+      .then(mod => mod.StaffManagementPagesModule)
   }
 ];
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceRooms } from '../services/data.service.rooms';
-import { Room } from '../models/Room';
+import { Room } from '../../_models/room';
 
 @Component({
   templateUrl: './room-create.component.html',
@@ -13,6 +13,6 @@ export class RoomCreateComponent {
     room: Room = new Room();    // добавляемый объект
     constructor(private dataService: DataServiceRooms, private router: Router) { }
     save() {
-        this.dataService.createProduct(this.room).subscribe(data => this.router.navigateByUrl("/"));
+      this.dataService.createProduct(this.room).subscribe(data => this.router.navigateByUrl("/roommanager/rooms"));
     }
 }

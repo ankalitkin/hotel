@@ -1,0 +1,11 @@
+<h2 *ngIf="user.userId; else register">
+  Редактирование клиента
+</h2>
+
+<ng-template #register>
+  <h2>
+    Регистрация клиента
+  </h2>
+</ng-template>
+
+<app-user-editor (userSave)="handleUserSave($event)" [roles]="roles" [user]="user"></app-user-editor>

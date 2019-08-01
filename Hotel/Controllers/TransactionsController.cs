@@ -150,7 +150,7 @@ namespace Hotel.Controllers
                 BirthDate = user.BirthDate;
                 Email = user.Email;
                 Phone = user.Phone;
-                ClientID = user.ClientID;
+                ClientID = user.ClientId;
 
                 RoomName = room.Name;
                 Floor = room.Floor;
@@ -218,7 +218,7 @@ namespace Hotel.Controllers
             int userId = -1;
             if (id != null)
             {
-                var user = await _context.Users.Where(u => u.ClientID == id).FirstOrDefaultAsync();
+                var user = await _context.Users.Where(u => u.ClientId == id).FirstOrDefaultAsync();
                 userId = user != null ? user.UserId : userId;
             }
 

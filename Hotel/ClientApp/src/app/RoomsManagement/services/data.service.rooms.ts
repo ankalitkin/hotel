@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http';
-import { Room } from '../models/Room';
+import { Room } from '../../_models/room';
 
 @Injectable()
 
 export class DataServiceRooms {
 
-    private url = "/api/Rooms";
+    private url = "api/Rooms";
 
     constructor(private http: HttpClient) {
     }

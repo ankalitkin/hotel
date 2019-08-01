@@ -1,16 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatDatepickerModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatPaginatorModule,
-  MatSelectModule,
-  MatSortModule,
-  MatTableModule
-} from '@angular/material';
+
 import { MaterialModule } from '../material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -34,20 +24,12 @@ import { MyHistoryPageComponent } from './my-history-page/my-history-page.compon
   imports: [
     CommonModule,
     MaterialModule,
-    TransactionRoutingModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatTableModule,
-    MatSortModule,
-    MatButtonModule,
-    MatPaginatorModule,
-    TransactionsModule,
-    FormsModule,
-    MatCheckboxModule,
-    ReactiveFormsModule,
 
+    TransactionRoutingModule,
+    TransactionsModule,
+
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class TransactionPagesModule { }

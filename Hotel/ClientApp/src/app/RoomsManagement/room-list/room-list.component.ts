@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataServiceRooms } from '../services/data.service.rooms';
-import { Room } from '../models/Room';
+import { Room } from '../../_models/room';
 
 @Component({
   templateUrl: './room-list.component.html',

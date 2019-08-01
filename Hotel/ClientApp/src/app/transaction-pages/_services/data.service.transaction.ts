@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class DataServiceTransaction {
 
-  private baseUrl = "/api/Transactions";
+  private baseUrl = '/api/Transactions';
 
   constructor(private http: HttpClient) { }
 

@@ -29,12 +29,14 @@ namespace Hotel.Entities
         public string Phone { get; set; }
         public string Email { get; set; }
         [StringLength(12)]
-        public string ClientID { get; set; }
-        [JsonIgnore] public virtual Role Role { get; set; }
+        public string ClientId { get; set; }
+        /*[JsonIgnore]*/ public virtual Role Role { get; set; }
         public int RoleId { get; set; }
         public bool IsDeleted { get; set; }
 
-        [NotMapped] public bool CanEditRooms => Role.Rights.HasFlag(Role.AccessRights.CanEditRooms);
+        //[NotMapped] public string RoleName => Role.Name;
+        //[NotMapped] public int Rights => (int)Role.Rights;
+        /*[NotMapped] public bool CanEditRooms => Role.Rights.HasFlag(Role.AccessRights.CanEditRooms);
         [NotMapped] public bool CanEditCost => Role.Rights.HasFlag(Role.AccessRights.CanEditCost);
         [NotMapped] public bool CanEditStuff => Role.Rights.HasFlag(Role.AccessRights.CanEditStuff);
         [NotMapped] public bool CanRegisterClients => Role.Rights.HasFlag(Role.AccessRights.CanRegisterClients);
@@ -45,5 +47,6 @@ namespace Hotel.Entities
         [NotMapped] public bool CanGetAnyHistory => Role.Rights.HasFlag(Role.AccessRights.CanGetAnyHistory);
         [NotMapped] public bool CanGetOwnHistory => Role.Rights.HasFlag(Role.AccessRights.CanGetOwnHistory);
         [NotMapped] public bool CanGetFinancialInformation => Role.Rights.HasFlag(Role.AccessRights.CanGetFinancialInformation);
+        */
     }
 }

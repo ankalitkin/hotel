@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DataServiceRooms } from '../services/data.service.rooms';
-import { Room } from '../models/Room';
+import { Room } from '../../_models/room';
 
 @Component({
   templateUrl: './room-edit.component.html',
@@ -17,16 +17,16 @@ export class RoomEditComponent implements OnInit {
         this.id = Number.parseInt(activeRoute.snapshot.params["id"]);
     }
 
-    ngOnInit() {
+  ngOnInit() {
         if (this.id)
             this.dataService.getProduct(this.id)
                 .subscribe((data: Room) => {
                     this.room = data;
-                    if (this.room != null) this.loaded = true;
+                  if (this.room != null) this.loaded = true;
                 });
     }
 
     save() {
-        this.dataService.updateProduct(this.room).subscribe(data => this.router.navigateByUrl("/"));
+      this.dataService.updateProduct(this.room).subscribe(data => this.router.navigateByUrl("/roommanager/rooms"));
     }
 }

@@ -4,7 +4,6 @@ import { InteractionService } from '../_services/interaction.service';
 import { Transaction, TransactionFilter } from '../../_models/transaction';
 import { InfoTransactionComponent } from '../../transaction/info-transaction/info-transaction.component';
 
-
 @Component({
   selector: 'app-info-transcation-page',
   templateUrl: './info-transcation-page.component.html',
