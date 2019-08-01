@@ -1,5 +1,5 @@
-﻿<div>
-    <a routerLink="/CreateRoom" class="nav-link">Добавить</a>
+<div>
+    <a routerLink="../createRoom" class="nav-link">Добавить</a>
 </div>
 <table class="table table-striped">
     <thead>
@@ -15,12 +15,14 @@
         <tr *ngFor="let r of rooms">
             <td>{{r?.name}}</td>
             <td>{{r?.floor}}</td>
-            <td>{{r?.categoryId}}</td>
+            <td>{{r?.roomTypeId}}</td>
             <td>{{r?.numberOfSeats}}</td>
             <td>{{r?.hasMiniBar}}</td>
             <td>
-                <a [routerLink]="['RoomEdit', r.id]" class="btn btn-sm btn-primary">Изменить</a>
-                <button (click)="delete(r.id)" class="btn btn-sm btn-danger">Удалить</button>
+              <!--<a [routerLink]="['../roomEdit', r.id]" class="btn btn-sm btn-primary">Изменить</a>-->
+              <a [routerLink]="['../roomEdit', r.roomId]" class="btn btn-sm btn-primary">Изменить</a>
+              
+              <button (click)="delete(r.id)" class="btn btn-sm btn-danger">Удалить</button>
             </td>
         </tr>
     </tbody>
