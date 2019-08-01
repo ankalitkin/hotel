@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataServiceTransaction } from '../../services/data.service.transaction';
-import { Transaction } from '../../models/transaction';
+import { DataServiceTransaction } from '../_services/data.service.transaction';
+import { Transaction } from '../../_models/transaction';
 
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
