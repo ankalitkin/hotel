@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Transaction } from '../../_models/transaction';
-//import { MatDialogRef, MAT_DIALOG_DATA} from
+
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({

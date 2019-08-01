@@ -150,7 +150,7 @@ namespace Hotel.Controllers
                 BirthDate = user.BirthDate;
                 Email = user.Email;
                 Phone = user.Phone;
-                ClientID = user.ClientID;
+                ClientID = user.ClientId;
 
                 RoomName = room.Name;
                 Floor = room.Floor;
