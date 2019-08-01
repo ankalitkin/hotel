@@ -45,7 +45,7 @@ import {MyDateAdapter} from './_shared/calendar_workaround';
     //LoadingBarHttpClientModule,
     //LoadingBarHttpModule,
     LoadingBarRouterModule, //
-    SharedModule,
+    SharedModule //
   ],
   providers: [
 /*    {provide: LOCALE_ID, useValue: 'ru-RU'},*/

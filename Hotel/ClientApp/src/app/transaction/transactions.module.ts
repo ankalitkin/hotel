@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { InfoTransactionComponent } from './info-transaction/info-transaction.component';
 import { FinancicalInformationComponent } from './financical-information/financical-information.component';
 import { FilterTransactionComponent } from './filter-transaction/filter-transaction.component';
@@ -8,18 +9,6 @@ import { EditTransactionDialogComponent } from './edit-transaction-dialog/edit-t
 import { MyHistoryComponent } from './my-history/my-history.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatDatepickerModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatOptionModule,
-  MatPaginatorModule,
-  MatSelectModule,
-  MatSortModule,
-  MatTableModule
-} from '@angular/material';
 
 import { MaterialModule } from '../material-module';
 // For loading-progress
@@ -60,23 +49,14 @@ import { SharedModule } from '../_shared/shared.module';
     CommonModule,
     MaterialModule,
     SharedModule,
+
     //LoadingBarHttpClientModule,
     //LoadingBarHttpModule,
     LoadingBarRouterModule,
 
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatCheckboxModule,
     FormsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatButtonModule,
     RouterModule,
-    MatInputModule
 
   ]
 })
