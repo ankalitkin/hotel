@@ -8,8 +8,8 @@ export class Transaction {
   public userId: number;
   public roomId: number;
   public cost: number;
-  public isPaid: Boolean;
-  public isCanceled: Boolean;
+  public isPaid: boolean;
+  public isCanceled: boolean;
   public isEvicted: Boolean;
 
   @jsonIgnore() public TheNoumber: number;

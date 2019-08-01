@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Room } from '../models/Room';
+import { Room } from '../../_models/room';
 @Component({
     selector: "room-form",
     templateUrl: './room-form.component.html'

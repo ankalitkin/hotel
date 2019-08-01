@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataServiceTransaction } from '../_services/data.service.transaction';
 import { FinancicalInformation, FinancicalInfoFilter } from '../../_models/transaction';
 
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 
 @Component({

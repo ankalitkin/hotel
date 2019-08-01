@@ -218,7 +218,7 @@ namespace Hotel.Controllers
             int userId = -1;
             if (id != null)
             {
-                var user = await _context.Users.Where(u => u.ClientID == id).FirstOrDefaultAsync();
+                var user = await _context.Users.Where(u => u.ClientId == id).FirstOrDefaultAsync();
                 userId = user != null ? user.UserId : userId;
             }
 

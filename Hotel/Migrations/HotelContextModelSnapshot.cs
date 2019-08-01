@@ -227,7 +227,7 @@ namespace Hotel.Migrations
 
                     b.Property<DateTime>("BirthDate");
 
-                    b.Property<string>("ClientID")
+                    b.Property<string>("ClientId")
                         .HasMaxLength(12);
 
                     b.Property<string>("Email");
@@ -253,7 +253,7 @@ namespace Hotel.Migrations
                         {
                             UserId = 1,
                             BirthDate = new DateTime(1996, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientID = "123456789012",
+                            ClientId = "123456789012",
                             Email = "Tom@mail.ru",
                             FirstName = "Tom",
                             IsDeleted = false,
@@ -265,7 +265,7 @@ namespace Hotel.Migrations
                         {
                             UserId = 2,
                             BirthDate = new DateTime(1999, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientID = "123456789013",
+                            ClientId = "123456789013",
                             Email = "Dik@mail.ru",
                             FirstName = "Dik",
                             IsDeleted = false,
@@ -277,7 +277,7 @@ namespace Hotel.Migrations
                         {
                             UserId = 3,
                             BirthDate = new DateTime(1986, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientID = "123456789014",
+                            ClientId = "123456789014",
                             Email = "Jorge@mail.ru",
                             FirstName = "Jorge",
                             IsDeleted = false,

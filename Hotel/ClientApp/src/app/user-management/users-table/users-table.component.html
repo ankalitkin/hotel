@@ -1,0 +1,76 @@
+<table>
+  <tr>
+    <td style="width: 100%;">
+      <mat-form-field class="filter">
+        <label>
+          <input (keyup)="applyFilter(filter)" [(ngModel)]="filter" matInput placeholder="Быстрый фильтр">
+        </label>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-checkbox (change)="applyDeleted(showDeleted)" [(ngModel)]="showDeleted" style="float: right">Показать
+        удалённых
+      </mat-checkbox>
+    </td>
+  </tr>
+</table>
+
+<div class="mat-elevation-z8">
+  <table [dataSource]="usersData" mat-table matSort>
+    <tr>
+      <ng-container matColumnDef="userId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id</th>
+        <td *matCellDef="let user" mat-cell> {{user.userId}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Фамилия</th>
+        <td *matCellDef="let user" mat-cell> {{user.lastName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Имя</th>
+        <td *matCellDef="let user" mat-cell> {{user.firstName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="birthDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Дата рождения</th>
+        <td *matCellDef="let user" mat-cell> {{user.birthDate | date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Телефон</th>
+        <td *matCellDef="let user" mat-cell> {{user.phone}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email</th>
+        <td *matCellDef="let user" mat-cell> {{user.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="clientID">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Номер клиента</th>
+        <td *matCellDef="let user" mat-cell> {{user.clientId}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="roleName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Роль</th>
+        <td *matCellDef="let user" mat-cell> {{user.role.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="isDeleted">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Удалён?</th>
+        <td *matCellDef="let user" mat-cell> {{user.isDeleted}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="editButton">
+        <th mat-header-cell *matHeaderCellDef>Редактирование</th>
+        <td *matCellDef="let user" mat-cell><a color="primary" mat-raised-button
+                                               routerLink="./edit/{{user.userId}}">Изменить</a></td>
+      </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr *matRowDef="let user; columns: displayedColumns;" mat-row></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>
+</div>
