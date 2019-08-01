@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { Transaction } from '../models/transaction';
+import { Transaction } from '../../_models/transaction';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 

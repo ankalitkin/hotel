@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, Optional } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Transaction } from '../../models/transaction';
-import { DataServiceTransaction } from '../../services/data.service.transaction';
+import { Transaction } from '../../_models/transaction';
+import { DataServiceTransaction } from '../_services/data.service.transaction';
 import { Router } from '@angular/router';
-import { InteractionService } from '../../services/interaction.service';
+import { InteractionService } from '../_services/interaction.service';
 
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EditTransactionDialogComponent } from '../../edit-transaction-dialog/edit-transaction-dialog.component'
+import { EditTransactionDialogComponent } from '../../transaction/edit-transaction-dialog/edit-transaction-dialog.component'
 
 import { Subscription } from 'rxjs';
 

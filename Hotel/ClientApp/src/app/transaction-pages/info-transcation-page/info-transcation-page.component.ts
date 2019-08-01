@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataServiceTransaction } from '../../services/data.service.transaction';
-import { InteractionService } from '../../services/interaction.service';
-import { Transaction } from '../../models/transaction';
-import { TransactionFilter } from '../../models/transaction';
-import { InfoTransactionComponent } from '../../info-transaction/info-transaction.component';
+import { DataServiceTransaction } from '../_services/data.service.transaction';
+import { InteractionService } from '../_services/interaction.service';
+import { Transaction, TransactionFilter } from '../../_models/transaction';
+import { InfoTransactionComponent } from '../../transaction/info-transaction/info-transaction.component';
 
 
 @Component({

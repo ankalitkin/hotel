@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Transaction, FinancicalInformation } from '../models/transaction';
-import { TransactionFilter } from '../models/transaction';
+import { Transaction, FinancicalInformation, TransactionFilter, ExpandData } from '../../_models/transaction';
 import { Observable } from 'rxjs';
-import { ExpandData } from '../models/transaction';
 
 @Injectable()
 export class DataServiceTransaction {

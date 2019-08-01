@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ExpandData } from '../models/transaction';
+import { ExpandData } from '../../_models/transaction';
 
 @Component({
   selector: 'expand-transaction',
