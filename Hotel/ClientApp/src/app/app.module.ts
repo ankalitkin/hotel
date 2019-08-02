@@ -11,11 +11,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  IgxInputGroupModule,
+  IgxSliderModule
+} from "igniteui-angular";
+
+import { IgxCheckboxModule } from 'igniteui-angular';
+
+import { DoubleSliderComponent } from "./Slider/slider-component";
 
 // For loading-progress
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarHttpModule } from '@ngx-loading-bar/http';
-import { LoadingBarRouterModule } from '@ngx-loading-bar/router'
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 
 import { InfoTranscationPageComponent } from './transaction/pages/info-transcation-page/info-transcation-page.component';
 import { InfoTransactionComponent } from './transaction/info-transaction/info-transaction.component';
@@ -29,6 +37,11 @@ import { RoomListComponent } from './RoomsManagement/room-list/room-list.compone
 import { RoomFormComponent } from './RoomsManagement/room-form/room-form.component';
 import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.component';
 import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
+
+import { RoomCostListComponent } from './RoomCostManagement/roomcost-list/roomcost-list.component';
+import { RoomCostFormComponent } from './RoomCostManagement/roomcost-form/roomcost-form.component';
+import { RoomCostCreateComponent } from './RoomCostManagement/roomcost-create/roomcost-create.component';
+import { RoomCostEditComponent } from './RoomCostManagement/roomcost-edit/roomcost-edit.component';
 
 @NgModule({
 
@@ -44,7 +57,12 @@ import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.compone
     RoomListComponent,
     RoomFormComponent,
     RoomCreateComponent,
-    RoomEditComponent
+    RoomEditComponent,
+    RoomCostListComponent,
+    RoomCostFormComponent,
+    RoomCostCreateComponent,
+    RoomCostEditComponent,
+    DoubleSliderComponent
   ],
   imports: [
     BrowserModule,
@@ -58,8 +76,12 @@ import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.compone
     //LoadingBarHttpClientModule,
     //LoadingBarHttpModule,
     LoadingBarRouterModule,
+    IgxInputGroupModule,
+    IgxSliderModule,
+    IgxCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

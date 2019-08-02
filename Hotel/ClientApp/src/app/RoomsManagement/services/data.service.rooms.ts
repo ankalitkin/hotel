@@ -6,7 +6,7 @@ import { Room } from '../models/Room';
 
 export class DataServiceRooms {
 
-    private url = "api/Rooms";
+    private url = "api/Admin/Rooms";
 
     constructor(private http: HttpClient) {
     }

@@ -5,43 +5,61 @@ using System.Threading.Tasks;
 using Hotel.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Hotel.Data;
+using static Hotel.Data.RoomCostExtensions;
 
 namespace Hotel.Controllers
 {
-    [Route("RoomCost")]
+    [Route("api/Admin/RoomCosts")]
     [ApiController]
     public class RoomsCostController : Controller
     {
-        // GET: RoomCost?role=права
-        [HttpGet]
-        public IActionResult Get(int role)
+        [HttpGet]// Возвращает список всех ценников
+        public IEnumerable<RoomCost> Get()
         {
-            if ((role & (int)Role.AccessRights.CanEditRooms) == 0)
-            {
-                return View("~/Views/AccessError.cshtml");
-            }
-            ViewData["RoomCosts"] = RoomCostExtensions.AllRoomCosts().Result;
-            return  View("~/Views/CostChanges.cshtml");
+            return AllRoomCosts().Result;
         }
 
-        // POST:
-        [HttpPost]
-        public IActionResult Post(int role)
+        [HttpGet("{id}")]// Возвращает ценник по id
+        public RoomCost Get(int id)
         {
-            if ((role & (int)Role.AccessRights.CanEditRooms) == 0)
-            {
-                return View("~/Views/AccessError.cshtml");
-            }
-            RoomCost obj = new RoomCost(
-                int.Parse(Request.Form.FirstOrDefault(r => r.Key == "categoryId").Value),
-                int.Parse(Request.Form.FirstOrDefault(r => r.Key == "numberOfSeats").Value),
-                Request.Form.FirstOrDefault(r => r.Key == "hasMiniBar").Value == "true",
-                int.Parse(Request.Form.FirstOrDefault(r => r.Key == "cost").Value)
-                );
+            return FindRoomCost(id).Result;
+        }
 
-            obj.RoomCostSave();
-            ViewData["name"] = obj.Cost;
-            return View("~/Views/SuccessfullyRegistration.cshtml");
+        [HttpPost]// Добаляет ценник в базу
+        public IActionResult Post([FromBody]RoomCost roomCost)
+        {
+            if (ModelState.IsValid)
+            {
+                RoomCost rmc;
+                if ((rmc = FindRoomCost(roomCost).Result) == null)
+                    roomCost.RoomCostSave();
+                else
+                {
+                    rmc.Cost = roomCost.Cost;
+                    rmc.RoomCostUpdate();
+                }
+                    
+
+                return Ok(roomCost);
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpPut("{id}")]// Обновляет данные о ценнике
+        public IActionResult Put(int id, [FromBody]RoomCost roomCost)
+        {
+            if (ModelState.IsValid)
+            {
+                roomCost.RoomCostUpdate();
+                return Ok(roomCost);
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpDelete("{id}")]// Удаляет ценник из базы
+        public IActionResult Delete(int id)
+        {
+            return Ok(RoomCostDelete(id).Result);
         }
 
     }

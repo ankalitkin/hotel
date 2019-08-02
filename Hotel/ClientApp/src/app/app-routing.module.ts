@@ -14,6 +14,11 @@ import { RoomFormComponent } from './RoomsManagement/room-form/room-form.compone
 import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.component';
 import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
 
+import { RoomCostListComponent } from './RoomCostManagement/roomcost-list/roomcost-list.component';
+import { RoomCostFormComponent } from './RoomCostManagement/roomcost-form/roomcost-form.component';
+import { RoomCostCreateComponent } from './RoomCostManagement/roomcost-create/roomcost-create.component';
+import { RoomCostEditComponent } from './RoomCostManagement/roomcost-edit/roomcost-edit.component';
+
 
 const routes: Routes = [
   {
@@ -42,6 +47,14 @@ const routes: Routes = [
       { path: 'rooms', component: RoomListComponent },
       { path: 'createRoom', component: RoomCreateComponent },
       { path: 'roomEdit/:id', component: RoomEditComponent }
+    ]
+  },
+  {
+    path: 'roomcostmanager',
+    children: [
+      { path: 'roomCosts', component: RoomCostListComponent },
+      { path: 'createRoomCost', component: RoomCostCreateComponent },
+      { path: 'roomCostEdit/:id', component: RoomCostEditComponent }
     ]
   }
     //children: [

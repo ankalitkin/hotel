@@ -5,8 +5,10 @@ import { Room } from '../models/Room';
 
 @Component({
   templateUrl: './room-edit.component.html',
-  providers: [DataServiceRooms]
+  providers: [DataServiceRooms],
+  styleUrls: ['./room-edit.component.scss']
 })
+
 export class RoomEditComponent implements OnInit {
 
     id: number;

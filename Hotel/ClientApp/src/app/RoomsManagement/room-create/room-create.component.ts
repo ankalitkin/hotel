@@ -5,7 +5,8 @@ import { Room } from '../models/Room';
 
 @Component({
   templateUrl: './room-create.component.html',
-  providers: [DataServiceRooms]
+  providers: [DataServiceRooms],
+  styleUrls: ['./room-create.component.scss']
 })
 
 export class RoomCreateComponent {

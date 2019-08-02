@@ -29,12 +29,21 @@ namespace Hotel.Data
             }
         }
 
-        // Поиск комнаты в базе
+        // Поиск комнаты в базе по id
         public static async Task<Room> FindRoom(int id)
         {
             using (HotelContext db = new HotelContext())
             {
                 return await db.Rooms.AsNoTracking().FirstOrDefaultAsync(r => r.RoomId == id && r.IsDeleted == false);
+            }
+        }
+
+        // Поиск комнаты в базе по номеру комнаты
+        public static async Task<Room> FindRoom(string number)
+        {
+            using (HotelContext db = new HotelContext())
+            {
+                return await db.Rooms.AsNoTracking().FirstOrDefaultAsync(r => r.Name == number && r.IsDeleted == false);
             }
         }
 
