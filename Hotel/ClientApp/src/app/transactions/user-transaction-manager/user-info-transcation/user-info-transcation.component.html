@@ -1,1 +1,101 @@
-<p>user-info-transcation works!</p>
+
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Быстрый фильтр">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+
+    <!-- Number Column -->
+    <ng-container matColumnDef="TheNoumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> № </th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="row.Loading === true">
+          <!-- При обновлении этого компонента из БД-->
+          <div>
+            <mat-spinner [diameter]="20"></mat-spinner>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="row.Loading !== true">
+          {{row.TheNoumber}}
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <!-- UserName Column -->
+    <ng-container matColumnDef="userId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID Пользователя </th>
+      <td mat-cell *matCellDef="let row"> {{row.userId}}</td>
+    </ng-container>
+
+    <!-- DateComeIn Column -->
+    <ng-container matColumnDef="checkInTime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Дата въезда </th>
+      <td mat-cell *matCellDef="let row"> {{row.checkInTime | date: 'shortDate' }} </td>
+    </ng-container>
+
+    <!-- DateComeOut Column -->
+    <ng-container matColumnDef="checkOutTime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Дата выезда </th>
+      <td mat-cell *matCellDef="let row"> {{row.checkOutTime | date: 'shortDate'}} </td>
+    </ng-container>
+
+    <!-- Cost Column -->
+    <ng-container matColumnDef="cost">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Стоимость </th>
+      <td mat-cell *matCellDef="let row"> {{row.cost}} руб. </td>
+    </ng-container>
+
+    <!-- ExpandedDetal -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div class="element-detail"
+             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-10">
+                <div align="center">
+
+                  <button mat-raised-button  [disabled]="element.isPaid || element.isCanceled || element.isEvicted"
+                          [routerLink]="'./edit/' + element.transactionId"> Редактировать </button>
+
+                  <button mat-raised-button [disabled]="element.isCanceled == true || element.checkInTime < currentDate || element.isPaid == true || element.isEvicted == true"
+                          (click)="element.isCanceled = true; putTransaction(element);">
+                    Отменить
+                  </button>
+                </div>
+              </div>
+
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-10">
+                <div align="center">
+                  <button class="userInfoButton" mat-raised-button (click)="showExpandData = !showExpandData"> <span *ngIf="!showExpandData">Больше информации</span> <span *ngIf="showExpandData">Меньше информации</span></button>
+                  <ng-container *ngIf="element == expandedElement && showExpandData">
+                    <app-user-expand-transaction-page (SaveTemp)="SaveTemp($event)" [transactionId]="element.transactionId" [expandData]="tempExpandData"></app-user-expand-transaction-page>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <!-- For expanded detal-->
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+        class="element-row"
+        [class.expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element; showExpandData = false"></tr>
+
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+

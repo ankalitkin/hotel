@@ -52,6 +52,8 @@ namespace Hotel.Controllers
                 return BadRequest();
             }
 
+            transaction.Cost = GetRoomCost(transaction.RoomId);
+
             _context.Entry(transaction).State = EntityState.Modified;
 
             try
@@ -77,6 +79,9 @@ namespace Hotel.Controllers
         [HttpPost]
         public async Task<ActionResult<Transaction>> PostTransaction([FromBody]Transaction transaction)
         {
+            if (transaction.Cost <= 0)
+                transaction.Cost = GetRoomCost(transaction.RoomId);
+
             _context.Transactions.Add(transaction);
             await _context.SaveChangesAsync();
 
@@ -206,27 +211,59 @@ namespace Hotel.Controllers
         {
             // TODO: если запрос от пользователя, то выдать только его транзакции(т.е. присвоить нужное значение id)
 
-            bool isPaid = false, isCanceled = false, all = false;
+            bool isPaid = false, isCanceled = false, all = false, isReadyComeIn = false, isReadyComeOut = false;
 
-            if (type == "all")
-                all = true;
-            else if (type == "isPaid")
-                isPaid = true;
-            else if (type == "isCanceled")
-                isCanceled = true;
+            // P.S. мб лучше было бы сделать множественный выбор
+            switch (type)
+            {
+                case "all":
+                    {
+                        all = true;
+                        break;
+                    }
+                case "isPaid":
+                    {
+                        isPaid = true;
+                        break;
+                    }
+                case "isCanceled":
+                    {
+                        isCanceled = true;
+                        break;
+                    }
+                case "isReadyComeIn":
+                    {
+                        isReadyComeIn = true;
+                        break;
+                    }
+                case "isReadyComeOut":
+                    {
+                        isReadyComeOut = true;
+                        break;
+                    }
+            }
 
             int userId = -1;
             if (id != null)
             {
                 var user = await _context.Users.Where(u => u.ClientId == id).FirstOrDefaultAsync();
                 userId = user != null ? user.UserId : userId;
+
+                if (userId == -1)
+                {
+                    return BadRequest();
+                }
             }
 
+
             var list = await _context.Transactions.AsNoTracking()
-                .Where(t => (id == null || userId < 0) || t.UserId == userId)
+                .Where(t => (id == null) || t.UserId == userId)
                 .Where(t => start == null || t.CheckInTime >= start)
                 .Where(t => end == null || t.CheckOutTime <= end)
-                .Where(t => all || t.IsPaid == isPaid && t.IsCanceled == isCanceled)
+                .Where(t => all ||
+                t.IsPaid == isPaid && t.IsCanceled == isCanceled
+                && (!isReadyComeIn || t.CheckInTime == DateTime.Today)
+                && (!isReadyComeOut || t.CheckOutTime == DateTime.Today))
                 .ToListAsync();
 
             return list;
@@ -244,12 +281,68 @@ namespace Hotel.Controllers
                        on room.RoomId equals trans.RoomId into p
                        from t in p.DefaultIfEmpty()
                        where t == null || (t.CheckInTime <= start && t.CheckOutTime <= start
-                        || t.CheckInTime >= end && t.CheckOutTime >= end)
+                        || t.CheckInTime >= end && t.CheckOutTime >= end || t.IsCanceled)
                        select room;
-
 
             return await list.ToListAsync();
         }
 
+        public class RoomAndTransaction
+        {
+            public Room room;
+            public Transaction transaction;
+        }
+        // POST: api/Transactions/RoomId
+        [HttpPost("RoomId")]
+        public async Task<ActionResult<int>> GetFreeRoomId([FromBody]RoomAndTransaction roomAndTransaction)
+        {
+            Room room = roomAndTransaction.room;
+            Transaction transaction = roomAndTransaction.transaction;
+
+            var RoomQuery = from r in _context.Rooms
+                         where r.RoomTypeId == room.RoomTypeId &&
+                         r.NumberOfSeats == room.NumberOfSeats &&
+                         r.HasMiniBar == room.HasMiniBar
+                         join tr in _context.Transactions
+                         on r.RoomId equals tr.RoomId into p
+                         from trans in p.DefaultIfEmpty()
+                         where trans == null || ((trans.CheckInTime <= transaction.CheckInTime &&
+                         trans.CheckOutTime <= transaction.CheckOutTime
+                         || trans.CheckInTime >= transaction.CheckInTime &&
+                            trans.CheckOutTime >= transaction.CheckOutTime)
+                         || trans.IsCanceled
+                         || trans.TransactionId == transaction.TransactionId)
+                         select r.RoomId;
+
+            var list = await RoomQuery.ToListAsync(); 
+            foreach (var e in list)
+            {
+                Console.WriteLine(e);
+            }
+            var RoomId =  await RoomQuery.FirstOrDefaultAsync();
+            return RoomId;
+        }
+
+        public int GetRoomCost(int roomId)
+        {
+            var room = _context.Rooms.Find(roomId);
+
+            if (room == null)
+            {
+                return 0;
+            }
+
+            var cost = _context.RoomCosts
+                .Where(rc => rc.CategoryId == room.RoomTypeId)
+                .Where(rc => rc.NumberOfSeats == room.NumberOfSeats)
+                .Where(rc => rc.HasMiniBar == room.HasMiniBar)
+                .Select(rc => rc.Cost)
+                .FirstOrDefault();
+
+            if (cost <= 0) // ну кто знает :)
+                cost = 1400;
+
+            return cost;
+        }
     }
 }

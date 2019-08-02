@@ -1,0 +1,29 @@
+<div class="element-description">
+  <table>
+    <tr>
+      <td><span> Информация о ВАС:</span></td>
+      <td><span>  Информация о комнате:</span> </td>
+    </tr>
+    <tr>
+      <td><span>Пользователь: {{this.expandData.userName }}</span></td>
+      <td><span>Номер комнаты: {{this.expandData.roomName }}</span></td>
+    </tr>
+    <tr>
+      <td><span>ClientID: {{this.expandData.clientID}}</span></td>
+      <td><span>Этаж: {{this.expandData.floor}}</span></td>
+    </tr>
+    <tr>
+      <td><span>Дата рождения: {{this.expandData.birthDate | date: 'shortDate'}}</span></td>
+      <td><span>Тип: {{this.expandData.roomTypeId}}</span></td>
+    </tr>
+    <tr>
+      <td><span>Телефон: {{this.expandData.phone}}</span></td>
+      <td><span>Кол-во мест: {{this.expandData.numberOfSeats}}</span></td>
+    </tr>
+    <tr>
+      <td><span>Email: {{this.expandData.email}}</span></td>
+      <td><span>Наличие минибара: {{this.expandData.hasMiniBar}}</span></td>
+    </tr>
+
+  </table>
+</div>

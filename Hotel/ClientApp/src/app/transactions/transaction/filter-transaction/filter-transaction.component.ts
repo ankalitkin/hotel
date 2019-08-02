@@ -14,7 +14,10 @@ export class FilterTransactionComponent implements OnInit {
 
   _filterForm: FormGroup;
   filter: TransactionFilter;
-  typeList = [{ value: 'all', viewValue: 'Все' }, { value: 'isPaid', viewValue: 'Оплаченные' }, { value: 'isCanceled', viewValue:'Отмененные' }];
+  typeList = [{ value: 'all', viewValue: 'Все' },
+    { value: 'isReadyComeIn', viewValue: 'На заселение' }, { value: 'isReadyComeOut', viewValue: 'На выселение' },
+    { value: 'isPaid', viewValue: 'Оплаченные' }, { value: 'isCanceled', viewValue: 'Отмененные' },
+    { value: 'isNotPaid', viewValue: 'НЕ Оплаченные' },{ value: 'isNotCanceled', viewValue: 'НЕ Отмененные' }];
   typeSelect: string = 'all';
 
   constructor(private fb: FormBuilder) {

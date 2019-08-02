@@ -51,30 +51,18 @@
               <mat-checkbox formControlName="hasMiniBar"> Мини-бар </mat-checkbox>
             </div>
 
-            <div>
-              <mat-checkbox formControlName="isPaid"> Оплачена </mat-checkbox>
-            </div>
-
-            <div>
-              <mat-checkbox formControlName="isCanceled"> Отменена </mat-checkbox>
-            </div>
-
-            <div>
-              <mat-checkbox formControlName="isEvicted"> Выселен </mat-checkbox>
-            </div>
-
           </ng-container>
-</div>
-<div mat-dialog-actions class="buttons">
+        </div>
+        <div mat-dialog-actions class="buttons">
 
-  <button mat-raised-button [disabled]="_transactionForm.invalid" (click)="closeDialog()">
-    Сохранить
-  </button>
+          <button mat-raised-button [disabled]="_transactionForm.invalid" (click)="closeDialog()">
+            Сохранить
+          </button>
 
-  <button mat-raised-button (click)="CancelClick()">
-    Отмена
-  </button>
-</div>
+          <button mat-raised-button (click)="CancelClick()">
+            Отмена
+          </button>
+        </div>
 
       </div>
     </div>

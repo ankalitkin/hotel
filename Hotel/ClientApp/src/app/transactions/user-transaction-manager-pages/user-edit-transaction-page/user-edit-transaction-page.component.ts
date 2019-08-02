@@ -6,18 +6,17 @@ import { Router } from '@angular/router';
 import { InteractionService } from '../../_services/interaction.service';
 
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EditTransactionDialogComponent } from '../../transaction/edit-transaction-dialog/edit-transaction-dialog.component'
+import { UserEditTransactionDialogComponent } from '../../user-transaction-manager/user-edit-transaction-dialog/user-edit-transaction-dialog.component'
 
 import { Subscription } from 'rxjs';
 import { Room } from 'src/app/_models/room';
-
 @Component({
-  selector: 'app-edit-transaction-page',
-  templateUrl: './edit-transaction-page.component.html',
-  styleUrls: ['./edit-transaction-page.component.scss'],
+  selector: 'app-user-edit-transaction-page',
+  templateUrl: './user-edit-transaction-page.component.html',
+  styleUrls: ['./user-edit-transaction-page.component.scss'],
   providers: [DataServiceTransaction]
 })
-export class EditTransactionPageComponent implements OnInit, OnDestroy {
+export class UserEditTransactionPageComponent implements OnInit {
 
   EditedTransaction?: Transaction;
   Room?: Room;
@@ -57,10 +56,8 @@ export class EditTransactionPageComponent implements OnInit, OnDestroy {
   }
 
   saveTransaction() {
-    console.log("edit ..");
+    console.log("edit room");
     console.log(this.Room);
-    console.log(this.EditedTransaction);
-    console.log("edit ..");
     this.dataService.GetRoomId(this.Room, this.EditedTransaction)
       .subscribe((data: number) => {
         this.EditedTransaction.roomId = data;
@@ -68,7 +65,7 @@ export class EditTransactionPageComponent implements OnInit, OnDestroy {
         this.dataService.PutTransaction(this.EditedTransaction)
           .subscribe((data: any) => { this.CompleteSave() });
       });
-    
+
   }
 
   CompleteSave() {
@@ -99,7 +96,7 @@ export class EditTransactionPageComponent implements OnInit, OnDestroy {
     this.isLoaded = true;
   }
   openDialog(): void {
-    const dialogRef = this.dialog.open(EditTransactionDialogComponent, {
+    const dialogRef = this.dialog.open(UserEditTransactionDialogComponent, {
       width: '60%',
       data: { transaction: this.EditedTransaction, room: this.Room }
     });
@@ -109,6 +106,5 @@ export class EditTransactionPageComponent implements OnInit, OnDestroy {
       this.handleTransactionChange(result);
     });
   }
-
 
 }

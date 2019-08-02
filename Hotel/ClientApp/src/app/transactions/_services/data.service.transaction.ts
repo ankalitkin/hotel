@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Transaction, FinancicalInformation, TransactionFilter, ExpandData } from '../../_models/transaction';
+import { Room } from '../../_models/room';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -79,5 +80,13 @@ export class DataServiceTransaction {
 
   GetExpandData(transactionId: Number): Observable<ExpandData> {
     return this.http.get<ExpandData>(this.baseUrl + '/ExpandData/' + transactionId);
+  }
+
+  GetRoomId(room: Room, transaction: Transaction): Observable<number>{
+    return this.http.post<number>(this.baseUrl + '/RoomId', { room: room, transaction: transaction });
+  }
+
+  GetRoom(roomId: number): Observable<Room> {
+    return this.http.get<Room>('/api/Rooms/' + roomId);
   }
 }

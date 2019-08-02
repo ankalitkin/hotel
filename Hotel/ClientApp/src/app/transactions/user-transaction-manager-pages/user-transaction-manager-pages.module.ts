@@ -11,13 +11,16 @@ import { DataServiceTransaction } from '../_services/data.service.transaction';
 
 import { MyHistoryPageComponent } from './my-history-page/my-history-page.component';
 import { UserInfoTranscationPageComponent } from './user-info-transcation-page/user-info-transcation-page.component';
+import { UserEditTransactionPageComponent } from './user-edit-transaction-page/user-edit-transaction-page.component';
 
 
 @NgModule({
   declarations: [
     MyHistoryPageComponent,
-    UserInfoTranscationPageComponent
+    UserInfoTranscationPageComponent,
+    UserEditTransactionPageComponent
   ],
+  entryComponents: [UserEditTransactionPageComponent],
   imports: [
     CommonModule,
     MaterialModule,

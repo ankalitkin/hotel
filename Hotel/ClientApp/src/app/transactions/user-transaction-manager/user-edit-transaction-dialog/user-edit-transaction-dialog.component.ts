@@ -1,17 +1,16 @@
-import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Transaction } from '../../../_models/transaction';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Room } from 'src/app/_models/room';
 
-
 @Component({
-  selector: 'edit-transaction-dialog',
-  templateUrl: './edit-transaction-dialog.component.html',
-  styleUrls: ['./edit-transaction-dialog.component.scss']
+  selector: 'user-edit-transaction-dialog',
+  templateUrl: './user-edit-transaction-dialog.component.html',
+  styleUrls: ['./user-edit-transaction-dialog.component.scss']
 })
-export class EditTransactionDialogComponent implements OnInit {
+export class UserEditTransactionDialogComponent implements OnInit {
 
   EditedTransaction?: Transaction;
   Room?: Room;
@@ -23,7 +22,7 @@ export class EditTransactionDialogComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<EditTransactionDialogComponent>,
+    public dialogRef: MatDialogRef<UserEditTransactionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {
     this.EditedTransaction = data.transaction;
     this.Room = data.room;
