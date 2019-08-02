@@ -31,7 +31,7 @@ import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.c
 import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { LoginComponent } from './user/login/login.component';
-import { UserService } from './_shared/user.service';
+import { UserService } from 'src/app/user/services/user.service';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
