@@ -32,6 +32,7 @@ import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.compone
 import { RegistrationComponent } from './user/registration/registration.component';
 import { LoginComponent } from './user/login/login.component';
 import { UserService } from './_shared/user.service';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
 
@@ -61,6 +62,9 @@ import { UserService } from './_shared/user.service';
     MatNativeDateModule,
     ReactiveFormsModule,
     LoadingBarRouterModule,
+    ToastrModule.forRoot({
+      progressBar: true
+    }),
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
