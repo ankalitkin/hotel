@@ -28,7 +28,6 @@ namespace Hotel.Controllers
             return await _context.Transactions.AsNoTracking().ToListAsync();
         }
 
-
         // GET: api/Transactions/5
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Transaction>> GetTransaction(int id)
@@ -47,12 +46,12 @@ namespace Hotel.Controllers
         [HttpPut("{id:int}")]
         public async Task<IActionResult> PutTransaction(int id, [FromBody]Transaction transaction)
         {
-            if (id != transaction.TransactionId)
+            if (id != transaction.TransactionId || !ValidTransaction(transaction).Result)
             {
                 return BadRequest();
             }
 
-            transaction.Cost = GetRoomCost(transaction.RoomId);
+            transaction.Cost = (transaction.CheckOutTime - transaction.CheckInTime).Days * GetRoomCost(transaction.RoomId).Result.Value;
 
             _context.Entry(transaction).State = EntityState.Modified;
 
@@ -79,8 +78,11 @@ namespace Hotel.Controllers
         [HttpPost]
         public async Task<ActionResult<Transaction>> PostTransaction([FromBody]Transaction transaction)
         {
-            if (transaction.Cost <= 0)
-                transaction.Cost = GetRoomCost(transaction.RoomId);
+            if(!ValidTransaction(transaction).Result)
+            {
+                return BadRequest();
+            }
+            transaction.Cost = (transaction.CheckOutTime - transaction.CheckInTime).Days * GetRoomCost(transaction.RoomId).Result.Value;
 
             _context.Transactions.Add(transaction);
             await _context.SaveChangesAsync();
@@ -273,18 +275,15 @@ namespace Hotel.Controllers
         [HttpGet("FreeRooms")]
         public async Task<ActionResult<IEnumerable<Room>>> GetFreeRooms(DateTime start, DateTime end, int? type, int? seats, bool? minibar)
         {
-            var list = from room in _context.Rooms
-                       where type == null || room.RoomTypeId == type &&
-                       seats == null || room.NumberOfSeats == seats &&
-                       minibar == null || room.HasMiniBar == minibar
-                       join trans in _context.Transactions
-                       on room.RoomId equals trans.RoomId into p
-                       from t in p.DefaultIfEmpty()
-                       where t == null || (t.CheckInTime <= start && t.CheckOutTime <= start
-                        || t.CheckInTime >= end && t.CheckOutTime >= end || t.IsCanceled)
-                       select room;
+            var queryGoodRooms = from room in _context.Rooms
+                                 where type == null || room.RoomTypeId == type &&
+                                 seats == null || room.NumberOfSeats == seats &&
+                                 minibar == null || room.HasMiniBar == minibar
+                                 select room;
 
-            return await list.ToListAsync();
+            var freeRooms = GetFreeRoomsList(start, end).Result.Value.Intersect(await queryGoodRooms.ToListAsync()).ToList();
+
+            return freeRooms;
         }
 
         public class RoomAndTransaction
@@ -292,6 +291,8 @@ namespace Hotel.Controllers
             public Room room;
             public Transaction transaction;
         }
+
+        // При редактировании транзакции
         // POST: api/Transactions/RoomId
         [HttpPost("RoomId")]
         public async Task<ActionResult<int>> GetFreeRoomId([FromBody]RoomAndTransaction roomAndTransaction)
@@ -299,33 +300,32 @@ namespace Hotel.Controllers
             Room room = roomAndTransaction.room;
             Transaction transaction = roomAndTransaction.transaction;
 
-            var RoomQuery = from r in _context.Rooms
-                         where r.RoomTypeId == room.RoomTypeId &&
-                         r.NumberOfSeats == room.NumberOfSeats &&
-                         r.HasMiniBar == room.HasMiniBar
-                         join tr in _context.Transactions
-                         on r.RoomId equals tr.RoomId into p
-                         from trans in p.DefaultIfEmpty()
-                         where trans == null || ((trans.CheckInTime <= transaction.CheckInTime &&
-                         trans.CheckOutTime <= transaction.CheckOutTime
-                         || trans.CheckInTime >= transaction.CheckInTime &&
-                            trans.CheckOutTime >= transaction.CheckOutTime)
-                         || trans.IsCanceled
-                         || trans.TransactionId == transaction.TransactionId)
-                         select r.RoomId;
+            var queryGoogRooms = from r in _context.Rooms
+                                 where r.RoomTypeId == room.RoomTypeId &&
+                                 r.NumberOfSeats == room.NumberOfSeats &&
+                                 r.HasMiniBar == room.HasMiniBar
+                                 select r;
 
-            var list = await RoomQuery.ToListAsync(); 
-            foreach (var e in list)
+            var freeRooms = GetFreeRoomsList(transaction.CheckInTime, transaction.CheckOutTime, transaction.TransactionId).Result.Value.Intersect(await queryGoogRooms.ToListAsync());
+
+            if(freeRooms == null)
             {
-                Console.WriteLine(e);
+                return BadRequest();
             }
-            var RoomId =  await RoomQuery.FirstOrDefaultAsync();
+            var Room = freeRooms.FirstOrDefault();
+
+            if (Room == null)
+            {
+                return BadRequest();
+            }
+
+            var RoomId = Room.RoomId;
             return RoomId;
         }
 
-        public int GetRoomCost(int roomId)
+        private async Task<ActionResult<int>> GetRoomCost(int roomId)
         {
-            var room = _context.Rooms.Find(roomId);
+            var room = await _context.Rooms.FindAsync(roomId);
 
             if (room == null)
             {
@@ -343,6 +343,51 @@ namespace Hotel.Controllers
                 cost = 1400;
 
             return cost;
+        }
+
+        private async Task<ActionResult<IEnumerable<Room>>> GetFreeRoomsList(DateTime start, DateTime end, int transactionId = 0)
+        {
+            var queryBadRooms = from r in _context.Rooms
+                                join trans in _context.Transactions
+                                on r.RoomId equals trans.RoomId
+                                where
+                                (trans.CheckInTime >= start &&
+                                trans.CheckInTime <= end
+                                || trans.CheckOutTime >= start &&
+                                   trans.CheckOutTime <= end)
+                                && !trans.IsCanceled
+                                && trans.TransactionId != transactionId
+                                select r;
+
+            var queryGoodRooms = await _context.Rooms.Except(queryBadRooms).ToListAsync();
+            return queryGoodRooms;
+        }
+
+        private async Task<bool> ValidTransaction(Transaction transaction)
+        {
+            bool result = true;
+
+            if(transaction.CheckInTime > transaction.CheckOutTime || transaction.Cost <= 0)
+            {
+                result = false;
+            }
+            else 
+            {
+                var user = await _context.Users.FindAsync(transaction.UserId);
+                bool roomIsFree = GetFreeRoomsList(transaction.CheckInTime, transaction.CheckOutTime, transaction.TransactionId).Result.Value
+                    .Where(r => r.RoomId == transaction.RoomId).FirstOrDefault() != null;
+
+                if(user == null)
+                {
+                    result = false;
+                }
+                else
+                {
+                    result = !user.IsDeleted && roomIsFree;
+                }
+            }
+
+            return result;
         }
     }
 }

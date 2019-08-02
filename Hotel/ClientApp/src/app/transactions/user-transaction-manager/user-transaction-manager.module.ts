@@ -14,7 +14,7 @@ import { UserExpandTransactionPageComponent } from '../user-transaction-manager-
 import { SharedModule } from '../../_shared/shared.module';
 
 import { MyHistoryComponent } from './my-history/my-history.component';
-import { UserInfoTranscationComponent } from './user-info-transcation/user-info-transcation.component';
+import { UserInfoTransactionComponent } from './user-info-transcation/user-info-transcation.component';
 import { UserEditTransactionDialogComponent } from './user-edit-transaction-dialog/user-edit-transaction-dialog.component';
 import { UserExpandTransactionComponent } from './user-expand-transaction/user-expand-transaction.component';
 import { UserFilterTransactionComponent } from './user-filter-transaction/user-filter-transaction.component';
@@ -24,7 +24,7 @@ import { UserFilterTransactionComponent } from './user-filter-transaction/user-f
 @NgModule({
   declarations: [
     MyHistoryComponent,
-    UserInfoTranscationComponent,
+    UserInfoTransactionComponent,
     UserEditTransactionDialogComponent,
     UserExpandTransactionComponent,
     UserFilterTransactionComponent,
@@ -32,7 +32,7 @@ import { UserFilterTransactionComponent } from './user-filter-transaction/user-f
   ],
   exports: [
     MyHistoryComponent,
-    UserInfoTranscationComponent,
+    UserInfoTransactionComponent,
     UserEditTransactionDialogComponent,
     UserExpandTransactionComponent,
     UserFilterTransactionComponent,

@@ -81,7 +81,7 @@ export class UserEditTransactionPageComponent implements OnInit {
       this.Room = result.room;
       this.saveTransaction();
     }
-    this.router.navigate(['transactions/info']);
+    this.router.navigate(['usertransactions/info']);
   }
 
   GetRoom() {

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataServiceTransaction } from '../../_services/data.service.transaction';
 import { InteractionService } from '../../_services/interaction.service';
 import { Transaction, TransactionFilter } from '../../../_models/transaction';
-import { InfoTransactionComponent } from '../../transaction/info-transaction/info-transaction.component';
+import { UserInfoTransactionComponent } from '../../user-transaction-manager/user-info-transcation/user-info-transcation.component';
 
 @Component({
   selector: 'app-user-info-transcation-page',
@@ -14,7 +14,7 @@ export class UserInfoTranscationPageComponent implements OnInit {
 
   transactions?: Transaction[];
   isLoaded: Boolean = false;
-  @ViewChild(InfoTransactionComponent, { static: false }) infoTrans: InfoTransactionComponent;
+  @ViewChild(UserInfoTransactionComponent, { static: false }) infoTrans: UserInfoTransactionComponent;
 
   constructor(private dataService: DataServiceTransaction, private interactionService: InteractionService) {
     interactionService.setRecipient(this); // установка в качестве получателя(получает от дочернего эл-та)
@@ -65,7 +65,7 @@ export class UserInfoTranscationPageComponent implements OnInit {
     const index = this.infoTrans.dataSource.data.indexOf(old_transaction);
 
     // Загрузка транзакции из базы по индексу (можно было и без этого, напрямую передав объект)
-    //( всё только ради кружочка загрузки только ОДНОГО элемнта :-)
+    //( всё только ради кружочка загрузки только у ОДНОГО элемнта :-)
     this.dataService.GetTransaction(id)
       .subscribe((data) => {
         data.Loading = false;
