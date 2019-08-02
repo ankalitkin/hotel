@@ -30,18 +30,16 @@ namespace Hotel.Services
             }
         }
 
-
-        public bool CheckPassword(string _email,string _password)
+        public User FindByUserId(string _id)
         {
             using (HotelContext db = new HotelContext())
             {
                 var userlist = db.Users.ToList();
-                if (userlist.FirstOrDefault(v => v.Email == _email && v.Password == _password)!=null)
-                {
-                    return true;
-                }
-                return false;
+                var user = userlist.FirstOrDefault(v => v.UserId ==Convert.ToInt32(_id));
+                return user;
             }
         }
+
+
     }
 }

@@ -1,19 +1,18 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using Newtonsoft.Json;
+using System.Security.Claims;
 using Hotel.Entities;
 using Hotel.Services;
 using Hotel.Data;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hotel.Controllers
 {
@@ -42,29 +41,76 @@ namespace Hotel.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> Login([FromBody]LoginModel lm)
+        public async Task Login([FromBody]LoginModel lm)
         {
-             var user = _userService.FindByUserEmail(lm.Email);
-             if (user != null && user.Password==lm.Password)
-             {
-          //  User user1 = new User { FirstName = "Armenjannn", LastName ="Tovmasyan", BirthDate = DateTime.Parse("01.05.1996"), Phone = "8-800-555-35-35", Email = "armenjanjan@gmail.com", ClientID = "123456789099", RoleId = 1, IsDeleted = false };
-            var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(new Claim[]
-                    {
-                        new Claim("UserID",user.UserId.ToString())
-                    }),
-                    Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("RelexPractice1234")), SecurityAlgorithms.HmacSha256Signature)
-                };
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-                var token = tokenHandler.WriteToken(securityToken);
-                return Ok(new { token });
+            var identity = GetIdentity(lm.Email, lm.Password);
+            if (identity == null)
+            {
+                Response.StatusCode = 400;
+                await Response.WriteAsync("Invalid username or password.");
+                return;
             }
-            else
-                return BadRequest(new { message = "неправильный логин или пароль" });
-        } 
-      
+
+            var now = DateTime.UtcNow;
+            var jwt = new JwtSecurityToken(
+                    issuer: AuthOptions.ISSUER,
+                    audience: AuthOptions.AUDIENCE,
+                    notBefore: now,
+                    claims: identity.Claims,
+                    expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
+                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+            var response = new
+            {
+                token = encodedJwt,
+                
+            };
+
+            Response.ContentType = "application/json";
+            await Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
+        
+    }
+
+        [HttpGet]
+        [Authorize]
+        //GET : /api/UserProfile
+        [Route("userprofile")]
+        public async Task<Object> GetUserProfile()
+        {
+            
+            string userId = User.Claims.First(c => c.Type == "userid").Value;
+            User user1 = _userService.FindByUserId(userId);
+          
+            return new
+            {
+                user1.FirstName,
+                user1.Email,
+                userId
+
+            };
+
+        }
+
+        private ClaimsIdentity GetIdentity(string email, string password)
+        {
+            var user = _userService.FindByUserEmail(email);
+
+            
+            if (user.Password==password)
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim("userid", user.UserId.ToString()),
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType, user.RoleId.ToString())
+                };
+                ClaimsIdentity claimsIdentity =
+                new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
+                    ClaimsIdentity.DefaultRoleClaimType);
+                return claimsIdentity;
+            }
+            return null;
+        }
+
     }
 }

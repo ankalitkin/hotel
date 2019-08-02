@@ -33,6 +33,9 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { LoginComponent } from './user/login/login.component';
 import { UserService } from 'src/app/user/services/user.service';
 import { ToastrModule } from 'ngx-toastr';
+import { UserhomeComponent } from './user/userhome/userhome.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
 @NgModule({
 
@@ -50,7 +53,8 @@ import { ToastrModule } from 'ngx-toastr';
     RoomCreateComponent,
     RoomEditComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    UserhomeComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +70,11 @@ import { ToastrModule } from 'ngx-toastr';
       progressBar: true
     }),
   ],
-  providers: [UserService],
+  providers: [UserService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

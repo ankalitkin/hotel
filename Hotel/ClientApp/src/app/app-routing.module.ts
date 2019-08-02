@@ -16,7 +16,7 @@ import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.compone
 
 import { RegistrationComponent } from './user/registration/registration.component';
 import { LoginComponent } from './user/login/login.component';
-
+import { UserhomeComponent } from './user/userhome/userhome.component';
 
 const routes: Routes = [
   {
@@ -51,8 +51,10 @@ const routes: Routes = [
   path: 'user',
     children: [
       { path: 'registration', component: RegistrationComponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent },
+      { path: 'userprofile', component: UserhomeComponent }
     ]
+    
   },
   
 ];
