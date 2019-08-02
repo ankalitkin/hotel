@@ -11,8 +11,13 @@ import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.compone
 const routes: Routes = [
   {
     path: 'transactions',
-    loadChildren: () => import('./transaction-pages/transaction-pages.module')
+    loadChildren: () => import('./transactions/transaction-pages/transaction-pages.module')
       .then(mod => mod.TransactionPagesModule)
+  },
+  {
+    path: 'usertransactions',
+    loadChildren: () => import('./transactions/user-transaction-manager-pages/user-transaction-manager-pages.module')
+      .then(mod => mod.UserTransactionManagerPagesModule)
   },
   {
     path: 'roommanager',
