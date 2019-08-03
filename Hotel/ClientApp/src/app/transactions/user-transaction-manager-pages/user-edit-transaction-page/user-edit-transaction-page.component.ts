@@ -10,11 +10,16 @@ import { UserEditTransactionDialogComponent } from '../../user-transaction-manag
 
 import { Subscription } from 'rxjs';
 import { Room } from 'src/app/_models/room';
+
+import { SnackBarService } from '../../_services/snack-bar.service';
+
+
+
 @Component({
   selector: 'app-user-edit-transaction-page',
   templateUrl: './user-edit-transaction-page.component.html',
   styleUrls: ['./user-edit-transaction-page.component.scss'],
-  providers: [DataServiceTransaction]
+  providers: [DataServiceTransaction, SnackBarService]
 })
 export class UserEditTransactionPageComponent implements OnInit {
 
@@ -28,6 +33,7 @@ export class UserEditTransactionPageComponent implements OnInit {
     public dialog: MatDialog,
     private activeRoute: ActivatedRoute,
     private router: Router,
+    private snackBarService: SnackBarService,
     @Optional() private interactionService?: InteractionService) {
   }
 
@@ -56,19 +62,20 @@ export class UserEditTransactionPageComponent implements OnInit {
   }
 
   saveTransaction() {
-    console.log("edit room");
-    console.log(this.Room);
+
     this.dataService.GetRoomId(this.Room, this.EditedTransaction)
       .subscribe((data: number) => {
         this.EditedTransaction.roomId = data;
         console.log('id = ' + data);
         this.dataService.PutTransaction(this.EditedTransaction)
-          .subscribe((data: any) => { this.CompleteSave() });
-      });
+          .subscribe((data: any) => { this.CompleteSave() }, (error: any) => { this.snackBarService.failureSnack() });
+      }, (error: any) => { this.snackBarService.failureSnack() });
 
   }
 
   CompleteSave() {
+    this.snackBarService.succsesSnack();
+
     if (this.interactionService != undefined) { // передача данных в родительский компонент
       this.interactionService.setTemp(this.EditedTransaction.transactionId);
       this.interactionService.sendMessage();

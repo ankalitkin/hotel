@@ -21,7 +21,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class UserInfoTransactionComponent implements OnInit {
 
-  displayedColumns: string[] = ['TheNoumber', 'userId', 'checkInTime', 'checkOutTime', 'cost'];
+  displayedColumns: string[] = ['TheNoumber', 'checkInTime', 'checkOutTime', 'status', 'cost'];
   dataSource: MatTableDataSource<Transaction>;
 
   @Input()

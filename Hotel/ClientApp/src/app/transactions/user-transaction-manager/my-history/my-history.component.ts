@@ -12,7 +12,7 @@ import {Transaction} from '../../../_models/transaction';
 })
 export class MyHistoryComponent implements OnInit {
 
-  displayedColumns: string[] = ['TheNoumber', 'checkInTime', 'checkOutTime', 'cost'];
+  displayedColumns: string[] = ['TheNoumber', 'checkInTime', 'checkOutTime', 'status', 'cost'];
   dataSource: MatTableDataSource<Transaction>;
   @Input()
   transactions: Transaction[] | null | undefined;

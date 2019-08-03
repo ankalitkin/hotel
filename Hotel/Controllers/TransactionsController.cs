@@ -46,7 +46,7 @@ namespace Hotel.Controllers
         [HttpPut("{id:int}")]
         public async Task<IActionResult> PutTransaction(int id, [FromBody]Transaction transaction)
         {
-            if (id != transaction.TransactionId || !ValidTransaction(transaction).Result)
+            if (id != transaction.TransactionId || !ValidTransaction(transaction).Result || !ModelState.IsValid)
             {
                 return BadRequest();
             }
@@ -240,6 +240,7 @@ namespace Hotel.Controllers
                     }
                 case "isReadyComeOut":
                     {
+                        isPaid = true;
                         isReadyComeOut = true;
                         break;
                     }
@@ -264,8 +265,8 @@ namespace Hotel.Controllers
                 .Where(t => end == null || t.CheckOutTime <= end)
                 .Where(t => all ||
                 t.IsPaid == isPaid && t.IsCanceled == isCanceled
-                && (!isReadyComeIn || t.CheckInTime == DateTime.Today)
-                && (!isReadyComeOut || t.CheckOutTime == DateTime.Today))
+                && (!isReadyComeIn || t.CheckInTime.Date == DateTime.Today.Date)
+                && (!isReadyComeOut || t.CheckOutTime.Date == DateTime.Today.Date))
                 .ToListAsync();
 
             return list;

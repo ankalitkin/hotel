@@ -16,6 +16,7 @@ export class FinancicalInformationComponent implements OnInit {
   dataSource: MatTableDataSource<FinancicalInformation>;
   @Input()
   financicalInformation: FinancicalInformation[] | null | undefined;
+  sum: number = 0;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -26,6 +27,9 @@ export class FinancicalInformationComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.financicalInformation);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+
+    this.dataSource.data.forEach((info) => this.sum += info.sum.valueOf());
   }
 
   applyFilter(filterValue: string) {
@@ -35,4 +39,5 @@ export class FinancicalInformationComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
 }

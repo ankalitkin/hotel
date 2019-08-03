@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Hotel.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Hotel.Entities
 
             IConfigurationRoot configuration = builder.Build();
             _connectionString = configuration.GetSection("ConnectionStrings").GetConnectionString("HotelContext");*/
-           // _connectionString = "data source=LAPTOP-G6OO0Q2P\\SQLEXPRESS;initial catalog=HotelProd;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;"; // заачееем??
+            // _connectionString = "data source=LAPTOP-G6OO0Q2P\\SQLEXPRESS;initial catalog=HotelProd;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;"; // заачееем??
             _connectionString = "data source=localhost;initial catalog=HotelProd;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;";
         }
 
@@ -52,35 +53,43 @@ namespace Hotel.Entities
 
             // Инициализация БД
             // /*
-            Role Owner = new Role { RoleId = 1, Name = "Owner", Rights = (Role.AccessRights)2047 };
-            Role Admin = new Role { RoleId = 2, Name = "Admin", Rights = Role.AccessRights.CanRegisterClients | Role.AccessRights.CanBookRooms | Role.AccessRights.CanCheckInOut | Role.AccessRights.CanGetAnyHistory | Role.AccessRights.CanGetInfo };
-            Role Visitor = new Role { RoleId = 3, Name = "Visitor", Rights = Role.AccessRights.CanCheckInOut | Role.AccessRights.CanGetOwnHistory };
+            List<Role> roles = InitDataBase.CreateRoles();
+            List<User> users = new List<User> { InitDataBase.CreateUser(1), InitDataBase.CreateUser(2), InitDataBase.CreateUser(2), InitDataBase.CreateUser(3) };
 
-            User user1 = new User { UserId = 1, FirstName = "Tom", LastName = "Timmi", BirthDate = DateTime.Parse("01.05.1996"), Phone = "8-800-555-35-35", Email = "Tom@mail.ru", ClientId = "123456789012", RoleId = Owner.RoleId, IsDeleted = false };
-            User user2 = new User { UserId = 2, FirstName = "Dik", LastName = "Dom", BirthDate = DateTime.Parse("05.07.1999"), Phone = "8-800-555-35-36", Email = "Dik@mail.ru", ClientId = "123456789013", RoleId = Admin.RoleId, IsDeleted = false };
-            User user3 = new User { UserId = 3, FirstName = "Jorge", LastName = "Vim", BirthDate = DateTime.Parse("11.05.1986"), Phone = "8-800-555-35-37", Email = "Jorge@mail.ru", ClientId = "123456789014", RoleId = Visitor.RoleId, IsDeleted = false };
+            for (int i = 0; i < 15; i++)
+            {
+                users.Add(InitDataBase.CreateUser(3));
+            }
 
-            Category Economy = new Category { CategoryId = 1, Name = "Economy" };
-            Category Ordinary = new Category { CategoryId = 2, Name = "Ordinary" };
-            Category Lux = new Category { CategoryId = 3, Name = "Lux" };
+            List<Category> categores = InitDataBase.CreateCategory();
 
-            Room room1 = new Room { RoomId = 1, Name = "101", Floor = "Подвал", RoomTypeId = Economy.CategoryId, NumberOfSeats = 2, HasMiniBar = false, IsDeleted = false };
-            Room room2 = new Room { RoomId = 2, Name = "121", Floor = "3", RoomTypeId = Ordinary.CategoryId, NumberOfSeats = 3, HasMiniBar = false, IsDeleted = false };
-            Room room3 = new Room { RoomId = 3, Name = "14a", Floor = "12", RoomTypeId = Lux.CategoryId, NumberOfSeats = 2, HasMiniBar = true, IsDeleted = false };
+            List<Room> rooms = new List<Room> { InitDataBase.CreateRoom(1), InitDataBase.CreateRoom(2), InitDataBase.CreateRoom(3) };
 
-            RoomCost room1Cost = new RoomCost { RoomCostId = 1, CategoryId = 1, NumberOfSeats = 2, HasMiniBar = false, Cost = 3500 };
-            RoomCost room2Cost = new RoomCost { RoomCostId = 2, CategoryId = 2, NumberOfSeats = 3, HasMiniBar = false, Cost = 5200 };
-            RoomCost room3Cost = new RoomCost { RoomCostId = 3, CategoryId = 3, NumberOfSeats = 2, HasMiniBar = true, Cost = 11700 };
+            for (int i = 0; i < 25; i++)
+            {
+                rooms.Add(InitDataBase.CreateRoom());
+            }
 
-            modelBuilder.Entity<Role>().HasData(Owner, Admin, Visitor);
-            modelBuilder.Entity<User>().HasData(user1, user2, user3);
-            modelBuilder.Entity<Category>().HasData(Economy, Ordinary, Lux);
-            modelBuilder.Entity<Room>().HasData(room1, room2, room3);
-            modelBuilder.Entity<RoomCost>().HasData(room1Cost, room2Cost, room3Cost);
+            List<RoomCost> costs = InitDataBase.CreateRoomCost();
+
+            List<Transaction> transctions = new List<Transaction>();
+
+            for (int i = 0; i < 15; i++)
+            {
+                var trans = InitDataBase.CreateTransaction();
+                if (transctions != null)
+                    transctions.Add(trans);
+            }
+
+            modelBuilder.Entity<Role>().HasData(roles);
+            modelBuilder.Entity<User>().HasData(users);
+            modelBuilder.Entity<Category>().HasData(categores);
+            modelBuilder.Entity<Room>().HasData(rooms);
+            modelBuilder.Entity<RoomCost>().HasData(costs);
+            modelBuilder.Entity<Transaction>().HasData(transctions);
+
             /*
-            modelBuilder.Entity<Transaction>().HasData(
-            new Transaction { TransactionId = 1, CheckInTime = DateTime.Now, CheckOutTime = DateTime.Now.AddDays(1), UserId = user3.UserId, RoomId = room1.RoomId, Cost = room1Cost.Cost, IsPaid = true });
-            //*/
+            */
         }
 
     }

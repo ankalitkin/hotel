@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {TransactionFilter} from '../../../_models/transaction';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'filter-transaction',
@@ -25,7 +26,7 @@ export class FilterTransactionComponent implements OnInit {
   ngOnInit() {
     // TODO: сделать шаблон для даты
     this._filterForm = this.fb.group({
-      clientId: this.fb.control(undefined),
+      clientId: this.fb.control(undefined, [Validators.pattern("[0-9]{12,12}")]),
       checkInTime: this.fb.control(undefined),
       checkOutTime: this.fb.control(undefined),
       type: this.fb.control(this.typeSelect, [Validators.required])

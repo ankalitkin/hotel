@@ -11,11 +11,13 @@ import { EditTransactionDialogComponent } from '../../transaction/edit-transacti
 import { Subscription } from 'rxjs';
 import { Room } from 'src/app/_models/room';
 
+import { SnackBarService } from '../../_services/snack-bar.service';
+
 @Component({
   selector: 'app-edit-transaction-page',
   templateUrl: './edit-transaction-page.component.html',
   styleUrls: ['./edit-transaction-page.component.scss'],
-  providers: [DataServiceTransaction]
+  providers: [DataServiceTransaction, SnackBarService]
 })
 export class EditTransactionPageComponent implements OnInit, OnDestroy {
 
@@ -29,6 +31,7 @@ export class EditTransactionPageComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private activeRoute: ActivatedRoute,
     private router: Router,
+    private snackBarService: SnackBarService,
     @Optional() private interactionService?: InteractionService) {
   }
 
@@ -57,21 +60,23 @@ export class EditTransactionPageComponent implements OnInit, OnDestroy {
   }
 
   saveTransaction() {
-    console.log("edit ..");
-    console.log(this.Room);
-    console.log(this.EditedTransaction);
-    console.log("edit ..");
+
     this.dataService.GetRoomId(this.Room, this.EditedTransaction)
       .subscribe((data: number) => {
         this.EditedTransaction.roomId = data;
         console.log('id = ' + data);
         this.dataService.PutTransaction(this.EditedTransaction)
-          .subscribe((data: any) => { this.CompleteSave() });
-      });
+          .subscribe((data: any) => { this.CompleteSave() }, (error: any) => { this.snackBarService.failureSnack() });
+      }, (error: any) => {
+        this.snackBarService.failureSnack()
+        });
     
   }
 
   CompleteSave() {
+
+    this.snackBarService.succsesSnack();
+
     if (this.interactionService != undefined) { // передача данных в родительский компонент
       this.interactionService.setTemp(this.EditedTransaction.transactionId);
       this.interactionService.sendMessage();
@@ -109,6 +114,5 @@ export class EditTransactionPageComponent implements OnInit, OnDestroy {
       this.handleTransactionChange(result);
     });
   }
-
 
 }

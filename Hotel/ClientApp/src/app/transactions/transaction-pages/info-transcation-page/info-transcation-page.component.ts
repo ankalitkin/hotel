@@ -4,11 +4,13 @@ import { InteractionService } from '../../_services/interaction.service';
 import { Transaction, TransactionFilter } from '../../../_models/transaction';
 import { InfoTransactionComponent } from '../../transaction/info-transaction/info-transaction.component';
 
+import { SnackBarService } from '../../_services/snack-bar.service';
+
 @Component({
   selector: 'app-info-transcation-page',
   templateUrl: './info-transcation-page.component.html',
   styleUrls: ['./info-transcation-page.component.scss'],
-  providers: [DataServiceTransaction, InteractionService]
+  providers: [DataServiceTransaction, InteractionService, SnackBarService]
 })
 export class InfoTranscationPageComponent implements OnInit {
 
@@ -16,7 +18,9 @@ export class InfoTranscationPageComponent implements OnInit {
   isLoaded: Boolean = false;
   @ViewChild(InfoTransactionComponent, { static: false }) infoTrans: InfoTransactionComponent;
 
-  constructor(private dataService: DataServiceTransaction, private interactionService: InteractionService) {
+  constructor(private dataService: DataServiceTransaction,
+    private interactionService: InteractionService,
+    private snackBarService: SnackBarService) {
     interactionService.setRecipient(this); // установка в качестве получателя(получает от дочернего эл-та)
   }
 
@@ -52,7 +56,7 @@ export class InfoTranscationPageComponent implements OnInit {
   putTransaction(transaction: Transaction) {
     transaction.Loading = true;
     this.dataService.PutTransaction(transaction)
-      .subscribe(() => { transaction.Loading = false; });
+      .subscribe(() => { transaction.Loading = false; this.snackBarService.succsesSnack() }, (error: any) => { transaction.Loading = false; this.snackBarService.failureSnack() });
   }
 
   // Получение id редактируемого объекта, чтобы в списке обновить только его одного

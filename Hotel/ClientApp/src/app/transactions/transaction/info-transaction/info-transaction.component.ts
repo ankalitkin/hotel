@@ -20,7 +20,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   ],
 })
 export class InfoTransactionComponent implements OnInit {
-  displayedColumns: string[] = ['TheNoumber', 'userId', 'checkInTime', 'checkOutTime', 'cost'];
+  displayedColumns: string[] = ['TheNoumber', 'checkInTime', 'checkOutTime', 'status', 'cost'];
   dataSource: MatTableDataSource<Transaction>;
 
   @Input()
@@ -32,10 +32,12 @@ export class InfoTransactionComponent implements OnInit {
   expandedElement: Transaction | null;
   showExpandData: Boolean = false;
   tempExpandData?: ExpandData;
+  updateExpand?: Boolean = false;
   currentDate: Date = new Date(); // чтобы не горела кнопка "отменить"
 
   SaveTemp(expandData: ExpandData) {
     this.tempExpandData = expandData;
+    this.updateExpand = false;
   }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -64,6 +66,7 @@ export class InfoTransactionComponent implements OnInit {
 
   // обновление транзакции в списке (после редактирования)
   updateTransaction(transaction: Transaction, index: number) {
+    this.updateExpand = true;
     this.dataSource.data[index] = transaction;
     this.dataSource._updateChangeSubscription();
   }

@@ -14,11 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20190730190250_rename_RoleId.cs" />
-    <Compile Remove="Migrations\20190730190250_rename_RoleId.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="ClientApp\src\app\material-module.ts" />
     <None Remove="ClientApp\src\app\transaction\models\transaction.ts" />
     <None Remove="ClientApp\src\app\transaction\services\data.service.transaction.ts" />

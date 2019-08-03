@@ -15,6 +15,8 @@ export class ExpandTransactionPageComponent implements OnInit {
   isLoaded: Boolean = false;
   @Input()
   transactionId?: Number;
+  @Input()
+  update?: Boolean = false;
 
   @Output()
   SaveTemp: EventEmitter<ExpandData> = new EventEmitter<ExpandData>();
@@ -23,7 +25,7 @@ export class ExpandTransactionPageComponent implements OnInit {
   constructor(private dataService: DataServiceTransaction) { }
 
   ngOnInit() {
-    if (this.expandData != undefined && this.expandData.transactionId == this.transactionId)
+    if (this.expandData != undefined && this.expandData.transactionId == this.transactionId && !this.update)
       this.isLoaded = true;
     else
       this.loadData();
@@ -42,6 +44,7 @@ export class ExpandTransactionPageComponent implements OnInit {
   CompleteLoad(data: ExpandData) {
     this.expandData = data;
     this.isLoaded = true;
+    this.update = false;
     this.SaveExpandData();
   }
 
