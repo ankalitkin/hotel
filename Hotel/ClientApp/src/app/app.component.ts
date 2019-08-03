@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ClientApp';
+
+  check_auth()
+  {
+    if (localStorage.getItem('token') != null) {
+      console.log(localStorage.getItem('token'));
+      return true;
+    }
+  return false; 
+  }
 }
+

@@ -7,10 +7,10 @@
   <button mat-button routerLink="roommanager/rooms">RoomManager</button>
   <button mat-button routerLink="user/registration">Registration</button>
   <button mat-button routerLink="user/login">Login</button>
-  <button mat-button routerLink="user/login">Logout</button>
-  <button mat-button routerLink="user/userprofile">Profile</button>
+  <button *ngIf="check_auth()" mat-button routerLink="user/login">Logout</button>
+  <button *ngIf="check_auth()" mat-button routerLink="user/userprofile">Profile</button>
 </mat-toolbar>
-<div class="mat-app-background basic-container">
+<div class="mat-app-background basic-container p-0">
   <router-outlet></router-outlet>
 </div>
 
