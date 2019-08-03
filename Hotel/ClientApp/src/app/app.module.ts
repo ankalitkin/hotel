@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {DateAdapter, MatNativeDateModule} from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthModule } from './_auth/auth.module';
 
 // For loading-progress
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
@@ -23,6 +24,7 @@ import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.c
 import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
 import {SharedModule} from './_shared/shared.module';
 import {MyDateAdapter} from './_shared/calendar_workaround';
+import {AuthModule} from "./_auth/auth.module";
 
 @NgModule({
 
@@ -46,6 +48,7 @@ import {MyDateAdapter} from './_shared/calendar_workaround';
     //LoadingBarHttpModule,
     LoadingBarRouterModule, //
     SharedModule,
+    AuthModule
   ],
   providers: [
 /*    {provide: LOCALE_ID, useValue: 'ru-RU'},*/

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PermitDirective } from './_auth/permit/permit.directive';
 
 @Component({
   selector: 'app-root',

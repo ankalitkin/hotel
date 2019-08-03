@@ -8,12 +8,11 @@
   <button mat-button routerLink="transactions/financicalInfo">financicalInfo</button>
   <button mat-button routerLink="transactions/myHistory">myHistory</button>
   <button mat-button routerLink="transactions/userInfo">userInfo</button>
-  <button mat-button routerLink="customers/">Customers</button>
-  <button mat-button routerLink="customers/register">RegisterС</button>
-  <button mat-button routerLink="staff/">Staff</button>
-  <button mat-button routerLink="staff/register">RegisterS</button>
+  <button mat-button routerLink="customers/" *appPermit="'CanEditClients'">Customers</button>
+  <button mat-button routerLink="customers/register" *appPermit="'CanRegisterClients'">RegisterС</button>
+  <button mat-button routerLink="staff/" *appPermit="'CanEditStaff'">Staff</button>
+  <button mat-button routerLink="staff/register" *appPermit="'CanEditStaff'">RegisterS</button>
   <button mat-button routerLink="flogin">FakeLogin</button>
-
 </mat-toolbar>
 
 <div class="mat-app-background basic-container">

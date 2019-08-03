@@ -4,7 +4,7 @@ import {PermitDirective} from './permit/permit.directive';
 
 @NgModule({
   declarations: [PermitDirective],
-  exports: [],
+  exports: [PermitDirective],
   imports: [
     CommonModule,
   ]
