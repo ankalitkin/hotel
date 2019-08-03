@@ -12,6 +12,7 @@ using System.Security.Claims;
 using Hotel.Entities;
 using Hotel.Services;
 using Hotel.Data;
+
 using Microsoft.AspNetCore.Authorization;
 
 namespace Hotel.Controllers
@@ -43,7 +44,7 @@ namespace Hotel.Controllers
         [Route("Login")]
         public async Task Login([FromBody]LoginModel lm)
         {
-            var identity = GetIdentity(lm.Email, lm.Password);
+            var identity = await Task.Run(()=>GetIdentity(lm.Email, lm.Password));
             if (identity == null)
             {
                 Response.StatusCode = 400;
@@ -80,7 +81,7 @@ namespace Hotel.Controllers
         {
             
             string userId = User.Claims.First(c => c.Type == "userid").Value;
-            User user1 = _userService.FindByUserId(userId);
+            User user1 = await Task.Run(()=>_userService.FindByUserId(userId));
             string firstName=user1.FirstName;
           
             return new
@@ -94,10 +95,10 @@ namespace Hotel.Controllers
 
         }
 
-        private ClaimsIdentity GetIdentity(string email, string password)
+        private async Task<ClaimsIdentity> GetIdentity(string email, string password)
         {
-            var user = _userService.FindByUserEmail(email);
-
+            //var user = _userService.FindByUserEmail(email);
+            var user = await Task.Run(() => _userService.FindByUserEmail(email));
             
             if (user.Password==password)
             {
