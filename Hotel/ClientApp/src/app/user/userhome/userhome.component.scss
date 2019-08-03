@@ -13,9 +13,8 @@ body {
 }
 
 .wrapper {
- justify-content:center;
- align-items:center;
-  transform: translate(-50%,-50%);
+
+  height:100vh;
   width: 100%;
   display: flex;
   box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);

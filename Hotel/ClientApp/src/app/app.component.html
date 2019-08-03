@@ -5,9 +5,9 @@
   <button mat-button routerLink="">Home</button>
   <button mat-button routerLink="transactions/info">Transactions</button>
   <button mat-button routerLink="roommanager/rooms">RoomManager</button>
-  <button mat-button routerLink="user/registration">Registration</button>
-  <button mat-button routerLink="user/login">Login</button>
-  <button *ngIf="check_auth()" mat-button routerLink="user/login">Logout</button>
+  <button   *ngIf="!check_auth()" mat-button routerLink="user/registration">Registration</button>
+  <button  *ngIf="!check_auth()" mat-button routerLink="user/login">Login</button>
+  <button *ngIf="check_auth()" mat-button (click)="UserhomeComponent.onLogout()">Logout</button>
   <button *ngIf="check_auth()" mat-button routerLink="user/userprofile">Profile</button>
 </mat-toolbar>
 <div class="mat-app-background basic-container p-0">

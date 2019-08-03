@@ -24,5 +24,10 @@ export class UserhomeComponent implements OnInit {
       },
     );
   }
+  
+  onLogout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/user/login']);
+  }
 
 }
