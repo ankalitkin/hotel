@@ -13,6 +13,11 @@
               <label class="text-danger" *ngIf="service.formModel.get('Email').touched && service.formModel.get('Email').errors?.email">Некоректный email.</label> 
             </div>
             <div class="form-group">
+              <label>Номер Телефона</label>
+              <input class="form-control" formControlName="Phone">   
+              <label class="text-danger" *ngIf="service.formModel.get('Phone').touched && service.formModel.get('Phone').errors?.required">Обязательное поле.</label> 
+            </div>
+            <div class="form-group">
               <label>Фамилия</label>
               <input class="form-control" formControlName="FullName">
             </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +8,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+  constructor(private router: Router){}
   check_auth()
   {
     if (localStorage.getItem('token') != null) {
       return true;
     }
   return false; 
+  }
+
+  onLogout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/user/login']);
+    console.log("Token Удален");
   }
 }
 

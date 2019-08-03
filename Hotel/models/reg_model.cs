@@ -11,13 +11,15 @@ namespace Hotel
         public string Lastname { get; set; }
         public string Password{ get; set; }
         public string Email { get; set; }
+        public string Phone{get;set;}
 
-        public reg_model(string f, string l,string p,string e)
+        public reg_model(string f, string l,string p,string e,string ph)
         {
             Firstname = f;
             Lastname = l;
             Password = p;
             Email=e;
+            Phone=ph;
         }
     }
 }

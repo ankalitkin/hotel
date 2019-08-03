@@ -32,7 +32,7 @@ namespace Hotel.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user1 = new User {FirstName = r.Firstname, LastName = r.Lastname, BirthDate = DateTime.Parse("01.05.1996"), Phone = "8-800-555-35-35", Email = r.Email, ClientID = "123456789099", RoleId = 1, IsDeleted = false, Password=r.Password};
+                User user1 = new User {FirstName = r.Firstname, LastName = r.Lastname, BirthDate = DateTime.Parse("01.05.1996"), Phone = r.Phone, Email = r.Email, ClientID = "123456789099", RoleId = 1, IsDeleted = false, Password=r.Password};
                 user1.UserSave();
                 return Ok();
             }
@@ -81,11 +81,12 @@ namespace Hotel.Controllers
             
             string userId = User.Claims.First(c => c.Type == "userid").Value;
             User user1 = _userService.FindByUserId(userId);
+            string firstName=user1.FirstName;
           
             return new
             {
  
-                user1.FirstName,
+                firstName,
                 user1.Email,
                 userId
 

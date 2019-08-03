@@ -63,6 +63,7 @@ input {
   margin-right: auto;
   max-width: 90%;
   width: 400px;
+
 }
 
 /* ---------- LOGIN ---------- */
@@ -93,6 +94,17 @@ input {
 #login fieldset p:last-child {
   margin-bottom: 0;
 }
+
+
+.loginform
+{
+  display: flex;
+  height:100vh;
+  width:100%;
+  background-color:#2F4F4F;
+  align-items:center;
+}
+
 
 #login fieldset input {
   border-radius: 3px;
