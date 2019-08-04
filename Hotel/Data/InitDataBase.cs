@@ -88,7 +88,7 @@ namespace Hotel.Data
                 Name = Name,
                 Floor = floor,
                 RoomTypeId = CategoryId,
-                NumberOfSeats = 2,
+                NumberOfSeats = random.Next(1, 5),
                 HasMiniBar = random.Next(2) == 1,
                 IsDeleted = false };
 
