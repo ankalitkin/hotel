@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,12 +12,11 @@ using Hotel.Entities;
 using Hotel.Services;
 using Hotel.Data;
 
-
 using Microsoft.AspNetCore.Authorization;
 
 namespace Hotel.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -74,9 +72,9 @@ namespace Hotel.Controllers
         
     }
 
+
         [HttpGet]
         [Authorize]
-
         [Route("userprofile")]
         public async Task<Object> GetUserProfile()
         {
@@ -86,12 +84,10 @@ namespace Hotel.Controllers
             info info1 = new info(user1.FirstName, user1.Email, user1.Phone);
 
             return info1;
-
         }
 
         private async Task<ClaimsIdentity> GetIdentity(string email, string password)
         {
-            
             var user = await Task.Run(() => _userService.FindByUserEmail(email));
             
             if (user.Password==password)
@@ -99,6 +95,7 @@ namespace Hotel.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim("userid", user.UserId.ToString()),
+                    new Claim("rights", (int)user.Role.Rights+""),
                     new Claim(ClaimsIdentity.DefaultRoleClaimType, user.RoleId.ToString())
                 };
                 ClaimsIdentity claimsIdentity =

@@ -1,23 +1,34 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <ngx-loading-bar></ngx-loading-bar>
-<mat-toolbar color="primary">
-  <span>HEAD</span>
-  <button mat-button routerLink="">Home</button>
-  <button mat-button routerLink="transactions/info">Transactions</button>
-  <button mat-button routerLink="roommanager/rooms">RoomManager</button>
-  <button mat-button routerLink="roomcostmanager/roomCosts">CostManager</button>
-  <button mat-button routerLink="transactions/financicalInfo">financicalInfo</button>
-  <button mat-button routerLink="usertransactions/info">UserTransactions</button>
-  <button mat-button routerLink="usertransactions/myHistory">myHistory</button>
-  <button mat-button routerLink="customers/">Customers</button>
-  <button mat-button routerLink="customers/register">RegisterС</button>
-  <button mat-button routerLink="staff/">Staff</button>
-  <button mat-button routerLink="staff/register">RegisterS</button>
+<mat-toolbar *ngIf="reload" color="primary">
+  <button mat-button routerLink="" style="font-weight: bold; font-size: 110%;">Главная</button>
+  <!--
+  CanEditRooms = 1,
+  CanEditCost = 2,
+  CanEditStaff = 4,
+  CanRegisterCustomers = 8,
+  CanEditCustomers = 16,
+  CanBookRooms = 32,
+  CanCheckInOut = 64,
+  CanGetInfo = 128,
+  CanGetAnyHistory = 256,
+  CanGetOwnHistory = 512,
+  CanGetFinancialInformation = 1024,
+  IsCustomer = 2048
+  -->
+  <button *appPermit="'CanGetAnyHistory'" mat-button routerLink="transactions/info">Брони</button>
+  <button *appPermit="'CanEditRooms'" mat-button routerLink="roommanager/rooms">Комнаты</button>
+  <button *appPermit="'CanEditCost'" mat-button routerLink="roomcostmanager/roomCosts">Цены</button>
+  <button *appPermit="'CanGetFinancialInformation'" mat-button routerLink="transactions/financicalInfo">ФинОтчёты
+  </button>
+  <button *appPermit="'CanEditCustomers'" mat-button routerLink="customers/">Клиенты</button>
+  <button *appPermit="'CanRegisterCustomers'" mat-button routerLink="customers/register">РегКлиент</button>
+  <button *appPermit="'CanEditStaff'" mat-button routerLink="staff/">Сотрудники</button>
+  <button *appPermit="'CanEditStaff'" mat-button routerLink="staff/register">РегСотр</button>
 
-  <button *ngIf="!check_auth()" mat-button routerLink="user/registration">Registration</button>
-  <button *ngIf="!check_auth()" mat-button routerLink="user/login">Login</button>
-  <button *ngIf="check_auth()" mat-button (click)="onLogout()">Logout</button>
-  <button *ngIf="check_auth()" mat-button routerLink="user/userprofile">Profile</button>
+  <button *ngIf="!check_auth()" mat-button routerLink="user/registration">Регистрация</button>
+  <button *ngIf="!check_auth()" mat-button routerLink="user/login">Войти</button>
+  <button (click)="onLogout()" *ngIf="check_auth()" mat-button>Выйти</button>
+  <button *ngIf="check_auth()" mat-button routerLink="user/userprofile">Мой Профиль</button>
 </mat-toolbar>
 <div class="mat-app-background basic-container p-0">
   <router-outlet></router-outlet>

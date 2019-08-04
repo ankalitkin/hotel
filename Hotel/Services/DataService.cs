@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Hotel.Data;
 using Hotel.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hotel.Services
 {
@@ -24,7 +25,7 @@ namespace Hotel.Services
         {
             using (HotelContext db = new HotelContext())
             {
-                var userlist = db.Users.ToList();
+                var userlist = db.Users.Include(u => u.Role).ToList();
                 var user = userlist.FirstOrDefault(v => v.Email == _email);
                 return user;
             }
@@ -34,7 +35,7 @@ namespace Hotel.Services
         {
             using (HotelContext db = new HotelContext())
             {
-                var userlist = db.Users.ToList();
+                var userlist = db.Users.Include(u => u.Role).ToList();
                 var user = userlist.FirstOrDefault(v => v.UserId ==Convert.ToInt32(_id));
                 return user;
             }

@@ -4,14 +4,16 @@ using Hotel.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hotel.Migrations
 {
     [DbContext(typeof(HotelContext))]
-    partial class HotelContextModelSnapshot : ModelSnapshot
+    [Migration("20190804211202_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,17 +37,17 @@ namespace Hotel.Migrations
                         new
                         {
                             CategoryId = 1,
-                            Name = "Эконом"
+                            Name = "Economy"
                         },
                         new
                         {
                             CategoryId = 2,
-                            Name = "Стандарт"
+                            Name = "Ordinary"
                         },
                         new
                         {
                             CategoryId = 3,
-                            Name = "Люкс"
+                            Name = "Lux"
                         });
                 });
 

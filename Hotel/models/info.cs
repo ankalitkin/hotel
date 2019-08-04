@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hotel.Entities;
 
 namespace Hotel
 {
@@ -11,12 +12,11 @@ namespace Hotel
         public string Email { get; set;}
         public string Phone { get; set;}
 
-        public info(string f, string e,string p)
+        public info(string f, string e, string p)
         {
             Firstname = f;
             Email = e;
             Phone = p;
-
         }
     }
 }
