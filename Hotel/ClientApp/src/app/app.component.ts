@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PermitDirective } from './_auth/permit/permit.directive';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,12 +10,8 @@ import { Router } from '@angular/router';
 export class AppComponent {
 
   constructor(private router: Router){}
-  check_auth()
-  {
-    if (localStorage.getItem('token') != null) {
-      return true;
-    }
-  return false; 
+  check_auth() {
+    return localStorage.getItem('token') != null;
   }
 
   onLogout() {

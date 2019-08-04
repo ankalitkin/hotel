@@ -8,7 +8,7 @@ import {PermissionService} from "../_services/permission.service";
 })
 export class PermitDirective implements OnChanges, OnDestroy {
 
-  @Input() appPermit!: string;
+  @Input() appPermit: string;
 
   private sub = Subscription.EMPTY;
 
@@ -18,9 +18,9 @@ export class PermitDirective implements OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    /*    if ('appPermit' in changes) {
+        if ('appPermit' in changes) {
           this.sub.unsubscribe();
-          this.sub = this.permissionService.watch(this.appPermit)
+          this.sub = this.permissionService.checkPermission(this.appPermit)
             .subscribe(has => {
               if (has) {
                 this.vcr.createEmbeddedView(this.template);
@@ -28,7 +28,7 @@ export class PermitDirective implements OnChanges, OnDestroy {
                 this.vcr.clear();
               }
             });
-        }*/
+        }
   }
 
   ngOnDestroy(): void {

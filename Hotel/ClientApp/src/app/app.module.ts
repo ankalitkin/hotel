@@ -78,7 +78,7 @@ import { RoomCostEditComponent } from './RoomCostManagement/roomcost-edit/roomco
     IgxSliderModule,
     IgxCheckboxModule,
     LoadingBarRouterModule, //
-    SharedModule //
+    SharedModule,
   ],
   providers: [
 /*    {provide: LOCALE_ID, useValue: 'ru'},*/
