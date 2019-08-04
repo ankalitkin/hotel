@@ -81,7 +81,7 @@ namespace Hotel.Controllers
             
             string userId = User.Claims.First(c => c.Type == "userid").Value;
             User user1 = await Task.Run(()=>_userService.FindByUserId(userId));
-            info info1 = new info(user1.FirstName, user1.Email, user1.Phone, (int)user1.Role.Rights);
+            info info1 = new info(user1.FirstName, user1.Email, user1.Phone);
 
             return info1;
         }
@@ -95,6 +95,7 @@ namespace Hotel.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim("userid", user.UserId.ToString()),
+                    new Claim("rights", (int)user.Role.Rights+""),
                     new Claim(ClaimsIdentity.DefaultRoleClaimType, user.RoleId.ToString())
                 };
                 ClaimsIdentity claimsIdentity =

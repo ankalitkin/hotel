@@ -20,11 +20,12 @@ namespace Hotel.Services
         }
 
 
+
         public User FindByUserEmail(string _email)
         {
             using (HotelContext db = new HotelContext())
             {
-                var userlist = db.Users.ToList();
+                var userlist = db.Users.Include(u => u.Role).ToList();
                 var user = userlist.FirstOrDefault(v => v.Email == _email);
                 return user;
             }
@@ -35,7 +36,7 @@ namespace Hotel.Services
             using (HotelContext db = new HotelContext())
             {
                 var userlist = db.Users.Include(u => u.Role).ToList();
-                var user = userlist.FirstOrDefault(v => v.UserId == Convert.ToInt32(_id));
+                var user = userlist.FirstOrDefault(v => v.UserId ==Convert.ToInt32(_id));
                 return user;
             }
         }
