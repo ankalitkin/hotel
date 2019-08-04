@@ -27,11 +27,8 @@ export class UserEditorComponent implements OnInit, OnChanges {
       phone: fb.control(undefined),
       password: fb.control(undefined),
       roleId: fb.control(undefined, [Validators.required]),
-      isDeleted: fb.control(undefined)
+      isDeleted: fb.control(undefined),
     };
-    if (this.isCustomer) {
-      fg.clientId = fb.control(undefined, [Validators.required]);
-    }
     this.formGroup = fb.group(fg);
   }
 
@@ -39,6 +36,11 @@ export class UserEditorComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if ('isCustomer' in changes && this.isCustomer && !this.formGroup.contains('clientId')) {
+      this.formGroup.addControl('clientId', this.fb.control(undefined, [Validators.required]));
+      console.log('Гав-гав!');
+    }
+
     if ('user' in changes && this.user) {
       this.formGroup.patchValue(this.user);
     }

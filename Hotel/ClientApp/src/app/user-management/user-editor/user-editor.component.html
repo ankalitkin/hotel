@@ -15,13 +15,15 @@
     </mat-form-field>
   </p>
 
-  <mat-form-field>
-    <label>
-      <input formControlName="birthDate" [matDatepicker]="picker" matInput placeholder="Дата рождения" required>
-    </label>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+  <p>
+    <mat-form-field>
+      <label>
+        <input [matDatepicker]="picker" formControlName="birthDate" matInput placeholder="Дата рождения" required>
+      </label>
+      <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </p>
 
   <p>
     <mat-form-field>

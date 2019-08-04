@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
 import { RoomListComponent } from './RoomsManagement/room-list/room-list.component';
 import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.component';
@@ -12,6 +12,10 @@ import { RoomCostEditComponent } from './RoomCostManagement/roomcost-edit/roomco
 import { RegistrationComponent } from './user/registration/registration.component';
 import { LoginComponent } from './user/login/login.component';
 import { UserhomeComponent } from './user/userhome/userhome.component';
+import {RoomListComponent} from './RoomsManagement/room-list/room-list.component';
+import {RoomCreateComponent} from './RoomsManagement/room-create/room-create.component';
+import {RoomEditComponent} from './RoomsManagement/room-edit/room-edit.component';
+import {CustomersGuard} from "./customers-management-pages/_guards/customers.guard";
 
 
 const routes: Routes = [
@@ -43,6 +47,8 @@ const routes: Routes = [
   },
   {
     path: 'customers',
+    runGuardsAndResolvers: 'always',
+    canActivate: [CustomersGuard],
     loadChildren: () => import('./customers-management-pages/customers-management-pages.module')
       .then(mod => mod.CustomersManagementPagesModule)
   },
@@ -58,9 +64,16 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'userprofile', component: UserhomeComponent }
     ]
-    
+
+  },
+  {
+    path: 'flogin',
+    loadChildren: () => {
+      return import('./fake-login/fake-login.module')
+        .then(mod => mod.FakeLoginModule);
+    }
   }
-  
+
 ];
 
 @NgModule({

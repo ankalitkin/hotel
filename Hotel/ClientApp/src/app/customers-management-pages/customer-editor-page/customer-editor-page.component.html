@@ -8,4 +8,5 @@
   </h2>
 </ng-template>
 
-<app-user-editor (userSave)="handleUserSave($event)" [roles]="roles" [user]="user"></app-user-editor>
+<app-user-editor (userSave)="handleUserSave($event)" [isCustomer]="true" [roles]="roles"
+                 [user]="user"></app-user-editor>
