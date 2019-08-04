@@ -74,7 +74,7 @@
               <div class="col-10">
                 <div align="center">
                   <ng-container *ngIf="element == expandedElement && showExpandData">
-                    <app-user-expand-transaction-page (SaveTemp)="SaveTemp($event)" [transactionId]="element.transactionId" [expandData]="tempExpandData"></app-user-expand-transaction-page>
+                    <app-user-expand-transaction-page (SaveTemp)="SaveTemp($event)" [transactionId]="element.transactionId" [expandData]="tempExpandData" [update]="updateExpand"></app-user-expand-transaction-page>
                   </ng-container>
                 </div>
               </div>

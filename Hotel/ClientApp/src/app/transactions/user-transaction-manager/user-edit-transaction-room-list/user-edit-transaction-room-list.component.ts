@@ -5,13 +5,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Room, } from '../../../_models/room';
 
 @Component({
-  selector: 'edit-transaction-room-list',
-  templateUrl: './edit-transaction-room-list.component.html',
-  styleUrls: ['./edit-transaction-room-list.component.scss']
+  selector: 'user-edit-transaction-room-list',
+  templateUrl: './user-edit-transaction-room-list.component.html',
+  styleUrls: ['./user-edit-transaction-room-list.component.scss']
 })
-export class EditTransactionRoomListComponent implements OnInit {
+export class UserEditTransactionRoomListComponent implements OnInit {
 
-  displayedColumns: string[] = ['TheNoumber', 'name','floor', 'roomTypeId', 'numberOfSeats', 'hasMiniBar', 'Cost'];
+
+  displayedColumns: string[] = ['TheNoumber', 'name', 'floor', 'roomTypeId', 'numberOfSeats', 'hasMiniBar', 'Cost'];
   dataSource: MatTableDataSource<Room>;
 
   selectedElement?: Room;

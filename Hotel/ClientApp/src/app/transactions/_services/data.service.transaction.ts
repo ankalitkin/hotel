@@ -17,13 +17,23 @@ export class DataServiceTransaction {
 
   GetInfo(filter?: TransactionFilter): Observable<Transaction[]> {
 
+    if (filter == undefined) {
+      let params = new HttpParams();
+
+      params = params
+        .append('type', 'all');
+
+      return this.http.get<Transaction[]>(this.baseUrl + '/Info', { params });
+    }
     let checkInTime = '';
     if (filter.checkInTime != undefined)
       checkInTime = filter.checkInTime.toISOString().substr(0,10);
     let checkOutTime = '';
     if (filter.checkOutTime != undefined)
       checkOutTime = filter.checkOutTime.toISOString().substr(0, 10);
-    let type = filter.type.toString();
+    let type = '';
+    if (filter.type != undefined)
+      type = filter.type.toString();
     let clientId = '';
     if (filter.clientId != undefined)
       clientId = filter.clientId.toString();
