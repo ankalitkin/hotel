@@ -20,9 +20,9 @@ namespace Hotel.Data
 
         public static List<Role> CreateRoles()
         {
-            Role Owner = new Role { RoleId = 1, Name = "Owner", Rights = (Role.AccessRights)2047 };
-            Role Admin = new Role { RoleId = 2, Name = "Admin", Rights = Role.AccessRights.CanRegisterClients | Role.AccessRights.CanBookRooms | Role.AccessRights.CanCheckInOut | Role.AccessRights.CanGetAnyHistory | Role.AccessRights.CanGetInfo };
-            Role Visitor = new Role { RoleId = 3, Name = "Visitor", Rights = Role.AccessRights.CanCheckInOut | Role.AccessRights.CanGetOwnHistory };
+            Role Owner = new Role { RoleId = 1, Name = "Владелец", Rights = (Role.AccessRights)2047 };
+            Role Admin = new Role { RoleId = 2, Name = "Администратор", Rights = Role.AccessRights.CanRegisterClients | Role.AccessRights.CanBookRooms | Role.AccessRights.CanCheckInOut | Role.AccessRights.CanGetAnyHistory | Role.AccessRights.CanGetInfo };
+            Role Visitor = new Role { RoleId = 3, Name = "Посетитель", Rights = Role.AccessRights.CanCheckInOut | Role.AccessRights.CanGetOwnHistory | Role.AccessRights.IsCustomer };
 
             List<Role> list = new List<Role> {Owner,Admin,Visitor };
 
