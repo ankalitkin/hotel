@@ -1,0 +1,9 @@
+<div *ngIf="loaded">
+  <h2>Изменение данных о комнате</h2>
+  <roomcost-form [(roomCost)]="roomCost"></roomcost-form>
+  <div class="form-group center-block">
+    <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+    <a routerLink="../../roomCosts" class="btn btn-warning">Назад к списку</a>
+  </div>
+</div>
+

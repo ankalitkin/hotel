@@ -10,14 +10,25 @@ namespace Hotel.Data
     public static class RoomCostExtensions
     {
         // Поиск в базе
-        public static async Task<RoomCost> FindRoomCost(int CategoryId, int NumberOfSeats, bool HasMiniBar)
+        public static async Task<RoomCost> FindRoomCost(RoomCost roomCost)
         {
             using (HotelContext db = new HotelContext())
             {
                 return await db.RoomCosts.AsNoTracking().FirstOrDefaultAsync(
-                    rc => CategoryId == rc.CategoryId &&
-                          NumberOfSeats == rc.NumberOfSeats &&
-                          HasMiniBar == rc.HasMiniBar);
+                    rc => roomCost.CategoryId == rc.CategoryId &&
+                          roomCost.NumberOfSeats == rc.NumberOfSeats &&
+                          roomCost.HasMiniBar == rc.HasMiniBar);
+            }
+        }
+
+        // Поиск записи в базе
+        public static async Task<RoomCost> FindRoomCost(int id)
+        {
+            using (HotelContext db = new HotelContext())
+            {
+                return await db.RoomCosts.AsNoTracking()
+                    .FirstOrDefaultAsync(rc => rc.RoomCostId == id &&
+                                               rc.Cost > 0);
             }
         }
 
@@ -26,25 +37,43 @@ namespace Hotel.Data
         {
             using (HotelContext db = new HotelContext())
             {
-                return await db.RoomCosts.AsNoTracking().ToListAsync();
+                return await db.RoomCosts.AsNoTracking().Where(x => x.Cost > 0).ToListAsync();
             }
         }
 
-        // Сохраниение/добавление в базу
-        public static async void RoomCostSave(this RoomCost roomCost)
+        // Сохранение комнаты в базе данных
+        public static async void RoomCostSave(this RoomCost unsyRoomCost)
         {
             using (HotelContext db = new HotelContext())
             {
-                RoomCost foundRoomCost = FindRoomCost(roomCost.CategoryId, roomCost.NumberOfSeats, roomCost.HasMiniBar).Result;
-                if (foundRoomCost == null)
-                    await db.RoomCosts.AddAsync(roomCost);
-                else
-                {
-                    foundRoomCost.Cost = roomCost.Cost;
-                    db.RoomCosts.Update(foundRoomCost);
-                }                   
-
+                await db.RoomCosts.AddAsync(unsyRoomCost);
                 await db.SaveChangesAsync();
+            }
+        }
+
+        // Обновление данных в базе о ценнике
+        public static async void RoomCostUpdate(this RoomCost unsyRoomCost)
+        {
+            using (HotelContext db = new HotelContext())
+            {
+                db.RoomCosts.Update(unsyRoomCost);
+                await db.SaveChangesAsync();
+            }
+        }
+
+        // Удаление ценника из базы
+        public static async Task<RoomCost> RoomCostDelete(int id)
+        {
+            using (HotelContext db = new HotelContext())
+            {
+                RoomCost roomCost = db.RoomCosts.FirstOrDefault(x => x.RoomCostId == id);
+                if (roomCost != null)
+                {
+                    roomCost.Cost = 0;
+                    db.RoomCosts.Update(roomCost);
+                    await db.SaveChangesAsync();
+                }
+                return roomCost;
             }
         }
     }

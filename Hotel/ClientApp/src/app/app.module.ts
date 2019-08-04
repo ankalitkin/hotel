@@ -11,6 +11,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {DateAdapter, MatNativeDateModule} from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  IgxInputGroupModule,
+  IgxSliderModule
+} from "igniteui-angular";
+
+import { IgxCheckboxModule } from 'igniteui-angular';
+
+import { DoubleSliderComponent } from "./Slider/slider-component";
 
 // For loading-progress
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
@@ -24,6 +32,11 @@ import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.compone
 import {SharedModule} from './_shared/shared.module';
 import {MyDateAdapter} from './_shared/calendar_workaround';
 
+import { RoomCostListComponent } from './RoomCostManagement/roomcost-list/roomcost-list.component';
+import { RoomCostFormComponent } from './RoomCostManagement/roomcost-form/roomcost-form.component';
+import { RoomCostCreateComponent } from './RoomCostManagement/roomcost-create/roomcost-create.component';
+import { RoomCostEditComponent } from './RoomCostManagement/roomcost-edit/roomcost-edit.component';
+
 @NgModule({
 
   declarations: [
@@ -32,6 +45,11 @@ import {MyDateAdapter} from './_shared/calendar_workaround';
     RoomFormComponent,
     RoomCreateComponent,
     RoomEditComponent,
+    RoomCostListComponent,
+    RoomCostFormComponent,
+    RoomCostCreateComponent,
+    RoomCostEditComponent,
+    DoubleSliderComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +62,10 @@ import {MyDateAdapter} from './_shared/calendar_workaround';
     ReactiveFormsModule,
     //LoadingBarHttpClientModule,
     //LoadingBarHttpModule,
+    LoadingBarRouterModule,
+    IgxInputGroupModule,
+    IgxSliderModule,
+    IgxCheckboxModule,
     LoadingBarRouterModule, //
     SharedModule //
   ],
@@ -54,4 +76,5 @@ import {MyDateAdapter} from './_shared/calendar_workaround';
   exports: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

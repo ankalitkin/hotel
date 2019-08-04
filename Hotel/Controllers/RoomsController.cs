@@ -11,15 +11,9 @@ using static Hotel.Data.RoomExtensions;
 
 namespace Hotel
 {
-    [Route("api/Rooms")]
-    public class ProductController : Controller
+    [Route("api/Admin/Rooms")]
+    public class RoomsController : Controller
     {
-        [HttpGet("RoomManager")]
-        public IActionResult roomManager()
-        {
-            return View("~/Views/RoomsManagment.cshtml");
-        }
-
         [HttpGet]// Возвращает список всех комнат
         public IEnumerable<Room> Get()
         {
@@ -29,7 +23,6 @@ namespace Hotel
         [HttpGet("{id}")]// Возвращает комнату по id
         public Room Get(int id)
         {
-
             return FindRoom(id).Result;
         }
 
@@ -38,7 +31,12 @@ namespace Hotel
         {
             if (ModelState.IsValid)
             {
-                room.RoomSave();
+                Room rm;
+                if ((rm = FindRoom(room.Name).Result) == null)
+                    room.RoomSave();
+                else
+                    rm.RoomUpdate();
+
                 return Ok(room);
             }
             return BadRequest(ModelState);
@@ -58,7 +56,7 @@ namespace Hotel
         [HttpDelete("{id}")]// Удаляет комнату из базы
         public IActionResult Delete(int id)
         {
-            return Ok(RoomDelete(id));
+            return Ok(RoomDelete(id).Result);
         }
     }
 }

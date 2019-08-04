@@ -1,28 +1,87 @@
-<div>
-    <a routerLink="../createRoom" class="nav-link">Добавить</a>
+<div class="wrapper container category">
+  <button routerLink="../createRoom" class="mat-fab search-button">Добавить</button>
+  <button mat-button (click)="onFilter()">{{filterName()}}</button>
+  <button class="search-button" mat-fab (click)="onSearchClick()">Поиск</button>
 </div>
-<table class="table table-striped">
+
+<ng-container *ngIf="isLoaded != true">
+  <div align="center">
+    <span> Идёт загрузка данных.Пожалуйста подождите... </span>
+    <br/>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+</ng-container>
+
+<div *ngIf="isLoaded && isFilter">
+  <div class="container">
+    <label>Этаж: {{roomFilter.floor==0 ? "Любой": roomFilter.floor}}</label>
+  </div>
+  <div class="container">
+    <igx-slider id="slider" [minValue]="0" [maxValue]="5" [isContinuous]=true [(ngModel)]="roomFilter.floor"></igx-slider>
+  </div>
+
+  <p class="wrapper container ">
+    Категория:
+    <mat-button-toggle-group name="categorySearch" aria-label="Category Search" [(ngModel)]="roomFilter.idCategory">
+      <mat-button-toggle value="1">Эконом</mat-button-toggle>
+      <mat-button-toggle value="2">Обычныый</mat-button-toggle>
+      <mat-button-toggle value="3">Люкс</mat-button-toggle>
+      <mat-button-toggle value="0">Любой</mat-button-toggle>
+    </mat-button-toggle-group>
+  </p>
+
+  <div class="container">
+    <label>Минимальное кол-во мест: {{roomFilter.numberOfSeats}}</label>
+  </div>
+  <div class="container">
+    <igx-slider id="slider" [minValue]="1" [maxValue]="5" [isContinuous]=true [(ngModel)]="roomFilter.numberOfSeats"></igx-slider>
+  </div>
+  <div class=" container wrapper">
+    <igx-checkbox [checked]="true" [(ngModel)]="roomFilter.hasMiniBar">
+      Наличие минибара
+    </igx-checkbox>
+    <igx-checkbox [checked]="true" [(ngModel)]="roomFilter.onlyFree">
+      Только свободные комнаты:
+    </igx-checkbox>
+  </div>
+  <div class="container">
+    <p id="pCenter">
+      Сначала:
+      <mat-button-toggle-group name="orderOfSearch" aria-label="Order of Search" [(ngModel)]="order">
+        <mat-button-toggle value="-1" (change)="onSearchClick()">Максимум</mat-button-toggle>
+        <mat-button-toggle value="+1" (change)="onSearchClick()">Минимум</mat-button-toggle>
+      </mat-button-toggle-group>
+      Критерий:
+      <mat-button-toggle-group name="Search" aria-label="Criterion Search" [(ngModel)]="criterion">
+        <mat-button-toggle value="0" (change)="onCriterionClick()">Этаж и номер</mat-button-toggle>
+        <mat-button-toggle value="1" (change)="onCriterionClick()">Кол-во мест</mat-button-toggle>
+      </mat-button-toggle-group>
+    </p>
+  </div>
+
+</div>
+
+<table *ngIf="isLoaded" class="table table-striped">
     <thead>
         <tr>
             <td>Номер</td>
             <td>Этаж</td>
             <td>Категория</td>
             <td>Кол-во мест</td>
-            <td>Наличие минибара</td>
+            <td>Минибар</td>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let r of rooms">
             <td>{{r?.name}}</td>
             <td>{{r?.floor}}</td>
-            <td>{{r?.roomTypeId}}</td>
+            <td>{{nameOfCategory(r?.roomTypeId)}}</td>
             <td>{{r?.numberOfSeats}}</td>
-            <td>{{r?.hasMiniBar}}</td>
+            <td>{{boolToRus(r?.hasMiniBar)}}</td>
             <td>
-              <!--<a [routerLink]="['../roomEdit', r.id]" class="btn btn-sm btn-primary">Изменить</a>-->
               <a [routerLink]="['../roomEdit', r.roomId]" class="btn btn-sm btn-primary">Изменить</a>
               
-              <button (click)="delete(r.id)" class="btn btn-sm btn-danger">Удалить</button>
+              <button (click)="delete(r.roomId)" class="btn btn-sm btn-danger">Удалить</button>
             </td>
         </tr>
     </tbody>

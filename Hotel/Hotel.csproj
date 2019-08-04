@@ -15,6 +15,18 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\material-module.ts" />
+    <None Remove="ClientApp\src\app\RoomCostManagement\models\range.ts" />
+    <None Remove="ClientApp\src\app\RoomCostManagement\models\RoomCost.ts" />
+    <None Remove="ClientApp\src\app\RoomCostManagement\models\roomCostFilter.ts" />
+    <None Remove="ClientApp\src\app\RoomCostManagement\roomcost-create\roomcost-create.component.ts" />
+    <None Remove="ClientApp\src\app\RoomCostManagement\roomcost-edit\roomcost-edit.component.ts" />
+    <None Remove="ClientApp\src\app\RoomCostManagement\roomcost-form\roomcost-form.component.ts" />
+    <None Remove="ClientApp\src\app\RoomCostManagement\roomcost-list\roomcost-list.component.ts" />
+    <None Remove="ClientApp\src\app\RoomsManagement\models\RoomFilter.ts" />
+    <None Remove="ClientApp\src\app\Slider\slider-component.ts" />
+    <None Remove="ClientApp\src\app\transaction\models\transaction.ts" />
+    <None Remove="ClientApp\src\app\transaction\models\user.ts" />
+    <None Remove="ClientApp\src\app\transaction\services\data.service.transaction.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +48,19 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\material-module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\RoomCostManagement\models\range.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\RoomCostManagement\models\RoomCost.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\RoomCostManagement\models\roomCostFilter.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\RoomCostManagement\roomcost-create\roomcost-create.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\RoomCostManagement\roomcost-edit\roomcost-edit.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\RoomCostManagement\roomcost-form\roomcost-form.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\RoomCostManagement\roomcost-list\roomcost-list.component.ts" />
+    <TypeScriptCompile Include="..\..\..\%2524Hotel2.0\hotel\Hotel\ClientApp\src\app\RoomCostManagement\roomcost-list\services\data.service.roomcosts.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\RoomsManagement\models\RoomFilter.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Slider\slider-component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\transaction\models\transaction.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\transaction\models\user.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\transaction\services\data.service.transaction.ts" />
   </ItemGroup>
 
 </Project>
