@@ -13,6 +13,7 @@ using Hotel.Entities;
 using Hotel.Services;
 using Hotel.Data;
 
+
 using Microsoft.AspNetCore.Authorization;
 
 namespace Hotel.Controllers
@@ -75,29 +76,22 @@ namespace Hotel.Controllers
 
         [HttpGet]
         [Authorize]
-        //GET : /api/UserProfile
+
         [Route("userprofile")]
         public async Task<Object> GetUserProfile()
         {
             
             string userId = User.Claims.First(c => c.Type == "userid").Value;
             User user1 = await Task.Run(()=>_userService.FindByUserId(userId));
-            string firstName=user1.FirstName;
-          
-            return new
-            {
- 
-                //name:firstName,
-                user1.Email,
-                userId
+            info info1 = new info(user1.FirstName, user1.Email, user1.Phone);
 
-            };
+            return info1;
 
         }
 
         private async Task<ClaimsIdentity> GetIdentity(string email, string password)
         {
-            //var user = _userService.FindByUserEmail(email);
+            
             var user = await Task.Run(() => _userService.FindByUserEmail(email));
             
             if (user.Password==password)

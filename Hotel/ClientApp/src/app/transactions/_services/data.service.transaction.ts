@@ -88,7 +88,7 @@ export class DataServiceTransaction {
 
   
   GetRoom(roomId: number): Observable<Room> {
-    return this.http.get<Room>('/api/Rooms/' + roomId);
+    return this.http.get<Room>('/api/Admin/Rooms/' + roomId);
   }
 
   GetFreeRooms(transaction: Transaction, room: Room): Observable<Room[]> {
@@ -114,5 +114,15 @@ export class DataServiceTransaction {
 
   GetRoomCost(roomId: number): Observable<number> {
     return this.http.get<number>(this.baseUrl + '/RoomCost/' + roomId);
+  }
+
+  GetTransactionsOfDate(date: Date): Observable<Transaction[]> {
+    let _date = new Date(date).toISOString().substr(0, 10);
+
+    let params = new HttpParams();
+    params = params
+      .append('date', _date);
+
+    return this.http.get<Transaction[]>(this.baseUrl + '/TransactionsOfDate', { params });
   }
 }

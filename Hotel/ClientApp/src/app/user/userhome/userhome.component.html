@@ -1,29 +1,43 @@
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-<div class="wrapper">
-  <div class="left">
-    <img src="https://cdn.onlinewebfonts.com/svg/img_233321.png" alt="user" width="100">
-    <h4>Armen</h4>
-  </div>
-  <div class="right">
-    <div class="info">
-      <h3>Информация</h3>
-      <div class="info_data">
-        <div class="data">
-          <h4>Email</h4>
-          <p>{{userDetails.email}}</p>
-        </div>
-        <div class="data">
-          <h4>Phone</h4>
-          <p>8950555666</p>
+
+<ng-template #spinner>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <div align="center">
+          <span> Загрузка...</span>
+          <mat-spinner></mat-spinner>
         </div>
       </div>
     </div>
-
-    <div class="projects">
-      <h3>История бронирования</h3>
-      
-    </div>
-
-
   </div>
-</div>
+</ng-template>
+
+<ng-container *ngIf="isLoaded; else spinner">
+  <div class="wrapper">
+    <div class="left">
+      <img src="https://cdn.onlinewebfonts.com/svg/img_233321.png" alt="user" width="100">
+      <h4>{{userDetails.email}}</h4>
+    </div>
+    <div class="right">
+      <div class="info">
+        <h3>Информация</h3>
+        <div class="info_data">
+          <div class="data">
+            <h4>Email</h4>
+            <p>{{userDetails.email}}</p>
+          </div>
+          <div class="data">
+            <h4>Номер Телефона</h4>
+            <p>{{userDetails.phone}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="projects">
+        <h3>История бронирования</h3>
+        <app-my-history-page></app-my-history-page>
+      </div>
+    </div>
+  </div>
+  </ng-container>

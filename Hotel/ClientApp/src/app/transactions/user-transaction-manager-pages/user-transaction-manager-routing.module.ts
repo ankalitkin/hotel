@@ -20,11 +20,12 @@ const routes: Routes = [
           }]
       }
     ]
-  },
-  {
-    path: 'myHistory',
-    component: MyHistoryPageComponent
   }
+  //,
+  //{
+  //  path: 'myHistory',
+  //  component: MyHistoryPageComponent
+  //}
 
 ];
 

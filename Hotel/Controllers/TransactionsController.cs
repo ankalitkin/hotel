@@ -115,8 +115,11 @@ namespace Hotel.Controllers
         [HttpGet("myHistory")]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetMyHistory()
         {
-            int id = 1; // TODO: когда будет регистрация
-            return await _context.Transactions.AsNoTracking().Where(t => t.UserId == id).ToListAsync();
+            int userId = Convert.ToInt32(User.Claims.First(c => c.Type == "userid").Value);
+
+            int id = userId; // TODO: когда будет регистрация
+            var list =  await _context.Transactions.AsNoTracking().Where(t => t.UserId == id).ToListAsync();
+            return list;
         }
 
         public class FinancialInfo
@@ -140,7 +143,7 @@ namespace Hotel.Controllers
             if (end == null)
                 end = DateTime.Now;
             var result = _context.Transactions.AsNoTracking()
-            .Where(t => t.CheckInTime >= start && t.CheckInTime <= end)
+            .Where(t => t.CheckInTime >= start && t.CheckInTime <= end && t.IsPaid == true)
             .GroupBy(t => t.CheckInTime.Date)
             .Select(g => new FinancialInfo(g.Key, g.Sum(t => t.Cost)));
 
@@ -355,10 +358,10 @@ namespace Hotel.Controllers
                                 join trans in _context.Transactions
                                 on r.RoomId equals trans.RoomId
                                 where
-                                (trans.CheckInTime >= start &&
-                                trans.CheckInTime <= end
-                                || trans.CheckOutTime >= start &&
-                                   trans.CheckOutTime <= end)
+                                (trans.CheckInTime.Date >= start.Date &&
+                                trans.CheckInTime.Date <= end.Date
+                                || trans.CheckOutTime.Date >= start.Date &&
+                                   trans.CheckOutTime.Date <= end.Date)
                                 && !trans.IsCanceled
                                 && trans.TransactionId != transactionId
                                 select r;
@@ -392,6 +395,14 @@ namespace Hotel.Controllers
             }
 
             return result;
+        }
+
+        // GET: api/Transactions/TransactionsOfDate
+        [HttpGet("TransactionsOfDate")]
+        public async Task<ActionResult<IEnumerable<Transaction>>> GetTransactionsOfDate(DateTime date)
+        {
+            date = date.AddDays(1);
+            return await _context.Transactions.AsNoTracking().Where(t => t.CheckInTime.Date == date.Date && t.IsPaid == true).ToListAsync();
         }
     }
 }

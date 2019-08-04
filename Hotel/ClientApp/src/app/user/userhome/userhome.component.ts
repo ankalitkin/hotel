@@ -1,6 +1,6 @@
 
 import { UserService } from 'src/app/user/services/user.service';
-
+import { user_information } from '../models/user_information';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -11,16 +11,19 @@ import { Router } from '@angular/router';
 })
 export class UserhomeComponent implements OnInit {
 
-  userDetails;
+  userDetails:user_information;
+  isLoaded: Boolean = false;
   constructor(private router: Router, private service: UserService) { }
   ngOnInit() {
+    this.isLoaded = false;
     this.service.getUserProfile().subscribe(
       res => {
         this.userDetails = res;
+        this.isLoaded = true;
       },
       err => {
         console.log(err);
-        console.log("!!!");
+      
       },
     );
   }

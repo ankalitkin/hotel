@@ -25,7 +25,7 @@ export class EditTransactionDialogComponent implements OnInit {
 
   @Output() transactionChange = new EventEmitter<Transaction>();
 
-  typeList = [{ value: '1', viewValue: 'Обычно' }, { value: '2', viewValue: 'Средне' }, { value: '3', viewValue: 'Люкс' }];
+  typeList = [{ value: '1', viewValue: 'Эконом' }, { value: '2', viewValue: 'Обычный' }, { value: '3', viewValue: 'Люкс' }];
   _transactionForm: FormGroup;
 
   isOpenFreeRoom: Boolean = false;
@@ -37,7 +37,6 @@ export class EditTransactionDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data) {
     this.EditedTransaction = data.transaction;
     this.Room = data.room;
-    //this.Room.roomId = 0;
   }
 
   ngOnInit() {
@@ -64,21 +63,6 @@ export class EditTransactionDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  //closeDialog() {
-  //  this.dialogRef.close({
-  //    transaction:
-  //    {
-  //      ...this.EditedTransaction,
-  //      ...this._transactionForm.value
-  //    },
-  //    room:
-  //    {
-  //      ...this.Room,
-  //      ...this._transactionForm.value
-  //    }
-  //  });
-  //}
-
   closeDialog() {
     let transaction = {
       ...this.EditedTransaction,
@@ -91,7 +75,6 @@ export class EditTransactionDialogComponent implements OnInit {
         ...this.Room,
         ...this._transactionForm.value
       }
-     // room.roomId = 0;
     }
 
     console.log(room);
@@ -107,6 +90,7 @@ export class EditTransactionDialogComponent implements OnInit {
 
     this.isSelectedRoom = false;
     this.selectedRoom = undefined;
+    this.isOpenFreeRoom = true;
 
     this.patternTrans = {
       ...this.EditedTransaction,
@@ -118,10 +102,10 @@ export class EditTransactionDialogComponent implements OnInit {
       ...this._transactionForm.value
     };
 
-    this.isOpenFreeRoom = true;
+
 
     if (this.editlist != undefined)
-      this.editlist.update();
+      this.editlist.update(this.patternTrans, this.patternRoom);
   }
 
   SetSelectRoom(room: Room) {

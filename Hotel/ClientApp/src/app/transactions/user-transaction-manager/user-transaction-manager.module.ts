@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 import { UserExpandTransactionPageComponent } from '../user-transaction-manager-pages/user-expand-transaction-page/user-expand-transaction-page.component';
 import { SharedModule } from '../../_shared/shared.module';
 
-import { MyHistoryComponent } from './my-history/my-history.component';
+
 import { UserInfoTransactionComponent } from './user-info-transcation/user-info-transcation.component';
 import { UserEditTransactionDialogComponent } from './user-edit-transaction-dialog/user-edit-transaction-dialog.component';
 import { UserExpandTransactionComponent } from './user-expand-transaction/user-expand-transaction.component';
@@ -23,7 +23,7 @@ import { UserFilterTransactionComponent } from './user-filter-transaction/user-f
 
 @NgModule({
   declarations: [
-    MyHistoryComponent,
+   // MyHistoryComponent,
     UserInfoTransactionComponent,
     UserEditTransactionDialogComponent,
     UserExpandTransactionComponent,
@@ -31,7 +31,7 @@ import { UserFilterTransactionComponent } from './user-filter-transaction/user-f
     UserExpandTransactionPageComponent
   ],
   exports: [
-    MyHistoryComponent,
+    // MyHistoryComponent,
     UserInfoTransactionComponent,
     UserEditTransactionDialogComponent,
     UserExpandTransactionComponent,

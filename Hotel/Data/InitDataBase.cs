@@ -50,6 +50,7 @@ namespace Hotel.Data
                 BirthDate = RandomDay(),
                 Phone = RandomPhone(),
                 Email = FirstName + "@mail.ru",
+                Password = "1234567890",
                 ClientId = RandomClientId(),
                 RoleId = roleId,
                 IsDeleted = false };
@@ -88,7 +89,7 @@ namespace Hotel.Data
                 Name = Name,
                 Floor = floor,
                 RoomTypeId = CategoryId,
-                NumberOfSeats = 2,
+                NumberOfSeats = random.Next(1, 5),
                 HasMiniBar = random.Next(2) == 1,
                 IsDeleted = false };
 
