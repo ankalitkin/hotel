@@ -33,7 +33,7 @@ namespace Hotel.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user1 = new User {FirstName = r.Firstname, LastName = r.Lastname, BirthDate = DateTime.Parse("01.05.1996"), Phone = r.Phone, Email = r.Email, ClientID = "123456789099", RoleId = 1, IsDeleted = false, Password=r.Password};
+                User user1 = new User {FirstName = r.Firstname, LastName = r.Lastname, BirthDate = DateTime.Parse("01.05.1996"), Phone = r.Phone, Email = r.Email, ClientId = "123456789099", RoleId = 1, IsDeleted = false, Password=r.Password};
                 user1.UserSave();
                 return Ok();
             }
@@ -87,7 +87,7 @@ namespace Hotel.Controllers
             return new
             {
  
-                firstName,
+                //name:firstName,
                 user1.Email,
                 userId
 
