@@ -1,0 +1,41 @@
+<div class="input-block">
+  <div class="form-group">
+    <fieldset class="form-group">
+      <label id="room-category-id" for="categoryCostFormControlSelect">Тип комнаты*</label>
+      <select class="form-control" [(ngModel)]="roomCost.categoryId" id="categoryCostFormControlSelect" (change)="clearErros()">
+        <option value="1">Эконом</option>
+        <option value="2">Обычный</option>
+        <option value="3">Люкс</option>
+      </select>
+      <label>Цена</label>
+      <input type="number" (change)="changeCost()" [(ngModel)]="categoryCost" class="form-control" />
+    </fieldset>
+  </div>
+
+  <div class="form-group">
+    <label id="seats-id" for="numberOfSeatsFormControlSelect">Количество мест*</label>
+    <select class="form-control" [(ngModel)]="roomCost.numberOfSeats" id="numberOfSeatsFormControlSelect" (change)="clearErros()" >
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+    <label>Цена</label>
+    <input type="number" (change)="changeCost()" [(ngModel)]="numberOfSeatsCost" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label for="fieldHasMiniBarCostId">Наличие минибара</label>
+    <input type="checkbox" id="fieldHasMiniBarCostId" (change)="changeCost()" value="true" [(ngModel)]="roomCost.hasMiniBar" class="form-control" />
+    <span *ngIf="roomCost.hasMiniBar == true">
+      <label>Цена</label>
+      <input type="number" (change)="changeCost()" [ngModel]="hasMiniBarCost" class="form-control" />
+    </span>
+  </div>
+
+  <div>
+    <label id="totalcost-id" >Общая стоимость*</label>
+    <input type="number" (change) = "clearErros()" [(ngModel)]="roomCost.cost" class="form-control" />
+  </div>
+</div>

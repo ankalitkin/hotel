@@ -1,0 +1,88 @@
+<div class="wrapper container category">
+  <button routerLink="../createRoomCost" class="mat-fab search-button">Добавить</button>
+  <button mat-button (click)="onFilter()">{{filterName()}}</button>
+  <button class="search-button" mat-fab (click)="onSearchClick()">Поиск</button>
+</div>
+
+<ng-container *ngIf="isLoaded != true">
+  <div align="center">
+    <span> Идёт загрузка данных.Пожалуйста подождите... </span>
+    <br />
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+</ng-container>
+
+<!--Начало блока фильтра-->
+<div *ngIf="isLoaded && isFilter">
+  <div class="container">
+    <label>Фильтр ценового диапазона</label>
+  </div>
+  <div class="container">
+    <igx-slider id="slider" [type]="sliderType.RANGE" [minValue]="minCost()"
+                [maxValue]="maxCost()" [lowerBound]="minCost()" [upperBound]="maxCost()"
+                [(ngModel)]="roomCostFilter.cost"></igx-slider>
+    <div class="wrapper">
+      <igx-input-group>
+        <input igxInput id="lowerInput" type="text" [ngModel]="roomCostFilter.cost.lower | currency" (blur)="updatePriceRange($event.target)" disabled />
+        <label igxLabel for="lowerInput">Lower price:</label>
+      </igx-input-group>
+      <igx-input-group>
+        <input igxInput id="upperInput" type="text" [ngModel]="roomCostFilter.cost.upper | currency" (blur)="updatePriceRange($event.target)" disabled />
+        <label igxLabel for="upperInput">Upper price:</label>
+      </igx-input-group>
+    </div>
+  </div>
+  <p class="wrapper container category">
+    Категория:
+    <mat-button-toggle-group name="categorySearch" aria-label="Category Search" [(ngModel)]="roomCostFilter.idCategory">
+      <mat-button-toggle value="1">Эконом</mat-button-toggle>
+      <mat-button-toggle value="2">Обычныый</mat-button-toggle>
+      <mat-button-toggle value="3">Люкс</mat-button-toggle>
+      <mat-button-toggle value="0">Любой</mat-button-toggle>
+    </mat-button-toggle-group>
+  </p>
+  <div class="container">
+    <label>Минимальное кол-во мест: {{roomCostFilter.numberOfSeats.lower}}</label>
+  </div>
+  <div class="container">
+    <igx-slider id="slider" [minValue]="1" [maxValue]="5" [isContinuous]=true [(ngModel)]="roomCostFilter.numberOfSeats.lower"></igx-slider>
+  </div>
+  <div class=" container wrapper">
+    <igx-checkbox [checked]="1" [(ngModel)]="roomCostFilter.hasMiniBar">
+      Наличие минибара
+    </igx-checkbox>
+    <p id="pCenter"> 
+      Отсортировать:
+      <mat-button-toggle-group name="orderOfSearch" aria-label="Order of Search" [(ngModel)]="order">
+        <mat-button-toggle value="-1" (change)="onSearchClick()">По убыванию</mat-button-toggle>
+        <mat-button-toggle value="+1" (change)="onSearchClick()">По возрастанию</mat-button-toggle>
+      </mat-button-toggle-group>
+    </p>
+  </div>
+ 
+</div>
+<!--Конец блока фильтра-->
+
+<table *ngIf="isLoaded" class="table table-striped">
+  <thead>
+    <tr>
+      <td>Категория</td>
+      <td>Кол-во мест</td>
+      <td>Минибар</td>
+      <td>Стоимость</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let r of roomCosts">
+      <td>{{nameOfCategory(r?.categoryId)}}</td>
+      <td>{{r?.numberOfSeats}}</td>
+      <td>{{boolToRus(r?.hasMiniBar)}}</td>
+      <td>{{r?.cost}}</td>
+      <td>
+        <a [routerLink]="['../roomCostEdit', r.roomCostId]" class="btn btn-sm btn-primary">Изменить</a>
+
+        <button (click)="delete(r.roomCostId)" class="btn btn-sm btn-danger">Удалить</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

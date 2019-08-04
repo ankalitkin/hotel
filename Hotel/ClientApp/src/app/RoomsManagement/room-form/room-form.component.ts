@@ -7,5 +7,9 @@ import { Room } from '../models/Room';
 })
 
 export class RoomFormComponent {
-    @Input() room: Room;
+  @Input() room: Room;
+
+  clearErros() {
+
+  }
 }
