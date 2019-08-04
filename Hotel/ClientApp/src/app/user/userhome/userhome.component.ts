@@ -1,6 +1,6 @@
 
 import { UserService } from 'src/app/user/services/user.service';
-
+import { user_information } from '../models/user_information';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class UserhomeComponent implements OnInit {
 
-  userDetails;
+  userDetails:user_information;
   constructor(private router: Router, private service: UserService) { }
   ngOnInit() {
     this.service.getUserProfile().subscribe(
@@ -20,7 +20,7 @@ export class UserhomeComponent implements OnInit {
       },
       err => {
         console.log(err);
-        console.log("!!!");
+      
       },
     );
   }
