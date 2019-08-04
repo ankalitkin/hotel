@@ -30,7 +30,7 @@
   <button (click)="onLogout()" *ngIf="check_auth()" mat-button>Выйти</button>
   <button *ngIf="check_auth()" mat-button routerLink="user/userprofile">Мой Профиль</button>
 </mat-toolbar>
-<div class="mat-app-background basic-container p-0">
+<div class="mat-app-background basic-container">
   <router-outlet></router-outlet>
 </div>
 
