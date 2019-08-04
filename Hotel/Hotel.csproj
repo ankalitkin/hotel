@@ -7,17 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ClientApp\src\app\transaction\Новая папка\**" />
-    <Content Remove="ClientApp\src\app\transaction\Новая папка\**" />
-    <EmbeddedResource Remove="ClientApp\src\app\transaction\Новая папка\**" />
-    <None Remove="ClientApp\src\app\transaction\Новая папка\**" />
+    <Compile Remove="ClientApp\src\app\transaction\**" />
+    <Content Remove="ClientApp\src\app\transaction\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\transaction\**" />
+    <None Remove="ClientApp\src\app\transaction\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\material-module.ts" />
-    <None Remove="ClientApp\src\app\transaction\models\transaction.ts" />
-    <None Remove="ClientApp\src\app\transaction\services\data.service.transaction.ts" />
-    <None Remove="ClientApp\src\app\transaction\services\interaction.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,15 +31,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\transaction\pages\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\material-module.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\transaction\models\transaction.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\transaction\services\data.service.transaction.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\transaction\services\interaction.service.ts" />
   </ItemGroup>
 
 </Project>

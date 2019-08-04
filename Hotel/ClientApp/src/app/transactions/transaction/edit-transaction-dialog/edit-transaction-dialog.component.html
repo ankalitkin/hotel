@@ -63,18 +63,30 @@
               <mat-checkbox formControlName="isEvicted"> Выселен </mat-checkbox>
             </div>
 
+            <div>
+              <button mat-raised-button [disabled]="_transactionForm.invalid" (click)="SeacrhFreeRooms()">
+                Найти
+              </button>
+            </div>
+
+            <ng-container *ngIf="isOpenFreeRoom">
+              <app-edit-transaction-room-list-page [transaction]="patternTrans" [room]="patternRoom" (selectRoomEmitter)="SetSelectRoom($event)"></app-edit-transaction-room-list-page>
+            </ng-container>
+
+            <div mat-dialog-actions class="buttons">
+
+              <button mat-raised-button [disabled]="_transactionForm.invalid || !isSelectedRoom" (click)="closeDialog()">
+                Сохранить
+              </button>
+
+              <button mat-raised-button (click)="CancelClick()">
+                Отмена
+              </button>
+            </div>
+
           </ng-container>
 </div>
-<div mat-dialog-actions class="buttons">
 
-  <button mat-raised-button [disabled]="_transactionForm.invalid" (click)="closeDialog()">
-    Сохранить
-  </button>
-
-  <button mat-raised-button (click)="CancelClick()">
-    Отмена
-  </button>
-</div>
 
       </div>
     </div>

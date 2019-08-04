@@ -60,23 +60,30 @@ export class EditTransactionPageComponent implements OnInit, OnDestroy {
   }
 
   saveTransaction() {
+    if (this.Room.roomId == 0) {
 
-    this.dataService.GetRoomId(this.Room, this.EditedTransaction)
-      .subscribe((data: number) => {
-        this.EditedTransaction.roomId = data;
-        console.log('id = ' + data);
-        this.dataService.PutTransaction(this.EditedTransaction)
-          .subscribe((data: any) => { this.CompleteSave() }, (error: any) => { this.snackBarService.failureSnack() });
-      }, (error: any) => {
-        this.snackBarService.failureSnack()
+      this.dataService.GetRoomId(this.Room, this.EditedTransaction)
+        .subscribe((data: number) => {
+          this.EditedTransaction.roomId = data;
+          console.log('id = ' + data);
+          this.dataService.PutTransaction(this.EditedTransaction)
+            .subscribe((data: any) => { this.CompleteSave() }, (error: any) => { this.snackBarService.failureSnack() });
+        }, (error: any) => {
+          this.snackBarService.failureSnack()
         });
+    } else {
+      this.EditedTransaction.roomId = this.Room.roomId;
+      this.dataService.PutTransaction(this.EditedTransaction)
+        .subscribe((data: any) => { this.CompleteSave() }, (error: any) => { this.snackBarService.failureSnack() });
+    }
+
     
   }
 
   CompleteSave() {
 
     this.snackBarService.succsesSnack();
-
+    console.log(this.EditedTransaction);
     if (this.interactionService != undefined) { // передача данных в родительский компонент
       this.interactionService.setTemp(this.EditedTransaction.transactionId);
       this.interactionService.sendMessage();

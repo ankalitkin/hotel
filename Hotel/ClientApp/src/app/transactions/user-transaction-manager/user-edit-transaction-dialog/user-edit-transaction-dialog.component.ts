@@ -29,7 +29,6 @@ export class UserEditTransactionDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    // TODO: сделать шаблон для даты и провреку, чтобы checkInTime <= checkOutTime
     this._transactionForm = this.fb.group({
       userId: this.fb.control(this.EditedTransaction.userId, [Validators.required, Validators.min(0), Validators.pattern("[0-9]{1,}")]),
       checkInTime: this.fb.control(this.EditedTransaction.checkInTime, [Validators.required]),

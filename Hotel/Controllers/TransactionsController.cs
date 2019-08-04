@@ -277,9 +277,9 @@ namespace Hotel.Controllers
         public async Task<ActionResult<IEnumerable<Room>>> GetFreeRooms(DateTime start, DateTime end, int? type, int? seats, bool? minibar)
         {
             var queryGoodRooms = from room in _context.Rooms
-                                 where type == null || room.RoomTypeId == type &&
-                                 seats == null || room.NumberOfSeats == seats &&
-                                 minibar == null || room.HasMiniBar == minibar
+                                 where (type == null || room.RoomTypeId == type) &&
+                                 (seats == null || room.NumberOfSeats >= seats) && // больше либо равно !!!
+                                 (minibar == null || room.HasMiniBar == minibar)
                                  select room;
 
             var freeRooms = GetFreeRoomsList(start, end).Result.Value.Intersect(await queryGoodRooms.ToListAsync()).ToList();
@@ -297,7 +297,9 @@ namespace Hotel.Controllers
         // POST: api/Transactions/RoomId
         [HttpPost("RoomId")]
         public async Task<ActionResult<int>> GetFreeRoomId([FromBody]RoomAndTransaction roomAndTransaction)
-        {
+        {   // сейчас у transaction другой RoomId, чем у room, ибо room - новая возможная комната и 
+            // если она проходит проверку, то нужно узнать её id
+
             Room room = roomAndTransaction.room;
             Transaction transaction = roomAndTransaction.transaction;
 
@@ -324,9 +326,10 @@ namespace Hotel.Controllers
             return RoomId;
         }
 
-        private async Task<ActionResult<int>> GetRoomCost(int roomId)
+        [HttpGet("RoomCost/{id:int}")]
+        public async Task<ActionResult<int>> GetRoomCost(int id)
         {
-            var room = await _context.Rooms.FindAsync(roomId);
+            var room = await _context.Rooms.FindAsync(id);
 
             if (room == null)
             {

@@ -1,0 +1,23 @@
+<!-- для edit-page-->
+
+<ng-container *ngIf="isLoaded == true">
+  <edit-transaction-room-list [rooms]="rooms" (selectRoomEmitter)="selectRoom($event)" [numberDay]="numberDay"></edit-transaction-room-list>
+</ng-container>
+
+<ng-container *ngIf="isLoaded != true">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <div align="center">
+          <div class="message">
+            <span> Идёт загрузка данных.Пожалуйста подождите... </span>
+          </div>
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+
+

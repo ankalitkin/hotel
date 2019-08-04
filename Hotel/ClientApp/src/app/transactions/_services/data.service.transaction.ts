@@ -63,7 +63,7 @@ export class DataServiceTransaction {
   GetFinancicalInfo(start?: Date, end?: Date): Observable<FinancicalInformation[]> {
     let _start = '';
     if (start != undefined)
-      _start = start.toISOString().substr(0, 10);;
+      _start = start.toISOString().substr(0, 10);
 
     let _end = '';
     if (end != undefined)
@@ -86,7 +86,33 @@ export class DataServiceTransaction {
     return this.http.post<number>(this.baseUrl + '/RoomId', { room: room, transaction: transaction });
   }
 
+  
   GetRoom(roomId: number): Observable<Room> {
     return this.http.get<Room>('/api/Rooms/' + roomId);
+  }
+
+  GetFreeRooms(transaction: Transaction, room: Room): Observable<Room[]> {
+
+    console.log(transaction.checkInTime);
+    let checkInTime = new Date(transaction.checkInTime).toISOString().substr(0, 10);
+    let checkOutTime = new Date(transaction.checkOutTime).toISOString().substr(0, 10);
+    let type = room.roomTypeId.toString();
+    let seats = room.numberOfSeats.toString();
+    let minibar = room.hasMiniBar.toString();
+
+    let params = new HttpParams();
+
+    params = params
+      .append('start', checkInTime)
+      .append('end', checkOutTime)
+      .append('type', type)
+      .append('seats', seats)
+      .append('minibar', minibar);
+
+    return this.http.get<Room[]>(this.baseUrl + '/FreeRooms', { params } );
+  }
+
+  GetRoomCost(roomId: number): Observable<number> {
+    return this.http.get<number>(this.baseUrl + '/RoomCost/' + roomId);
   }
 }

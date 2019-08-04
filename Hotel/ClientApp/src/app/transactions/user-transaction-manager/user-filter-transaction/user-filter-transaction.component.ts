@@ -20,7 +20,6 @@ export class UserFilterTransactionComponent implements OnInit {
   constructor(private fb: FormBuilder) {
   }
   ngOnInit() {
-    // TODO: сделать шаблон для даты
     this._filterForm = this.fb.group({
       clientId: this.fb.control(undefined),
       checkInTime: this.fb.control(undefined),
