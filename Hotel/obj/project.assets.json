@@ -16797,11 +16797,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\hotel\\Hotel\\Hotel.csproj",
+      "projectUniqueName": "C:\\Projects\\TheHotel\\hotel\\Hotel\\Hotel.csproj",
       "projectName": "Hotel",
-      "projectPath": "C:\\Projects\\hotel\\Hotel\\Hotel.csproj",
+      "projectPath": "C:\\Projects\\TheHotel\\hotel\\Hotel\\Hotel.csproj",
       "packagesPath": "C:\\Users\\Andreq\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\hotel\\Hotel\\obj\\",
+      "outputPath": "C:\\Projects\\TheHotel\\hotel\\Hotel\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

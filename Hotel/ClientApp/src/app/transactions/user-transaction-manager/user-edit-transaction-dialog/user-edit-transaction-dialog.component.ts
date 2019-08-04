@@ -17,7 +17,7 @@ export class UserEditTransactionDialogComponent implements OnInit {
 
   @Output() transactionChange = new EventEmitter<Transaction>();
 
-  typeList = [{ value: '1', viewValue: 'Обычно' }, { value: '2', viewValue: 'Средне' }, { value: '3', viewValue: 'Люкс' }];
+  typeList = [{ value: '1', viewValue: 'Эконом' }, { value: '2', viewValue: 'Обычный' }, { value: '3', viewValue: 'Люкс' }];
   _transactionForm: FormGroup;
 
   constructor(

@@ -27,7 +27,7 @@
     <!-- Type  Column -->
     <ng-container matColumnDef="roomTypeId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Тип </th>
-      <td mat-cell *matCellDef="let row"> {{row.roomTypeId}}</td>
+      <td mat-cell *matCellDef="let row"> {{row.roomTypeId == 1? "Эконом" :row.roomTypeId == 2? "Обычный" : "Люкс"}}</td>
     </ng-container>
 
     <!-- Seats  Column -->
@@ -39,7 +39,7 @@
     <!-- MiniBar  Column -->
     <ng-container matColumnDef="hasMiniBar">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Мини-Бар </th>
-      <td mat-cell *matCellDef="let row"> {{row.hasMiniBar}}</td>
+      <td mat-cell *matCellDef="let row"> {{row.hasMiniBar? "Да" : "Нет"}}</td>
     </ng-container>
 
     <!-- Cost  Column -->

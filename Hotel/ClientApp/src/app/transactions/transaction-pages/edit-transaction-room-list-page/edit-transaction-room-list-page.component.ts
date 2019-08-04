@@ -33,14 +33,17 @@ export class EditTransactionRoomListPageComponent implements OnInit {
       this.numberDay = Math.ceil(Math.abs(date2.getTime() - date1.getTime()) / (1000 * 3600 * 24));
     }
      
-    this.update();
+    this.loadRooms();
   }
 
-  update() {
+  update(transaction: Transaction, room: Room) {
+    this.transaction = transaction;
+    this.room = room;
     this.loadRooms();
   }
 
   loadRooms() {
+    console.log(this.transaction, this.room);
     this.isLoaded = false;
     this.dataService.GetFreeRooms(this.transaction, this.room)
       .subscribe((data: Room[]) => { this.CompleteLoad(data); });

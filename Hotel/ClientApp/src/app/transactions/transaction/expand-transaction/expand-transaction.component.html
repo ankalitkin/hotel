@@ -14,7 +14,7 @@
     </tr>
     <tr>
       <td><span>Дата рождения: {{this.expandData.birthDate | date: 'shortDate'}}</span></td>
-      <td><span>Тип: {{this.expandData.roomTypeId}}</span></td>
+      <td><span>Тип: {{this.expandData.roomTypeId == 1? "Эконом" : this.expandData.roomTypeId == 2? "Обычный" : "Люкс"}}</span></td>
     </tr>
     <tr>
       <td><span>Телефон: {{this.expandData.phone}}</span></td>
@@ -22,7 +22,7 @@
     </tr>
     <tr>
       <td><span>Email: {{this.expandData.email}}</span></td>
-      <td><span>Наличие минибара: {{this.expandData.hasMiniBar}}</span></td>
+      <td><span>Наличие минибара: {{this.expandData.hasMiniBar? "Да" : "Нет"}}</span></td>
     </tr>
 
   </table>
