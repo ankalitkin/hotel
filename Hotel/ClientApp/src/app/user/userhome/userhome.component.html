@@ -17,7 +17,7 @@
   <div class="wrapper">
     <div class="left">
       <img src="https://cdn.onlinewebfonts.com/svg/img_233321.png" alt="user" width="100">
-      <h4>{{userDetails?.email}}</h4>
+      <h4>{{userDetails?.firstname}}</h4>
     </div>
     <div class="right">
       <div class="info">
@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <div class="projects">
+      <div *appPermit="'CanGetOwnHistory'" class="projects">
         <h3>История бронирования</h3>
         <app-my-history-page></app-my-history-page>
       </div>

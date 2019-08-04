@@ -44,6 +44,8 @@ import {MyHistoryPageComponent} from './transactions/user-transaction-manager-pa
 import {TransactionPagesModule} from './transactions/transaction-pages/transaction-pages.module';
 
 import {UserTransactionManagerPagesModule} from './transactions/user-transaction-manager-pages/user-transaction-manager-pages.module';
+import {GuardsCheckEnd, Router} from '@angular/router';
+import {filter, map} from 'rxjs/operators';
 
 registerLocaleData(localeRu);
 
@@ -88,8 +90,8 @@ registerLocaleData(localeRu);
     TransactionPagesModule,
     UserTransactionManagerPagesModule
 
-    //MyHistoryPageComponent,
-    //MyHistoryComponent
+    // MyHistoryPageComponent,
+    // MyHistoryComponent
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'ru'},
@@ -102,5 +104,16 @@ registerLocaleData(localeRu);
     }],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
+  constructor(private router: Router) {
+    router.events.pipe(
+      filter(event => event instanceof GuardsCheckEnd),
+      map(event => (event as GuardsCheckEnd).shouldActivate)
+    ).subscribe(shouldActivate => {
+      if (!shouldActivate) {
+        this.router.navigate(['user', 'login']);
+      }
+    });
+  }
 }

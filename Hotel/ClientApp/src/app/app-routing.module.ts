@@ -11,6 +11,9 @@ import {RegistrationComponent} from './user/registration/registration.component'
 import {LoginComponent} from './user/login/login.component';
 import {UserhomeComponent} from './user/userhome/userhome.component';
 import {CustomersGuard} from './customers-management-pages/_guards/customers.guard';
+import {RoomManagementGuard} from './RoomsManagement/_guards/roomManagement.guard';
+import {RoomCostManagementGuard} from './RoomCostManagement/_guards/roomCostManagement.guard';
+import {StaffGuard} from './staff-management-pages/_guards/staff.guard';
 
 
 const routes: Routes = [
@@ -26,6 +29,8 @@ const routes: Routes = [
   },
   {
     path: 'roommanager',
+    runGuardsAndResolvers: 'always',
+    canActivate: [RoomManagementGuard],
     children: [
       { path: 'rooms', component: RoomListComponent },
       { path: 'createRoom', component: RoomCreateComponent },
@@ -34,6 +39,8 @@ const routes: Routes = [
   },
   {
     path: 'roomcostmanager',
+    runGuardsAndResolvers: 'always',
+    canActivate: [RoomCostManagementGuard],
     children: [
       { path: 'roomCosts', component: RoomCostListComponent },
       { path: 'createRoomCost', component: RoomCostCreateComponent },
@@ -49,6 +56,8 @@ const routes: Routes = [
   },
   {
     path: 'staff',
+    runGuardsAndResolvers: 'always',
+    canActivate: [StaffGuard],
     loadChildren: () => import('./staff-management-pages/staff-management-pages.module')
       .then(mod => mod.StaffManagementPagesModule)
   },
