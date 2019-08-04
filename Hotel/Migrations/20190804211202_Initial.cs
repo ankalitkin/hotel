@@ -145,9 +145,9 @@ namespace Hotel.Migrations
                 columns: new[] { "CategoryId", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Economy" },
-                    { 2, "Ordinary" },
-                    { 3, "Lux" }
+                    { 1, "Эконом" },
+                    { 2, "Стандарт" },
+                    { 3, "Люкс" }
                 });
 
             migrationBuilder.InsertData(
@@ -155,7 +155,7 @@ namespace Hotel.Migrations
                 columns: new[] { "RoleId", "Name", "Rights" },
                 values: new object[,]
                 {
-                    { 1, "Владелец", 2047 },
+                    { 1, "Владелец", 1471 },
                     { 2, "Администратор", 488 },
                     { 3, "Посетитель", 2624 }
                 });
@@ -172,23 +172,23 @@ namespace Hotel.Migrations
                     { 14, 2, 5500, true, 2 },
                     { 15, 2, 6300, true, 3 },
                     { 8, 1, 6200, true, 4 },
-                    { 11, 2, 5700, false, 3 },
-                    { 6, 1, 4000, true, 2 },
-                    { 5, 1, 3000, true, 1 },
-                    { 4, 1, 4200, false, 4 },
                     { 7, 1, 5700, true, 3 },
-                    { 2, 1, 3000, false, 2 },
+                    { 6, 1, 4000, true, 2 },
+                    { 11, 2, 5700, false, 3 },
+                    { 4, 1, 4200, false, 4 },
+                    { 3, 1, 3700, false, 3 },
+                    { 5, 1, 3000, true, 1 },
+                    { 1, 1, 2000, false, 1 },
                     { 24, 3, 10000, true, 4 },
                     { 23, 3, 8300, true, 3 },
                     { 22, 3, 7200, true, 2 },
                     { 21, 3, 6800, true, 1 },
                     { 20, 3, 8200, false, 4 },
-                    { 3, 1, 3700, false, 3 },
+                    { 2, 1, 3000, false, 2 },
                     { 12, 2, 6200, false, 4 },
                     { 19, 3, 7700, false, 3 },
                     { 18, 3, 6000, false, 2 },
-                    { 17, 3, 5000, false, 1 },
-                    { 1, 1, 2000, false, 1 }
+                    { 17, 3, 5000, false, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -196,34 +196,34 @@ namespace Hotel.Migrations
                 columns: new[] { "RoomId", "Floor", "HasMiniBar", "IsDeleted", "Name", "NumberOfSeats", "RoomTypeId" },
                 values: new object[,]
                 {
-                    { 18, "6", true, false, "982", 2, 3 },
-                    { 26, "7", false, false, "472a", 2, 3 },
-                    { 6, "2", false, false, "226", 2, 3 },
-                    { 5, "3", true, false, "281", 2, 3 },
-                    { 3, "1", true, false, "346a", 2, 3 },
-                    { 28, "5", true, false, "827", 2, 3 },
-                    { 20, "1", true, false, "339", 2, 3 },
-                    { 12, "5", true, false, "702b", 2, 3 },
-                    { 1, "5", true, false, "607", 2, 1 },
-                    { 24, "5", true, false, "537", 2, 2 },
-                    { 25, "3", true, false, "657", 2, 2 },
-                    { 10, "1", false, false, "598", 2, 1 },
-                    { 11, "6", true, false, "773a", 2, 1 },
-                    { 17, "1", true, false, "849a", 2, 1 },
-                    { 21, "6", true, false, "316a", 2, 1 },
-                    { 22, "7", false, false, "730", 2, 1 },
-                    { 23, "Подвал", false, false, "373a", 2, 1 },
-                    { 27, "4", true, false, "164b", 2, 1 },
-                    { 2, "7", true, false, "199", 2, 2 },
-                    { 8, "3", false, false, "173", 2, 1 },
-                    { 7, "5", true, false, "987b", 2, 2 },
-                    { 9, "4", false, false, "202", 2, 2 },
-                    { 13, "5", false, false, "636", 2, 2 },
-                    { 14, "2", false, false, "132", 2, 2 },
-                    { 15, "5", true, false, "157a", 2, 2 },
-                    { 16, "1", true, false, "821", 2, 2 },
-                    { 19, "7", true, false, "823", 2, 2 },
-                    { 4, "7", false, false, "498", 2, 2 }
+                    { 10, "5", false, false, "123", 2, 3 },
+                    { 22, "5", true, false, "622", 3, 3 },
+                    { 4, "2", false, false, "935", 3, 3 },
+                    { 3, "5", true, false, "263", 2, 3 },
+                    { 28, "1", false, false, "534b", 3, 3 },
+                    { 23, "Подвал", false, false, "403a", 4, 3 },
+                    { 11, "4", false, false, "789", 4, 3 },
+                    { 7, "7", false, false, "582", 3, 3 },
+                    { 1, "3", true, false, "655b", 4, 1 },
+                    { 24, "Подвал", false, false, "930", 4, 2 },
+                    { 26, "7", false, false, "775", 2, 2 },
+                    { 12, "Подвал", true, false, "349", 4, 1 },
+                    { 13, "Подвал", true, false, "831", 4, 1 },
+                    { 14, "6", true, false, "618", 3, 1 },
+                    { 15, "1", false, false, "866", 3, 1 },
+                    { 16, "3", true, false, "271b", 2, 1 },
+                    { 18, "1", true, false, "418", 3, 1 },
+                    { 19, "4", true, false, "741b", 3, 1 },
+                    { 25, "3", false, false, "785", 1, 1 },
+                    { 5, "Подвал", false, false, "959", 1, 1 },
+                    { 2, "Подвал", true, false, "728", 4, 2 },
+                    { 6, "4", true, false, "965", 1, 2 },
+                    { 8, "5", true, false, "919", 1, 2 },
+                    { 9, "4", true, false, "316a", 2, 2 },
+                    { 17, "6", true, false, "895", 2, 2 },
+                    { 20, "6", false, false, "920a", 2, 2 },
+                    { 21, "6", true, false, "153", 3, 2 },
+                    { 27, "6", true, false, "301", 2, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -231,25 +231,25 @@ namespace Hotel.Migrations
                 columns: new[] { "UserId", "BirthDate", "ClientId", "Email", "FirstName", "IsDeleted", "LastName", "Password", "Phone", "RoleId" },
                 values: new object[,]
                 {
-                    { 17, new DateTime(2005, 8, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "675572176210", "Михаил@mail.ru", "Михаил", false, "Ситников", null, "2-3239-9721-1", 3 },
-                    { 16, new DateTime(2005, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "340236898097", "Никита@mail.ru", "Никита", false, "Сидоров", null, "1-7991-9761-2", 3 },
-                    { 15, new DateTime(2001, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), "979965020133", "Егор@mail.ru", "Егор", false, "Смирнов", null, "2-8652-4647-6", 3 },
-                    { 14, new DateTime(2007, 7, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "227507737035", "Юлия@mail.ru", "Юлия", false, "Горбенко", null, "4-0245-2164-7", 3 },
-                    { 13, new DateTime(1997, 12, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "666846064181", "Никита@mail.ru", "Никита", false, "Астахов", null, "5-3421-0044-9", 3 },
-                    { 12, new DateTime(2015, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "718770209925", "Никита@mail.ru", "Никита", false, "Иванов", null, "7-2353-5696-0", 3 },
-                    { 11, new DateTime(2016, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "302499036571", "Илья@mail.ru", "Илья", false, "Астахов", null, "1-1737-9021-0", 3 },
-                    { 10, new DateTime(2019, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "052023867167", "Илья@mail.ru", "Илья", false, "Астахов", null, "3-7752-9924-6", 3 },
-                    { 6, new DateTime(2007, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "911192927508", "Михаил@mail.ru", "Михаил", false, "Иванов", null, "0-2354-1178-2", 3 },
-                    { 8, new DateTime(2012, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "162609533153", "Никита@mail.ru", "Никита", false, "Комаров", null, "3-3774-2533-2", 3 },
-                    { 7, new DateTime(2000, 3, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), "775822177981", "Екатерина@mail.ru", "Екатерина", false, "Воробьев", null, "2-9542-2968-7", 3 },
-                    { 5, new DateTime(2005, 8, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "485980336925", "Никита@mail.ru", "Никита", false, "Иванов", null, "7-4938-0013-3", 3 },
-                    { 4, new DateTime(1995, 6, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "306198468252", "Егор@mail.ru", "Егор", false, "Ускова", null, "3-3020-4140-9", 3 },
-                    { 3, new DateTime(2005, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "283522163358", "Алексей@mail.ru", "Алексей", false, "Астахов", null, "9-3937-7989-2", 2 },
-                    { 2, new DateTime(2019, 3, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), "736043575691", "Юлия@mail.ru", "Юлия", false, "Горбенко", null, "5-5148-6909-7", 2 },
-                    { 1, new DateTime(2014, 3, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "226119533390", "Егор@mail.ru", "Егор", false, "Астахов", null, "7-5897-7074-8", 1 },
-                    { 18, new DateTime(2007, 8, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "553236190792", "Илья@mail.ru", "Илья", false, "Комаров", null, "5-3244-3375-9", 3 },
-                    { 9, new DateTime(2003, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "928352315168", "Алексей@mail.ru", "Алексей", false, "Сидоров", null, "8-1913-0886-9", 3 },
-                    { 19, new DateTime(2015, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "548672906167", "Алексей@mail.ru", "Алексей", false, "Воробьев", null, "8-9782-2358-3", 3 }
+                    { 17, new DateTime(2001, 8, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "627480950496", "Анастасия@mail.ru", "Анастасия", false, "Астахов", "1234567890", "6-4209-4933-0", 3 },
+                    { 16, new DateTime(1998, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "843523014677", "Егор@mail.ru", "Егор", false, "Горбенко", "1234567890", "3-3959-9119-3", 3 },
+                    { 15, new DateTime(2003, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "115323081437", "Алексей@mail.ru", "Алексей", false, "Смирнов", "1234567890", "1-1353-9234-8", 3 },
+                    { 14, new DateTime(2009, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "546288220662", "Илья@mail.ru", "Илья", false, "Ситников", "1234567890", "1-5725-0788-1", 3 },
+                    { 13, new DateTime(2018, 3, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "187397358965", "Никита@mail.ru", "Никита", false, "Смирнов", "1234567890", "4-2590-7888-3", 3 },
+                    { 12, new DateTime(1995, 12, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "711485975056", "Егор@mail.ru", "Егор", false, "Иванов", "1234567890", "7-9386-7952-5", 3 },
+                    { 11, new DateTime(1999, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "697467640113", "Роман@mail.ru", "Роман", false, "Ситников", "1234567890", "0-1190-1250-7", 3 },
+                    { 10, new DateTime(2016, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "858374452616", "Роман@mail.ru", "Роман", false, "Смирнов", "1234567890", "4-4646-8304-0", 3 },
+                    { 6, new DateTime(2011, 6, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "103612849091", "Михаил@mail.ru", "Михаил", false, "Астахов", "1234567890", "8-9481-4267-4", 3 },
+                    { 8, new DateTime(2018, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "076779550826", "Екатерина@mail.ru", "Екатерина", false, "Иванов", "1234567890", "4-6467-6675-9", 3 },
+                    { 7, new DateTime(2001, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "391058232700", "Алексей@mail.ru", "Алексей", false, "Астахов", "1234567890", "2-3509-6257-6", 3 },
+                    { 5, new DateTime(2002, 8, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "190691335130", "Илья@mail.ru", "Илья", false, "Ситников", "1234567890", "7-7244-2402-9", 3 },
+                    { 4, new DateTime(2013, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "686928106367", "Никита@mail.ru", "Никита", false, "Поляков", "1234567890", "1-3801-9370-4", 3 },
+                    { 3, new DateTime(2007, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "414971649509", "Егор@mail.ru", "Егор", false, "Горбенко", "1234567890", "2-5290-5708-8", 2 },
+                    { 2, new DateTime(2010, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "628587109441", "Анастасия@mail.ru", "Анастасия", false, "Сидоров", "1234567890", "0-5756-1050-8", 2 },
+                    { 1, new DateTime(2004, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "225822861524", "owner@mail.ru", "Алексей", false, "Сидоров", "1234567890", "9-6549-0906-9", 1 },
+                    { 18, new DateTime(1997, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "591989195502", "Егор@mail.ru", "Егор", false, "Горбенко", "1234567890", "2-5734-5412-3", 3 },
+                    { 9, new DateTime(1999, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "078096151415", "Алексей@mail.ru", "Алексей", false, "Сидоров", "1234567890", "7-8092-1620-5", 3 },
+                    { 19, new DateTime(2011, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "910941151308", "Екатерина@mail.ru", "Екатерина", false, "Смирнов", "1234567890", "7-1833-9129-6", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -257,21 +257,21 @@ namespace Hotel.Migrations
                 columns: new[] { "TransactionId", "CheckInTime", "CheckOutTime", "Cost", "IsCanceled", "IsPaid", "RoomId", "UserId", "isEvicted" },
                 values: new object[,]
                 {
-                    { 4, new DateTime(2019, 7, 25, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(4587), new DateTime(2019, 7, 31, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(4587), 4000, false, false, 14, 1, false },
-                    { 7, new DateTime(2019, 7, 25, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6227), new DateTime(2019, 7, 27, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6227), 4000, false, false, 13, 2, false },
-                    { 15, new DateTime(2019, 8, 2, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6557), new DateTime(2019, 8, 11, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6557), 3000, false, false, 10, 3, false },
-                    { 13, new DateTime(2019, 7, 28, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6501), new DateTime(2019, 8, 2, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6501), 4000, false, false, 27, 4, false },
-                    { 3, new DateTime(2019, 8, 6, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(4345), new DateTime(2019, 8, 8, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(4345), 5500, false, true, 19, 6, false },
-                    { 6, new DateTime(2019, 8, 11, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6182), new DateTime(2019, 8, 20, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6182), 5500, false, true, 25, 6, false },
-                    { 14, new DateTime(2019, 8, 12, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6530), new DateTime(2019, 8, 19, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6530), 4000, false, true, 17, 8, false },
-                    { 1, new DateTime(2019, 7, 25, 16, 45, 54, 174, DateTimeKind.Local).AddTicks(5096), new DateTime(2019, 8, 5, 16, 45, 54, 174, DateTimeKind.Local).AddTicks(5096), 7200, false, false, 12, 9, false },
-                    { 11, new DateTime(2019, 8, 14, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6441), new DateTime(2019, 8, 26, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6441), 5500, false, true, 24, 10, false },
-                    { 10, new DateTime(2019, 7, 28, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6340), new DateTime(2019, 7, 30, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6340), 4000, false, false, 21, 13, false },
-                    { 2, new DateTime(2019, 8, 9, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(495), new DateTime(2019, 8, 12, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(495), 7200, false, true, 18, 15, false },
-                    { 9, new DateTime(2019, 8, 12, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6308), new DateTime(2019, 8, 27, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6308), 6000, false, true, 26, 15, false },
-                    { 5, new DateTime(2019, 8, 8, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6151), new DateTime(2019, 8, 18, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6151), 3000, false, true, 22, 17, false },
-                    { 8, new DateTime(2019, 8, 2, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6250), new DateTime(2019, 8, 8, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6250), 6000, false, false, 6, 17, false },
-                    { 12, new DateTime(2019, 8, 8, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6472), new DateTime(2019, 8, 9, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6472), 5500, false, true, 16, 17, false }
+                    { 15, new DateTime(2019, 8, 7, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(98), new DateTime(2019, 8, 17, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(98), 2000, false, true, 5, 1, false },
+                    { 1, new DateTime(2019, 8, 8, 0, 12, 2, 532, DateTimeKind.Local).AddTicks(3317), new DateTime(2019, 8, 14, 0, 12, 2, 532, DateTimeKind.Local).AddTicks(3317), 8300, false, true, 22, 4, false },
+                    { 10, new DateTime(2019, 7, 29, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9955), new DateTime(2019, 8, 12, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9955), 8200, false, false, 23, 5, false },
+                    { 14, new DateTime(2019, 8, 6, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(71), new DateTime(2019, 8, 18, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(71), 6200, false, true, 1, 5, false },
+                    { 11, new DateTime(2019, 7, 27, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9987), new DateTime(2019, 8, 11, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9987), 4000, false, false, 20, 7, false },
+                    { 7, new DateTime(2019, 8, 9, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9805), new DateTime(2019, 8, 17, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9805), 6000, false, true, 10, 9, false },
+                    { 13, new DateTime(2019, 8, 4, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(43), new DateTime(2019, 8, 16, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(43), 6200, false, false, 13, 9, false },
+                    { 4, new DateTime(2019, 8, 14, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9694), new DateTime(2019, 8, 18, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9694), 7700, false, true, 7, 10, false },
+                    { 5, new DateTime(2019, 7, 26, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9729), new DateTime(2019, 8, 7, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9729), 4000, false, false, 27, 12, false },
+                    { 2, new DateTime(2019, 8, 5, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(4956), new DateTime(2019, 8, 14, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(4956), 6200, false, true, 12, 15, false },
+                    { 3, new DateTime(2019, 7, 27, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(8463), new DateTime(2019, 8, 5, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(8463), 7700, false, false, 28, 15, false },
+                    { 6, new DateTime(2019, 8, 14, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9783), new DateTime(2019, 8, 24, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9783), 3700, false, true, 15, 15, false },
+                    { 9, new DateTime(2019, 7, 27, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9924), new DateTime(2019, 8, 4, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9924), 6300, false, false, 21, 15, false },
+                    { 8, new DateTime(2019, 7, 27, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9832), new DateTime(2019, 8, 4, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9832), 2000, false, false, 25, 16, false },
+                    { 12, new DateTime(2019, 8, 4, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(14), new DateTime(2019, 8, 14, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(14), 4500, false, false, 8, 19, false }
                 });
 
             migrationBuilder.CreateIndex(

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hotel.Migrations
 {
     [DbContext(typeof(HotelContext))]
-    [Migration("20190804134554_Initial")]
+    [Migration("20190804211202_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,7 +70,7 @@ namespace Hotel.Migrations
                         {
                             RoleId = 1,
                             Name = "Владелец",
-                            Rights = 2047
+                            Rights = 1471
                         },
                         new
                         {
@@ -114,202 +114,202 @@ namespace Hotel.Migrations
                         new
                         {
                             RoomId = 1,
-                            Floor = "5",
+                            Floor = "3",
                             HasMiniBar = true,
                             IsDeleted = false,
-                            Name = "607",
-                            NumberOfSeats = 2,
+                            Name = "655b",
+                            NumberOfSeats = 4,
                             RoomTypeId = 1
                         },
                         new
                         {
                             RoomId = 2,
-                            Floor = "7",
+                            Floor = "Подвал",
                             HasMiniBar = true,
                             IsDeleted = false,
-                            Name = "199",
-                            NumberOfSeats = 2,
+                            Name = "728",
+                            NumberOfSeats = 4,
                             RoomTypeId = 2
                         },
                         new
                         {
                             RoomId = 3,
-                            Floor = "1",
+                            Floor = "5",
                             HasMiniBar = true,
                             IsDeleted = false,
-                            Name = "346a",
+                            Name = "263",
                             NumberOfSeats = 2,
                             RoomTypeId = 3
                         },
                         new
                         {
                             RoomId = 4,
-                            Floor = "7",
+                            Floor = "2",
                             HasMiniBar = false,
                             IsDeleted = false,
-                            Name = "498",
-                            NumberOfSeats = 2,
-                            RoomTypeId = 2
+                            Name = "935",
+                            NumberOfSeats = 3,
+                            RoomTypeId = 3
                         },
                         new
                         {
                             RoomId = 5,
-                            Floor = "3",
-                            HasMiniBar = true,
+                            Floor = "Подвал",
+                            HasMiniBar = false,
                             IsDeleted = false,
-                            Name = "281",
-                            NumberOfSeats = 2,
-                            RoomTypeId = 3
+                            Name = "959",
+                            NumberOfSeats = 1,
+                            RoomTypeId = 1
                         },
                         new
                         {
                             RoomId = 6,
-                            Floor = "2",
-                            HasMiniBar = false,
-                            IsDeleted = false,
-                            Name = "226",
-                            NumberOfSeats = 2,
-                            RoomTypeId = 3
-                        },
-                        new
-                        {
-                            RoomId = 7,
-                            Floor = "5",
+                            Floor = "4",
                             HasMiniBar = true,
                             IsDeleted = false,
-                            Name = "987b",
-                            NumberOfSeats = 2,
+                            Name = "965",
+                            NumberOfSeats = 1,
                             RoomTypeId = 2
                         },
                         new
                         {
-                            RoomId = 8,
-                            Floor = "3",
+                            RoomId = 7,
+                            Floor = "7",
                             HasMiniBar = false,
                             IsDeleted = false,
-                            Name = "173",
-                            NumberOfSeats = 2,
-                            RoomTypeId = 1
+                            Name = "582",
+                            NumberOfSeats = 3,
+                            RoomTypeId = 3
+                        },
+                        new
+                        {
+                            RoomId = 8,
+                            Floor = "5",
+                            HasMiniBar = true,
+                            IsDeleted = false,
+                            Name = "919",
+                            NumberOfSeats = 1,
+                            RoomTypeId = 2
                         },
                         new
                         {
                             RoomId = 9,
                             Floor = "4",
-                            HasMiniBar = false,
+                            HasMiniBar = true,
                             IsDeleted = false,
-                            Name = "202",
+                            Name = "316a",
                             NumberOfSeats = 2,
                             RoomTypeId = 2
                         },
                         new
                         {
                             RoomId = 10,
-                            Floor = "1",
+                            Floor = "5",
                             HasMiniBar = false,
                             IsDeleted = false,
-                            Name = "598",
+                            Name = "123",
                             NumberOfSeats = 2,
-                            RoomTypeId = 1
+                            RoomTypeId = 3
                         },
                         new
                         {
                             RoomId = 11,
-                            Floor = "6",
-                            HasMiniBar = true,
+                            Floor = "4",
+                            HasMiniBar = false,
                             IsDeleted = false,
-                            Name = "773a",
-                            NumberOfSeats = 2,
-                            RoomTypeId = 1
+                            Name = "789",
+                            NumberOfSeats = 4,
+                            RoomTypeId = 3
                         },
                         new
                         {
                             RoomId = 12,
-                            Floor = "5",
+                            Floor = "Подвал",
                             HasMiniBar = true,
                             IsDeleted = false,
-                            Name = "702b",
-                            NumberOfSeats = 2,
-                            RoomTypeId = 3
+                            Name = "349",
+                            NumberOfSeats = 4,
+                            RoomTypeId = 1
                         },
                         new
                         {
                             RoomId = 13,
-                            Floor = "5",
-                            HasMiniBar = false,
+                            Floor = "Подвал",
+                            HasMiniBar = true,
                             IsDeleted = false,
-                            Name = "636",
-                            NumberOfSeats = 2,
-                            RoomTypeId = 2
+                            Name = "831",
+                            NumberOfSeats = 4,
+                            RoomTypeId = 1
                         },
                         new
                         {
                             RoomId = 14,
-                            Floor = "2",
-                            HasMiniBar = false,
+                            Floor = "6",
+                            HasMiniBar = true,
                             IsDeleted = false,
-                            Name = "132",
-                            NumberOfSeats = 2,
-                            RoomTypeId = 2
+                            Name = "618",
+                            NumberOfSeats = 3,
+                            RoomTypeId = 1
                         },
                         new
                         {
                             RoomId = 15,
-                            Floor = "5",
-                            HasMiniBar = true,
+                            Floor = "1",
+                            HasMiniBar = false,
                             IsDeleted = false,
-                            Name = "157a",
-                            NumberOfSeats = 2,
-                            RoomTypeId = 2
+                            Name = "866",
+                            NumberOfSeats = 3,
+                            RoomTypeId = 1
                         },
                         new
                         {
                             RoomId = 16,
-                            Floor = "1",
+                            Floor = "3",
                             HasMiniBar = true,
                             IsDeleted = false,
-                            Name = "821",
-                            NumberOfSeats = 2,
-                            RoomTypeId = 2
-                        },
-                        new
-                        {
-                            RoomId = 17,
-                            Floor = "1",
-                            HasMiniBar = true,
-                            IsDeleted = false,
-                            Name = "849a",
+                            Name = "271b",
                             NumberOfSeats = 2,
                             RoomTypeId = 1
                         },
                         new
                         {
-                            RoomId = 18,
+                            RoomId = 17,
                             Floor = "6",
                             HasMiniBar = true,
                             IsDeleted = false,
-                            Name = "982",
-                            NumberOfSeats = 2,
-                            RoomTypeId = 3
-                        },
-                        new
-                        {
-                            RoomId = 19,
-                            Floor = "7",
-                            HasMiniBar = true,
-                            IsDeleted = false,
-                            Name = "823",
+                            Name = "895",
                             NumberOfSeats = 2,
                             RoomTypeId = 2
                         },
                         new
                         {
-                            RoomId = 20,
+                            RoomId = 18,
                             Floor = "1",
                             HasMiniBar = true,
                             IsDeleted = false,
-                            Name = "339",
+                            Name = "418",
+                            NumberOfSeats = 3,
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            RoomId = 19,
+                            Floor = "4",
+                            HasMiniBar = true,
+                            IsDeleted = false,
+                            Name = "741b",
+                            NumberOfSeats = 3,
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            RoomId = 20,
+                            Floor = "6",
+                            HasMiniBar = false,
+                            IsDeleted = false,
+                            Name = "920a",
                             NumberOfSeats = 2,
-                            RoomTypeId = 3
+                            RoomTypeId = 2
                         },
                         new
                         {
@@ -317,19 +317,19 @@ namespace Hotel.Migrations
                             Floor = "6",
                             HasMiniBar = true,
                             IsDeleted = false,
-                            Name = "316a",
-                            NumberOfSeats = 2,
-                            RoomTypeId = 1
+                            Name = "153",
+                            NumberOfSeats = 3,
+                            RoomTypeId = 2
                         },
                         new
                         {
                             RoomId = 22,
-                            Floor = "7",
-                            HasMiniBar = false,
+                            Floor = "5",
+                            HasMiniBar = true,
                             IsDeleted = false,
-                            Name = "730",
-                            NumberOfSeats = 2,
-                            RoomTypeId = 1
+                            Name = "622",
+                            NumberOfSeats = 3,
+                            RoomTypeId = 3
                         },
                         new
                         {
@@ -337,29 +337,29 @@ namespace Hotel.Migrations
                             Floor = "Подвал",
                             HasMiniBar = false,
                             IsDeleted = false,
-                            Name = "373a",
-                            NumberOfSeats = 2,
-                            RoomTypeId = 1
+                            Name = "403a",
+                            NumberOfSeats = 4,
+                            RoomTypeId = 3
                         },
                         new
                         {
                             RoomId = 24,
-                            Floor = "5",
-                            HasMiniBar = true,
+                            Floor = "Подвал",
+                            HasMiniBar = false,
                             IsDeleted = false,
-                            Name = "537",
-                            NumberOfSeats = 2,
+                            Name = "930",
+                            NumberOfSeats = 4,
                             RoomTypeId = 2
                         },
                         new
                         {
                             RoomId = 25,
                             Floor = "3",
-                            HasMiniBar = true,
+                            HasMiniBar = false,
                             IsDeleted = false,
-                            Name = "657",
-                            NumberOfSeats = 2,
-                            RoomTypeId = 2
+                            Name = "785",
+                            NumberOfSeats = 1,
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -367,28 +367,28 @@ namespace Hotel.Migrations
                             Floor = "7",
                             HasMiniBar = false,
                             IsDeleted = false,
-                            Name = "472a",
+                            Name = "775",
                             NumberOfSeats = 2,
-                            RoomTypeId = 3
+                            RoomTypeId = 2
                         },
                         new
                         {
                             RoomId = 27,
-                            Floor = "4",
+                            Floor = "6",
                             HasMiniBar = true,
                             IsDeleted = false,
-                            Name = "164b",
+                            Name = "301",
                             NumberOfSeats = 2,
                             RoomTypeId = 1
                         },
                         new
                         {
                             RoomId = 28,
-                            Floor = "5",
-                            HasMiniBar = true,
+                            Floor = "1",
+                            HasMiniBar = false,
                             IsDeleted = false,
-                            Name = "827",
-                            NumberOfSeats = 2,
+                            Name = "534b",
+                            NumberOfSeats = 3,
                             RoomTypeId = 3
                         });
                 });
@@ -642,181 +642,181 @@ namespace Hotel.Migrations
                         new
                         {
                             TransactionId = 1,
-                            CheckInTime = new DateTime(2019, 7, 25, 16, 45, 54, 174, DateTimeKind.Local).AddTicks(5096),
-                            CheckOutTime = new DateTime(2019, 8, 5, 16, 45, 54, 174, DateTimeKind.Local).AddTicks(5096),
-                            Cost = 7200,
+                            CheckInTime = new DateTime(2019, 8, 8, 0, 12, 2, 532, DateTimeKind.Local).AddTicks(3317),
+                            CheckOutTime = new DateTime(2019, 8, 14, 0, 12, 2, 532, DateTimeKind.Local).AddTicks(3317),
+                            Cost = 8300,
                             IsCanceled = false,
-                            IsPaid = false,
-                            RoomId = 12,
-                            UserId = 9,
+                            IsPaid = true,
+                            RoomId = 22,
+                            UserId = 4,
                             isEvicted = false
                         },
                         new
                         {
                             TransactionId = 2,
-                            CheckInTime = new DateTime(2019, 8, 9, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(495),
-                            CheckOutTime = new DateTime(2019, 8, 12, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(495),
-                            Cost = 7200,
+                            CheckInTime = new DateTime(2019, 8, 5, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(4956),
+                            CheckOutTime = new DateTime(2019, 8, 14, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(4956),
+                            Cost = 6200,
                             IsCanceled = false,
                             IsPaid = true,
-                            RoomId = 18,
+                            RoomId = 12,
                             UserId = 15,
                             isEvicted = false
                         },
                         new
                         {
                             TransactionId = 3,
-                            CheckInTime = new DateTime(2019, 8, 6, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(4345),
-                            CheckOutTime = new DateTime(2019, 8, 8, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(4345),
-                            Cost = 5500,
+                            CheckInTime = new DateTime(2019, 7, 27, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(8463),
+                            CheckOutTime = new DateTime(2019, 8, 5, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(8463),
+                            Cost = 7700,
                             IsCanceled = false,
-                            IsPaid = true,
-                            RoomId = 19,
-                            UserId = 6,
+                            IsPaid = false,
+                            RoomId = 28,
+                            UserId = 15,
                             isEvicted = false
                         },
                         new
                         {
                             TransactionId = 4,
-                            CheckInTime = new DateTime(2019, 7, 25, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(4587),
-                            CheckOutTime = new DateTime(2019, 7, 31, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(4587),
-                            Cost = 4000,
+                            CheckInTime = new DateTime(2019, 8, 14, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9694),
+                            CheckOutTime = new DateTime(2019, 8, 18, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9694),
+                            Cost = 7700,
                             IsCanceled = false,
-                            IsPaid = false,
-                            RoomId = 14,
-                            UserId = 1,
+                            IsPaid = true,
+                            RoomId = 7,
+                            UserId = 10,
                             isEvicted = false
                         },
                         new
                         {
                             TransactionId = 5,
-                            CheckInTime = new DateTime(2019, 8, 8, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6151),
-                            CheckOutTime = new DateTime(2019, 8, 18, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6151),
-                            Cost = 3000,
+                            CheckInTime = new DateTime(2019, 7, 26, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9729),
+                            CheckOutTime = new DateTime(2019, 8, 7, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9729),
+                            Cost = 4000,
                             IsCanceled = false,
-                            IsPaid = true,
-                            RoomId = 22,
-                            UserId = 17,
+                            IsPaid = false,
+                            RoomId = 27,
+                            UserId = 12,
                             isEvicted = false
                         },
                         new
                         {
                             TransactionId = 6,
-                            CheckInTime = new DateTime(2019, 8, 11, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6182),
-                            CheckOutTime = new DateTime(2019, 8, 20, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6182),
-                            Cost = 5500,
+                            CheckInTime = new DateTime(2019, 8, 14, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9783),
+                            CheckOutTime = new DateTime(2019, 8, 24, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9783),
+                            Cost = 3700,
                             IsCanceled = false,
                             IsPaid = true,
-                            RoomId = 25,
-                            UserId = 6,
+                            RoomId = 15,
+                            UserId = 15,
                             isEvicted = false
                         },
                         new
                         {
                             TransactionId = 7,
-                            CheckInTime = new DateTime(2019, 7, 25, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6227),
-                            CheckOutTime = new DateTime(2019, 7, 27, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6227),
-                            Cost = 4000,
+                            CheckInTime = new DateTime(2019, 8, 9, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9805),
+                            CheckOutTime = new DateTime(2019, 8, 17, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9805),
+                            Cost = 6000,
                             IsCanceled = false,
-                            IsPaid = false,
-                            RoomId = 13,
-                            UserId = 2,
+                            IsPaid = true,
+                            RoomId = 10,
+                            UserId = 9,
                             isEvicted = false
                         },
                         new
                         {
                             TransactionId = 8,
-                            CheckInTime = new DateTime(2019, 8, 2, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6250),
-                            CheckOutTime = new DateTime(2019, 8, 8, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6250),
-                            Cost = 6000,
+                            CheckInTime = new DateTime(2019, 7, 27, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9832),
+                            CheckOutTime = new DateTime(2019, 8, 4, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9832),
+                            Cost = 2000,
                             IsCanceled = false,
                             IsPaid = false,
-                            RoomId = 6,
-                            UserId = 17,
+                            RoomId = 25,
+                            UserId = 16,
                             isEvicted = false
                         },
                         new
                         {
                             TransactionId = 9,
-                            CheckInTime = new DateTime(2019, 8, 12, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6308),
-                            CheckOutTime = new DateTime(2019, 8, 27, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6308),
-                            Cost = 6000,
+                            CheckInTime = new DateTime(2019, 7, 27, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9924),
+                            CheckOutTime = new DateTime(2019, 8, 4, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9924),
+                            Cost = 6300,
                             IsCanceled = false,
-                            IsPaid = true,
-                            RoomId = 26,
+                            IsPaid = false,
+                            RoomId = 21,
                             UserId = 15,
                             isEvicted = false
                         },
                         new
                         {
                             TransactionId = 10,
-                            CheckInTime = new DateTime(2019, 7, 28, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6340),
-                            CheckOutTime = new DateTime(2019, 7, 30, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6340),
-                            Cost = 4000,
+                            CheckInTime = new DateTime(2019, 7, 29, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9955),
+                            CheckOutTime = new DateTime(2019, 8, 12, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9955),
+                            Cost = 8200,
                             IsCanceled = false,
                             IsPaid = false,
-                            RoomId = 21,
-                            UserId = 13,
+                            RoomId = 23,
+                            UserId = 5,
                             isEvicted = false
                         },
                         new
                         {
                             TransactionId = 11,
-                            CheckInTime = new DateTime(2019, 8, 14, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6441),
-                            CheckOutTime = new DateTime(2019, 8, 26, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6441),
-                            Cost = 5500,
+                            CheckInTime = new DateTime(2019, 7, 27, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9987),
+                            CheckOutTime = new DateTime(2019, 8, 11, 0, 12, 2, 539, DateTimeKind.Local).AddTicks(9987),
+                            Cost = 4000,
                             IsCanceled = false,
-                            IsPaid = true,
-                            RoomId = 24,
-                            UserId = 10,
+                            IsPaid = false,
+                            RoomId = 20,
+                            UserId = 7,
                             isEvicted = false
                         },
                         new
                         {
                             TransactionId = 12,
-                            CheckInTime = new DateTime(2019, 8, 8, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6472),
-                            CheckOutTime = new DateTime(2019, 8, 9, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6472),
-                            Cost = 5500,
+                            CheckInTime = new DateTime(2019, 8, 4, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(14),
+                            CheckOutTime = new DateTime(2019, 8, 14, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(14),
+                            Cost = 4500,
                             IsCanceled = false,
-                            IsPaid = true,
-                            RoomId = 16,
-                            UserId = 17,
+                            IsPaid = false,
+                            RoomId = 8,
+                            UserId = 19,
                             isEvicted = false
                         },
                         new
                         {
                             TransactionId = 13,
-                            CheckInTime = new DateTime(2019, 7, 28, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6501),
-                            CheckOutTime = new DateTime(2019, 8, 2, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6501),
-                            Cost = 4000,
+                            CheckInTime = new DateTime(2019, 8, 4, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(43),
+                            CheckOutTime = new DateTime(2019, 8, 16, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(43),
+                            Cost = 6200,
                             IsCanceled = false,
                             IsPaid = false,
-                            RoomId = 27,
-                            UserId = 4,
+                            RoomId = 13,
+                            UserId = 9,
                             isEvicted = false
                         },
                         new
                         {
                             TransactionId = 14,
-                            CheckInTime = new DateTime(2019, 8, 12, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6530),
-                            CheckOutTime = new DateTime(2019, 8, 19, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6530),
-                            Cost = 4000,
+                            CheckInTime = new DateTime(2019, 8, 6, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(71),
+                            CheckOutTime = new DateTime(2019, 8, 18, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(71),
+                            Cost = 6200,
                             IsCanceled = false,
                             IsPaid = true,
-                            RoomId = 17,
-                            UserId = 8,
+                            RoomId = 1,
+                            UserId = 5,
                             isEvicted = false
                         },
                         new
                         {
                             TransactionId = 15,
-                            CheckInTime = new DateTime(2019, 8, 2, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6557),
-                            CheckOutTime = new DateTime(2019, 8, 11, 16, 45, 54, 182, DateTimeKind.Local).AddTicks(6557),
-                            Cost = 3000,
+                            CheckInTime = new DateTime(2019, 8, 7, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(98),
+                            CheckOutTime = new DateTime(2019, 8, 17, 0, 12, 2, 540, DateTimeKind.Local).AddTicks(98),
+                            Cost = 2000,
                             IsCanceled = false,
-                            IsPaid = false,
-                            RoomId = 10,
-                            UserId = 3,
+                            IsPaid = true,
+                            RoomId = 5,
+                            UserId = 1,
                             isEvicted = false
                         });
                 });
@@ -856,229 +856,248 @@ namespace Hotel.Migrations
                         new
                         {
                             UserId = 1,
-                            BirthDate = new DateTime(2014, 3, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "226119533390",
-                            Email = "Егор@mail.ru",
-                            FirstName = "Егор",
+                            BirthDate = new DateTime(2004, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "225822861524",
+                            Email = "owner@mail.ru",
+                            FirstName = "Алексей",
                             IsDeleted = false,
-                            LastName = "Астахов",
-                            Phone = "7-5897-7074-8",
+                            LastName = "Сидоров",
+                            Password = "1234567890",
+                            Phone = "9-6549-0906-9",
                             RoleId = 1
                         },
                         new
                         {
                             UserId = 2,
-                            BirthDate = new DateTime(2019, 3, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "736043575691",
-                            Email = "Юлия@mail.ru",
-                            FirstName = "Юлия",
+                            BirthDate = new DateTime(2010, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "628587109441",
+                            Email = "Анастасия@mail.ru",
+                            FirstName = "Анастасия",
                             IsDeleted = false,
-                            LastName = "Горбенко",
-                            Phone = "5-5148-6909-7",
+                            LastName = "Сидоров",
+                            Password = "1234567890",
+                            Phone = "0-5756-1050-8",
                             RoleId = 2
                         },
                         new
                         {
                             UserId = 3,
-                            BirthDate = new DateTime(2005, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "283522163358",
-                            Email = "Алексей@mail.ru",
-                            FirstName = "Алексей",
+                            BirthDate = new DateTime(2007, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "414971649509",
+                            Email = "Егор@mail.ru",
+                            FirstName = "Егор",
                             IsDeleted = false,
-                            LastName = "Астахов",
-                            Phone = "9-3937-7989-2",
+                            LastName = "Горбенко",
+                            Password = "1234567890",
+                            Phone = "2-5290-5708-8",
                             RoleId = 2
                         },
                         new
                         {
                             UserId = 4,
-                            BirthDate = new DateTime(1995, 6, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "306198468252",
-                            Email = "Егор@mail.ru",
-                            FirstName = "Егор",
+                            BirthDate = new DateTime(2013, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "686928106367",
+                            Email = "Никита@mail.ru",
+                            FirstName = "Никита",
                             IsDeleted = false,
-                            LastName = "Ускова",
-                            Phone = "3-3020-4140-9",
+                            LastName = "Поляков",
+                            Password = "1234567890",
+                            Phone = "1-3801-9370-4",
                             RoleId = 3
                         },
                         new
                         {
                             UserId = 5,
-                            BirthDate = new DateTime(2005, 8, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "485980336925",
-                            Email = "Никита@mail.ru",
-                            FirstName = "Никита",
+                            BirthDate = new DateTime(2002, 8, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "190691335130",
+                            Email = "Илья@mail.ru",
+                            FirstName = "Илья",
                             IsDeleted = false,
-                            LastName = "Иванов",
-                            Phone = "7-4938-0013-3",
+                            LastName = "Ситников",
+                            Password = "1234567890",
+                            Phone = "7-7244-2402-9",
                             RoleId = 3
                         },
                         new
                         {
                             UserId = 6,
-                            BirthDate = new DateTime(2007, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "911192927508",
+                            BirthDate = new DateTime(2011, 6, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "103612849091",
                             Email = "Михаил@mail.ru",
                             FirstName = "Михаил",
                             IsDeleted = false,
-                            LastName = "Иванов",
-                            Phone = "0-2354-1178-2",
+                            LastName = "Астахов",
+                            Password = "1234567890",
+                            Phone = "8-9481-4267-4",
                             RoleId = 3
                         },
                         new
                         {
                             UserId = 7,
-                            BirthDate = new DateTime(2000, 3, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "775822177981",
-                            Email = "Екатерина@mail.ru",
-                            FirstName = "Екатерина",
+                            BirthDate = new DateTime(2001, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "391058232700",
+                            Email = "Алексей@mail.ru",
+                            FirstName = "Алексей",
                             IsDeleted = false,
-                            LastName = "Воробьев",
-                            Phone = "2-9542-2968-7",
+                            LastName = "Астахов",
+                            Password = "1234567890",
+                            Phone = "2-3509-6257-6",
                             RoleId = 3
                         },
                         new
                         {
                             UserId = 8,
-                            BirthDate = new DateTime(2012, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "162609533153",
-                            Email = "Никита@mail.ru",
-                            FirstName = "Никита",
+                            BirthDate = new DateTime(2018, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "076779550826",
+                            Email = "Екатерина@mail.ru",
+                            FirstName = "Екатерина",
                             IsDeleted = false,
-                            LastName = "Комаров",
-                            Phone = "3-3774-2533-2",
+                            LastName = "Иванов",
+                            Password = "1234567890",
+                            Phone = "4-6467-6675-9",
                             RoleId = 3
                         },
                         new
                         {
                             UserId = 9,
-                            BirthDate = new DateTime(2003, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "928352315168",
+                            BirthDate = new DateTime(1999, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "078096151415",
                             Email = "Алексей@mail.ru",
                             FirstName = "Алексей",
                             IsDeleted = false,
                             LastName = "Сидоров",
-                            Phone = "8-1913-0886-9",
+                            Password = "1234567890",
+                            Phone = "7-8092-1620-5",
                             RoleId = 3
                         },
                         new
                         {
                             UserId = 10,
-                            BirthDate = new DateTime(2019, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "052023867167",
-                            Email = "Илья@mail.ru",
-                            FirstName = "Илья",
+                            BirthDate = new DateTime(2016, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "858374452616",
+                            Email = "Роман@mail.ru",
+                            FirstName = "Роман",
                             IsDeleted = false,
-                            LastName = "Астахов",
-                            Phone = "3-7752-9924-6",
+                            LastName = "Смирнов",
+                            Password = "1234567890",
+                            Phone = "4-4646-8304-0",
                             RoleId = 3
                         },
                         new
                         {
                             UserId = 11,
-                            BirthDate = new DateTime(2016, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "302499036571",
-                            Email = "Илья@mail.ru",
-                            FirstName = "Илья",
+                            BirthDate = new DateTime(1999, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "697467640113",
+                            Email = "Роман@mail.ru",
+                            FirstName = "Роман",
                             IsDeleted = false,
-                            LastName = "Астахов",
-                            Phone = "1-1737-9021-0",
+                            LastName = "Ситников",
+                            Password = "1234567890",
+                            Phone = "0-1190-1250-7",
                             RoleId = 3
                         },
                         new
                         {
                             UserId = 12,
-                            BirthDate = new DateTime(2015, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "718770209925",
-                            Email = "Никита@mail.ru",
-                            FirstName = "Никита",
+                            BirthDate = new DateTime(1995, 12, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "711485975056",
+                            Email = "Егор@mail.ru",
+                            FirstName = "Егор",
                             IsDeleted = false,
                             LastName = "Иванов",
-                            Phone = "7-2353-5696-0",
+                            Password = "1234567890",
+                            Phone = "7-9386-7952-5",
                             RoleId = 3
                         },
                         new
                         {
                             UserId = 13,
-                            BirthDate = new DateTime(1997, 12, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "666846064181",
+                            BirthDate = new DateTime(2018, 3, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "187397358965",
                             Email = "Никита@mail.ru",
                             FirstName = "Никита",
                             IsDeleted = false,
-                            LastName = "Астахов",
-                            Phone = "5-3421-0044-9",
+                            LastName = "Смирнов",
+                            Password = "1234567890",
+                            Phone = "4-2590-7888-3",
                             RoleId = 3
                         },
                         new
                         {
                             UserId = 14,
-                            BirthDate = new DateTime(2007, 7, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "227507737035",
-                            Email = "Юлия@mail.ru",
-                            FirstName = "Юлия",
+                            BirthDate = new DateTime(2009, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "546288220662",
+                            Email = "Илья@mail.ru",
+                            FirstName = "Илья",
                             IsDeleted = false,
-                            LastName = "Горбенко",
-                            Phone = "4-0245-2164-7",
+                            LastName = "Ситников",
+                            Password = "1234567890",
+                            Phone = "1-5725-0788-1",
                             RoleId = 3
                         },
                         new
                         {
                             UserId = 15,
-                            BirthDate = new DateTime(2001, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "979965020133",
-                            Email = "Егор@mail.ru",
-                            FirstName = "Егор",
+                            BirthDate = new DateTime(2003, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "115323081437",
+                            Email = "Алексей@mail.ru",
+                            FirstName = "Алексей",
                             IsDeleted = false,
                             LastName = "Смирнов",
-                            Phone = "2-8652-4647-6",
+                            Password = "1234567890",
+                            Phone = "1-1353-9234-8",
                             RoleId = 3
                         },
                         new
                         {
                             UserId = 16,
-                            BirthDate = new DateTime(2005, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "340236898097",
-                            Email = "Никита@mail.ru",
-                            FirstName = "Никита",
+                            BirthDate = new DateTime(1998, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "843523014677",
+                            Email = "Егор@mail.ru",
+                            FirstName = "Егор",
                             IsDeleted = false,
-                            LastName = "Сидоров",
-                            Phone = "1-7991-9761-2",
+                            LastName = "Горбенко",
+                            Password = "1234567890",
+                            Phone = "3-3959-9119-3",
                             RoleId = 3
                         },
                         new
                         {
                             UserId = 17,
-                            BirthDate = new DateTime(2005, 8, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "675572176210",
-                            Email = "Михаил@mail.ru",
-                            FirstName = "Михаил",
+                            BirthDate = new DateTime(2001, 8, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "627480950496",
+                            Email = "Анастасия@mail.ru",
+                            FirstName = "Анастасия",
                             IsDeleted = false,
-                            LastName = "Ситников",
-                            Phone = "2-3239-9721-1",
+                            LastName = "Астахов",
+                            Password = "1234567890",
+                            Phone = "6-4209-4933-0",
                             RoleId = 3
                         },
                         new
                         {
                             UserId = 18,
-                            BirthDate = new DateTime(2007, 8, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "553236190792",
-                            Email = "Илья@mail.ru",
-                            FirstName = "Илья",
+                            BirthDate = new DateTime(1997, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "591989195502",
+                            Email = "Егор@mail.ru",
+                            FirstName = "Егор",
                             IsDeleted = false,
-                            LastName = "Комаров",
-                            Phone = "5-3244-3375-9",
+                            LastName = "Горбенко",
+                            Password = "1234567890",
+                            Phone = "2-5734-5412-3",
                             RoleId = 3
                         },
                         new
                         {
                             UserId = 19,
-                            BirthDate = new DateTime(2015, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientId = "548672906167",
-                            Email = "Алексей@mail.ru",
-                            FirstName = "Алексей",
+                            BirthDate = new DateTime(2011, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClientId = "910941151308",
+                            Email = "Екатерина@mail.ru",
+                            FirstName = "Екатерина",
                             IsDeleted = false,
-                            LastName = "Воробьев",
-                            Phone = "8-9782-2358-3",
+                            LastName = "Смирнов",
+                            Password = "1234567890",
+                            Phone = "7-1833-9129-6",
                             RoleId = 3
                         });
                 });

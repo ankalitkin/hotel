@@ -1,7 +1,6 @@
 import {Directive, Input, OnChanges, OnDestroy, SimpleChanges, TemplateRef, ViewContainerRef} from '@angular/core';
-// import {PermissionService} from '../../core/_services/permission.service';
 import {Subscription} from 'rxjs';
-import {PermissionService} from "../_services/permission.service";
+import {PermissionService} from './permission.service';
 
 @Directive({
   selector: '[appPermit]'

@@ -20,7 +20,7 @@ namespace Hotel.Data
 
         public static List<Role> CreateRoles()
         {
-            Role Owner = new Role { RoleId = 1, Name = "Владелец", Rights = (Role.AccessRights)2047 };
+            Role Owner = new Role { RoleId = 1, Name = "Владелец", Rights = (Role.AccessRights)(2047 - Role.AccessRights.CanCheckInOut - Role.AccessRights.CanGetOwnHistory)};
             Role Admin = new Role { RoleId = 2, Name = "Администратор", Rights = Role.AccessRights.CanRegisterClients | Role.AccessRights.CanBookRooms | Role.AccessRights.CanCheckInOut | Role.AccessRights.CanGetAnyHistory | Role.AccessRights.CanGetInfo };
             Role Visitor = new Role { RoleId = 3, Name = "Посетитель", Rights = Role.AccessRights.CanCheckInOut | Role.AccessRights.CanGetOwnHistory | Role.AccessRights.IsCustomer };
 
@@ -49,7 +49,7 @@ namespace Hotel.Data
                 LastName = LastName,
                 BirthDate = RandomDay(),
                 Phone = RandomPhone(),
-                Email = FirstName + "@mail.ru",
+                Email = (lastUserId == 2 ? "owner" : FirstName) + "@mail.ru",
                 Password = "1234567890",
                 ClientId = RandomClientId(),
                 RoleId = roleId,
@@ -61,9 +61,9 @@ namespace Hotel.Data
         public static List<Category> CreateCategory()
         {
 
-            Category Economy = new Category { CategoryId = 1, Name = "Economy" };
-            Category Ordinary = new Category { CategoryId = 2, Name = "Ordinary" };
-            Category Lux = new Category { CategoryId = 3, Name = "Lux" };
+            Category Economy = new Category { CategoryId = 1, Name = "Эконом" };
+            Category Ordinary = new Category { CategoryId = 2, Name = "Стандарт" };
+            Category Lux = new Category { CategoryId = 3, Name = "Люкс" };
 
             List<Category> list = new List<Category> {Economy,Ordinary,Lux };
 

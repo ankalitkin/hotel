@@ -1,21 +1,16 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import { RoomListComponent } from './RoomsManagement/room-list/room-list.component';
-import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.component';
-import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
-
-import { RoomCostListComponent } from './RoomCostManagement/roomcost-list/roomcost-list.component';
-import { RoomCostFormComponent } from './RoomCostManagement/roomcost-form/roomcost-form.component';
-import { RoomCostCreateComponent } from './RoomCostManagement/roomcost-create/roomcost-create.component';
-import { RoomCostEditComponent } from './RoomCostManagement/roomcost-edit/roomcost-edit.component';
-import { RegistrationComponent } from './user/registration/registration.component';
-import { LoginComponent } from './user/login/login.component';
-import { UserhomeComponent } from './user/userhome/userhome.component';
 import {RoomListComponent} from './RoomsManagement/room-list/room-list.component';
 import {RoomCreateComponent} from './RoomsManagement/room-create/room-create.component';
 import {RoomEditComponent} from './RoomsManagement/room-edit/room-edit.component';
-import {CustomersGuard} from "./customers-management-pages/_guards/customers.guard";
+import {RoomCostListComponent} from './RoomCostManagement/roomcost-list/roomcost-list.component';
+import {RoomCostCreateComponent} from './RoomCostManagement/roomcost-create/roomcost-create.component';
+import {RoomCostEditComponent} from './RoomCostManagement/roomcost-edit/roomcost-edit.component';
+import {RegistrationComponent} from './user/registration/registration.component';
+import {LoginComponent} from './user/login/login.component';
+import {UserhomeComponent} from './user/userhome/userhome.component';
+import {CustomersGuard} from './customers-management-pages/_guards/customers.guard';
 
 
 const routes: Routes = [
@@ -65,15 +60,7 @@ const routes: Routes = [
       { path: 'userprofile', component: UserhomeComponent }
     ]
 
-  },
-  {
-    path: 'flogin',
-    loadChildren: () => {
-      return import('./fake-login/fake-login.module')
-        .then(mod => mod.FakeLoginModule);
-    }
-  }
-
+}
 ];
 
 @NgModule({

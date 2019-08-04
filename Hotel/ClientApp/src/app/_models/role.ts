@@ -1,9 +1,9 @@
 export enum AccessRights {
   CanEditRooms = 1,
   CanEditCost = 2,
-  CanEditStuff = 4,
-  CanRegisterClients = 8,
-  CanEditClients = 16,
+  CanEditStaff = 4,
+  CanRegisterCustomers = 8,
+  CanEditCustomers = 16,
   CanBookRooms = 32,
   CanCheckInOut = 64,
   CanGetInfo = 128,
