@@ -11,12 +11,15 @@ import { Router } from '@angular/router';
 })
 export class UserhomeComponent implements OnInit {
 
+  isLoaded: Boolean = false;
   userDetails;
   constructor(private router: Router, private service: UserService) { }
   ngOnInit() {
+    this.isLoaded = false;
     this.service.getUserProfile().subscribe(
       res => {
         this.userDetails = res;
+        this.isLoaded = true;
       },
       err => {
         console.log(err);

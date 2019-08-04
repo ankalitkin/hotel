@@ -53,13 +53,6 @@ namespace Hotel.Controllers
 
             transaction.Cost = (transaction.CheckOutTime - transaction.CheckInTime).Days * GetRoomCost(transaction.RoomId).Result.Value;
 
-            //var thisTransaction = await _context.Transactions.FindAsync(transaction.TransactionId);
-
-            //if (transaction.Cost != thisTransaction.Cost)
-           // {
-                //transaction.IsPaid = false;
-            //}
-
             _context.Entry(transaction).State = EntityState.Modified;
 
             try
@@ -122,8 +115,11 @@ namespace Hotel.Controllers
         [HttpGet("myHistory")]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetMyHistory()
         {
-            int id = 1; // TODO: когда будет регистрация
-            return await _context.Transactions.AsNoTracking().Where(t => t.UserId == id).ToListAsync();
+            int userId = Convert.ToInt32(User.Claims.First(c => c.Type == "userid").Value);
+
+            int id = userId; // TODO: когда будет регистрация
+            var list =  await _context.Transactions.AsNoTracking().Where(t => t.UserId == id).ToListAsync();
+            return list;
         }
 
         public class FinancialInfo
