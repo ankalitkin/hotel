@@ -838,6 +838,8 @@ namespace Hotel.Migrations
 
                     b.Property<string>("LastName");
 
+                    b.Property<string>("Password");
+
                     b.Property<string>("Phone");
 
                     b.Property<int>("RoleId");

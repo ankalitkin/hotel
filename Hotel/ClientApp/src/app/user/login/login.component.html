@@ -1,0 +1,18 @@
+
+  <div class="loginform">
+  <div class="grid">
+      <div id="login">
+        <h2><span class="fontawesome-lock"></span>Войти</h2>
+        <form #form='ngForm' autocomplete="off" (submit)="onSubmit(form)">
+          <fieldset>
+            <p><label for="email">Email</label></p>
+            <p><input type="email" id="email" #Email="ngModel" name="Email" [(ngModel)]="formModel.Email" required></p>
+            <p><label for="password">Пароль</label></p>
+            <p><input id="password" type="password" class="form-control" #Password="ngModel" name="Password" [(ngModel)]="formModel.Password" required ></p>
+            <p><input type="submit" [disabled]="form.invalid" value="Войти"></p>
+          </fieldset>
+        </form>
+      </div> 
+    </div>
+  </div>
+

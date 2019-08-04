@@ -29,6 +29,13 @@ import { RoomListComponent } from './RoomsManagement/room-list/room-list.compone
 import { RoomFormComponent } from './RoomsManagement/room-form/room-form.component';
 import { RoomCreateComponent } from './RoomsManagement/room-create/room-create.component';
 import { RoomEditComponent } from './RoomsManagement/room-edit/room-edit.component';
+import { RegistrationComponent } from './user/registration/registration.component';
+import { LoginComponent } from './user/login/login.component';
+import { UserService } from 'src/app/user/services/user.service';
+import { ToastrModule } from 'ngx-toastr';
+import { UserhomeComponent } from './user/userhome/userhome.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import {SharedModule} from './_shared/shared.module';
 import {MyDateAdapter} from './_shared/calendar_workaround';
 
@@ -49,7 +56,10 @@ import { RoomCostEditComponent } from './RoomCostManagement/roomcost-edit/roomco
     RoomCostFormComponent,
     RoomCostCreateComponent,
     RoomCostEditComponent,
-    DoubleSliderComponent
+    DoubleSliderComponent,
+    RegistrationComponent,
+    LoginComponent,
+    UserhomeComponent
   ],
   imports: [
     BrowserModule,
@@ -60,9 +70,10 @@ import { RoomCostEditComponent } from './RoomCostManagement/roomcost-edit/roomco
     HttpClientModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    //LoadingBarHttpClientModule,
-    //LoadingBarHttpModule,
     LoadingBarRouterModule,
+    ToastrModule.forRoot({
+      progressBar: true
+    }),
     IgxInputGroupModule,
     IgxSliderModule,
     IgxCheckboxModule,
@@ -70,10 +81,9 @@ import { RoomCostEditComponent } from './RoomCostManagement/roomcost-edit/roomco
     SharedModule //
   ],
   providers: [
-/*    {provide: LOCALE_ID, useValue: 'ru-RU'},*/
+/*    {provide: LOCALE_ID, useValue: 'ru'},*/
     {provide: DateAdapter, useClass: MyDateAdapter}
   ],
-  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -14,9 +14,12 @@
   <button mat-button routerLink="staff/">Staff</button>
   <button mat-button routerLink="staff/register">RegisterS</button>
 
+  <button *ngIf="!check_auth()" mat-button routerLink="user/registration">Registration</button>
+  <button *ngIf="!check_auth()" mat-button routerLink="user/login">Login</button>
+  <button *ngIf="check_auth()" mat-button (click)="onLogout()">Logout</button>
+  <button *ngIf="check_auth()" mat-button routerLink="user/userprofile">Profile</button>
 </mat-toolbar>
-
-<div class="mat-app-background basic-container">
+<div class="mat-app-background basic-container p-0">
   <router-outlet></router-outlet>
 </div>
 

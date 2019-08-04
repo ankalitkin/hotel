@@ -10,21 +10,22 @@ namespace Hotel.Entities
 {
     public class User
     {
-        private string password;
+       
 
         public User() {}
-        public User(string firstname, string lastname, string email, string password, string phone)
+        public User(string firstname, string lastname, string email, string password)
         {
             FirstName = firstname;
             LastName = lastname;
             Email = email;
-            this.password = password;
-            Phone = phone;
+            this.Password = password;
+           // Phone = phone;
         }
 
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Password { get; set;}
         public DateTime BirthDate { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }

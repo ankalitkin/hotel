@@ -9,6 +9,9 @@ import { RoomCostListComponent } from './RoomCostManagement/roomcost-list/roomco
 import { RoomCostFormComponent } from './RoomCostManagement/roomcost-form/roomcost-form.component';
 import { RoomCostCreateComponent } from './RoomCostManagement/roomcost-create/roomcost-create.component';
 import { RoomCostEditComponent } from './RoomCostManagement/roomcost-edit/roomcost-edit.component';
+import { RegistrationComponent } from './user/registration/registration.component';
+import { LoginComponent } from './user/login/login.component';
+import { UserhomeComponent } from './user/userhome/userhome.component';
 
 
 const routes: Routes = [
@@ -47,7 +50,17 @@ const routes: Routes = [
     path: 'staff',
     loadChildren: () => import('./staff-management-pages/staff-management-pages.module')
       .then(mod => mod.StaffManagementPagesModule)
+  },
+{
+  path: 'user',
+    children: [
+      { path: 'registration', component: RegistrationComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'userprofile', component: UserhomeComponent }
+    ]
+    
   }
+  
 ];
 
 @NgModule({

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hotel.Migrations
 {
     [DbContext(typeof(HotelContext))]
-    [Migration("20190723112852_e23")]
-    partial class e23
+    [Migration("20190731205056_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -237,6 +237,8 @@ namespace Hotel.Migrations
                     b.Property<bool>("IsDeleted");
 
                     b.Property<string>("LastName");
+
+                    b.Property<string>("Password");
 
                     b.Property<string>("Phone");
 
