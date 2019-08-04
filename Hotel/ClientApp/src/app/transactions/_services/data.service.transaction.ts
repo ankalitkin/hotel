@@ -88,7 +88,7 @@ export class DataServiceTransaction {
 
   
   GetRoom(roomId: number): Observable<Room> {
-    return this.http.get<Room>('/api/Rooms/' + roomId);
+    return this.http.get<Room>('/api/Admin/Rooms/' + roomId);
   }
 
   GetFreeRooms(transaction: Transaction, room: Room): Observable<Room[]> {

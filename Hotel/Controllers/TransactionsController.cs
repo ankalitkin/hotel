@@ -53,12 +53,12 @@ namespace Hotel.Controllers
 
             transaction.Cost = (transaction.CheckOutTime - transaction.CheckInTime).Days * GetRoomCost(transaction.RoomId).Result.Value;
 
-            var thisTransaction = await _context.Transactions.FindAsync(transaction.TransactionId);
+            //var thisTransaction = await _context.Transactions.FindAsync(transaction.TransactionId);
 
-            if (transaction.Cost != thisTransaction.Cost)
-            {
-                transaction.IsPaid = false;
-            }
+            //if (transaction.Cost != thisTransaction.Cost)
+           // {
+                //transaction.IsPaid = false;
+            //}
 
             _context.Entry(transaction).State = EntityState.Modified;
 

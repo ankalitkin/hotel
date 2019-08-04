@@ -44,6 +44,19 @@ import { RoomCostFormComponent } from './RoomCostManagement/roomcost-form/roomco
 import { RoomCostCreateComponent } from './RoomCostManagement/roomcost-create/roomcost-create.component';
 import { RoomCostEditComponent } from './RoomCostManagement/roomcost-edit/roomcost-edit.component';
 
+import { MyHistoryComponent } from '../app/transactions/user-transaction-manager/my-history/my-history.component';
+import { MyHistoryPageComponent } from '../app/transactions/user-transaction-manager-pages/my-history-page/my-history-page.component';
+
+import { TransactionPagesModule } from '../app/transactions/transaction-pages/transaction-pages.module';
+import { TransactionRoutingModule } from '../app/transactions/transaction-pages/transaction-routing.module';
+import { TransactionsModule } from './transactions/transaction/transactions.module';
+
+import { UserTransactionManagerPagesModule } from '../app/transactions/user-transaction-manager-pages/user-transaction-manager-pages.module';
+import { UserTransactionManagerRoutingModule } from '../app/transactions/user-transaction-manager-pages/user-transaction-manager-routing.module';
+import { UserTransactionManagerModule } from './transactions/user-transaction-manager/user-transaction-manager.module';
+
+import { DataServiceTransaction } from './transactions/_services/data.service.transaction';
+
 @NgModule({
 
   declarations: [
@@ -59,7 +72,12 @@ import { RoomCostEditComponent } from './RoomCostManagement/roomcost-edit/roomco
     DoubleSliderComponent,
     RegistrationComponent,
     LoginComponent,
-    UserhomeComponent
+    UserhomeComponent,
+
+    MyHistoryPageComponent,
+    MyHistoryComponent
+
+
   ],
   imports: [
     BrowserModule,
@@ -78,11 +96,21 @@ import { RoomCostEditComponent } from './RoomCostManagement/roomcost-edit/roomco
     IgxSliderModule,
     IgxCheckboxModule,
     LoadingBarRouterModule, //
-    SharedModule //
+    SharedModule, //
+    TransactionPagesModule,
+    UserTransactionManagerPagesModule
+
+    //MyHistoryPageComponent,
+    //MyHistoryComponent
   ],
   providers: [
-/*    {provide: LOCALE_ID, useValue: 'ru'},*/
-    {provide: DateAdapter, useClass: MyDateAdapter}
+    { provide: DateAdapter, useClass: MyDateAdapter },
+    UserService, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+    /*    ,{provide: LOCALE_ID, useValue: 'ru'},*/
   ],
   bootstrap: [AppComponent]
 })

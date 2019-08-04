@@ -50,6 +50,7 @@ namespace Hotel.Data
                 BirthDate = RandomDay(),
                 Phone = RandomPhone(),
                 Email = FirstName + "@mail.ru",
+                Password = "1234567890",
                 ClientId = RandomClientId(),
                 RoleId = roleId,
                 IsDeleted = false };
