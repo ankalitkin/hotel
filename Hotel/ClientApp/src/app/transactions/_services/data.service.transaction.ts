@@ -115,4 +115,14 @@ export class DataServiceTransaction {
   GetRoomCost(roomId: number): Observable<number> {
     return this.http.get<number>(this.baseUrl + '/RoomCost/' + roomId);
   }
+
+  GetTransactionsOfDate(date: Date): Observable<Transaction[]> {
+    let _date = new Date(date).toISOString().substr(0, 10);
+
+    let params = new HttpParams();
+    params = params
+      .append('date', _date);
+
+    return this.http.get<Transaction[]>(this.baseUrl + '/TransactionsOfDate', { params });
+  }
 }

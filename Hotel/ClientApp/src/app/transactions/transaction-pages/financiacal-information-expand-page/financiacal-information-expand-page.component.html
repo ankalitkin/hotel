@@ -1,0 +1,6 @@
+<ng-container *ngIf="isLoaded == true">
+  <financiacal-information-expand [expandData]="expandData"></financiacal-information-expand>
+</ng-container>
+<ng-container *ngIf="isLoaded != true">
+  <mat-spinner [diameter]="50"></mat-spinner>
+</ng-container>

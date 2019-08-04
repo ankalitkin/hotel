@@ -48,11 +48,8 @@
             </div>
 
             <div>
-              <mat-checkbox formControlName="hasMiniBar"> Мини-бар </mat-checkbox>
-            </div>
-
-            <div>
               <mat-checkbox formControlName="isPaid"> Оплачена </mat-checkbox>
+              <mat-checkbox formControlName="hasMiniBar" id="miniBarBut"> Мини-бар </mat-checkbox>
             </div>
 
             <div>
@@ -63,7 +60,7 @@
               <mat-checkbox formControlName="isEvicted"> Выселен </mat-checkbox>
             </div>
 
-            <div>
+            <div align="center">
               <button mat-raised-button [disabled]="_transactionForm.invalid" (click)="SeacrhFreeRooms()">
                 Найти
               </button>
@@ -73,7 +70,7 @@
               <app-edit-transaction-room-list-page [transaction]="patternTrans" [room]="patternRoom" (selectRoomEmitter)="SetSelectRoom($event)"></app-edit-transaction-room-list-page>
             </ng-container>
 
-            <div mat-dialog-actions class="buttons">
+            <div mat-dialog-actions class="buttons" align="center">
 
               <button mat-raised-button [disabled]="_transactionForm.invalid || !isSelectedRoom" (click)="closeDialog()">
                 Сохранить
