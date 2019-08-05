@@ -16,9 +16,11 @@
   IsCustomer = 2048
   -->
   <button *appPermit="'CanGetAnyHistory'" mat-button routerLink="transactions/info">Брони</button>
+  <button *appPermit="'CanGetOwnHistory'" mat-button routerLink="usertransactions/info">Мои брони</button>
   <button *appPermit="'CanEditRooms'" mat-button routerLink="roommanager/rooms">Комнаты</button>
   <button *appPermit="'CanEditCost'" mat-button routerLink="roomcostmanager/roomCosts">Цены</button>
-  <button *appPermit="'CanGetFinancialInformation'" mat-button routerLink="transactions/financicalInfo">ФинОтчёты
+  <button *appPermit="'CanGetFinancialInformation'" mat-button routerLink="transactions/financicalInfo">
+    ФинОтчёты
   </button>
   <button *appPermit="'CanEditCustomers'" mat-button routerLink="customers/">Клиенты</button>
   <button *appPermit="'CanRegisterCustomers'" mat-button routerLink="customers/register">РегКлиент</button>

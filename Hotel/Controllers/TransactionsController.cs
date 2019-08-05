@@ -84,7 +84,9 @@ namespace Hotel.Controllers
         [HttpPost]
         public async Task<ActionResult<Transaction>> PostTransaction([FromBody]Transaction transaction)
         {
-            if(!ValidTransaction(transaction).Result || !ModelState.IsValid)
+            int userId = Convert.ToInt16(User.Claims.First(c => c.Type == "userid").Value);
+            transaction.UserId = userId;
+            if (!ValidTransaction(transaction).Result || !ModelState.IsValid)
             {
                 return BadRequest();
             }
@@ -152,7 +154,7 @@ namespace Hotel.Controllers
             if (start == null)
                 start = DateTime.MinValue;
             if (end == null)
-                end = DateTime.Now;
+                end = DateTime.MaxValue;
             var result = _context.Transactions.AsNoTracking()
             .Where(t => t.CheckInTime >= start && t.CheckInTime <= end && t.IsPaid == true)
             .GroupBy(t => t.CheckInTime.Date)
@@ -239,7 +241,7 @@ namespace Hotel.Controllers
 
             int userId = -1;
 
-            if (roleId == 3) // Обычный пользователь
+            if (roleId == 3 || id == "-1") // Обычный пользователь
             {
                 userId = thisUserId;
             }
@@ -432,7 +434,7 @@ namespace Hotel.Controllers
         [HttpGet("TransactionsOfDate")]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetTransactionsOfDate(DateTime date)
         {
-            date = date.AddDays(1);
+            date = date.AddDays(1); // из-за часового пояся или из-за летнего времени получается на день меньше (времени уже нет решать по-нормальному) :)
             return await _context.Transactions.AsNoTracking().Where(t => t.CheckInTime.Date == date.Date && t.IsPaid == true).ToListAsync();
         }
     }

@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from '../../_models/user';
 import {Role} from '../../_models/role';
-import {Subscription} from 'rxjs';
-import {RoleListService} from '../../user-management/_services/role-list.service';
+import { Subscription } from 'rxjs';
+import { RoleListService } from '../../user-management/_services/role-list.service';
 import {StaffService} from '../_services/staff.service';
 import {ActivatedRoute, Router} from '@angular/router';
 

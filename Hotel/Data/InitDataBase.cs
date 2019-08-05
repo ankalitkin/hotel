@@ -49,10 +49,10 @@ namespace Hotel.Data
                 LastName = LastName,
                 BirthDate = RandomDay(),
                 Phone = RandomPhone(),
-                Email = (lastUserId == 2 ? "owner" : FirstName) + "@mail.ru",
+                Email = (lastUserId == 2 ? "owner" : FirstName + lastUserId.ToString()) + "@mail.ru",
                 Password = "1234567890",
                 ClientId = RandomClientId(),
-                RoleId = roleId,
+                RoleId = lastUserId == 2 ? 1 : roleId,
                 IsDeleted = false };
 
             return user;

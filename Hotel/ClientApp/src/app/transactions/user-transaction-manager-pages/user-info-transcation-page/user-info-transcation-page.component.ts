@@ -29,6 +29,12 @@ export class UserInfoTranscationPageComponent implements OnInit {
   }
 
   loadTransactions(filter?: TransactionFilter) {
+    if (filter == undefined) {
+      filter = new TransactionFilter();
+      filter.clientId = -1;
+    } else {
+      filter.clientId = -1;
+    }
     this.isLoaded = false;
     this.dataService.GetInfo(filter)
       .subscribe((data: Transaction[]) => { this.CompleteLoad(data); });

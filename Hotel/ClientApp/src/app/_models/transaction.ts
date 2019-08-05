@@ -16,7 +16,7 @@ export class Transaction {
   @jsonIgnore() public Loading: Boolean;
 }
 
-export interface TransactionFilter {
+export class TransactionFilter {
 
   clientId: number;
   checkInTime: Date;
