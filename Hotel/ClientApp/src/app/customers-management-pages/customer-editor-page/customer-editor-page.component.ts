@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs';
 import {RoleListService} from '../../user-management/_services/role-list.service';
 import {CustomersService} from '../_services/customers.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-customer-editor-page',
@@ -19,7 +20,8 @@ export class CustomerEditorPageComponent implements OnInit, OnDestroy {
   constructor(private roleListService: RoleListService,
               private customersService: CustomersService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -58,14 +60,14 @@ export class CustomerEditorPageComponent implements OnInit, OnDestroy {
 
   private Return() {
     return () => {
-      alert('Сохранено успешно!');
+      this.toastr.success('Сохранено успешно!');
       this.router.navigate(['/customers/']);
     };
   }
 
   private Error() {
     return () => {
-      alert('Произошла ошибка!');
+      this.toastr.error('Произошла ошибка!');
     };
   }
 
