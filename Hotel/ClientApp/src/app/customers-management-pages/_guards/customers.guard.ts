@@ -14,7 +14,8 @@ export class CustomersGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
-    return this.permissionService.checkPermission('CanEditCustomers');
+    return this.permissionService.checkPermission('CanEditCustomers') ||
+      this.permissionService.checkPermission('CanRegisterCustomers');
   }
 
 }
