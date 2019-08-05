@@ -28,7 +28,7 @@ namespace Hotel.Entities
             IConfigurationRoot configuration = builder.Build();
             _connectionString = configuration.GetSection("ConnectionStrings").GetConnectionString("HotelContext");*/
             // _connectionString = "data source=LAPTOP-G6OO0Q2P\\SQLEXPRESS;initial catalog=HotelProd;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;"; // заачееем??
-            _connectionString = "data source=LAPTOP-G6OO0Q2P\\SQLEXPRESS;initial catalog=HotelProd;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;"; // ПРОСТО ЗАКОМЕНТЬ, Костя, не удаляй
+            _connectionString = "data source=localhost;initial catalog=HotelProd;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;"; // ПРОСТО ЗАКОМЕНТЬ, Костя, не удаляй
         }
 
         public DbSet<User> Users { get; set; }
