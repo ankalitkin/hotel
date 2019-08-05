@@ -47,6 +47,9 @@ import {UserTransactionManagerPagesModule} from './transactions/user-transaction
 import {GuardsCheckEnd, Router} from '@angular/router';
 import {filter, map} from 'rxjs/operators';
 
+import { CategoryListComponent } from './room_client/category-list/category-list.component';
+import { ReservationComponent } from './room_client/reservation/reservation';
+
 registerLocaleData(localeRu);
 
 @NgModule({
@@ -67,7 +70,9 @@ registerLocaleData(localeRu);
     PermitDirective,
     UserhomeComponent,
     MyHistoryPageComponent,
-    MyHistoryComponent
+    MyHistoryComponent,
+    CategoryListComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,

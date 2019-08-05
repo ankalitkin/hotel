@@ -1,28 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { DataServiceRoom } from '../services/data.service.room';
+import { RoomCost } from '../../RoomCostManagement/models/RoomCost';
 import { SliderType } from "igniteui-angular";
-
-import { DataServiceRoomCosts } from '../services/data.service.roomcosts';
-import { RoomCost } from '../models/RoomCost';
-import { Range } from '../models/range';
-import { RoomCostFilter } from '../models/roomCostFilter';
-import { DoubleSliderComponent } from '../../Slider/slider-component'
-//import { slideInBl } from 'igniteui-angular';
+import { RoomCostFilter } from '../../RoomCostManagement/models/roomCostFilter';
+import { Range } from '../../RoomCostManagement/models/range';
 
 enum SortedBy { Cost }
 
 @Component({
-  templateUrl: './roomcost-list.component.html',
-  providers: [DataServiceRoomCosts],
-  styleUrls: ['./roomcost-list.scss']
+  selector: 'app-category-list',
+  templateUrl: './category-list.component.html',
+  styleUrls: ['./category-list.component.scss'],
+  providers: [DataServiceRoom]
 })
+export class CategoryListComponent implements OnInit {
 
-
-
-export class RoomCostListComponent implements OnInit {
   allRoomCosts: RoomCost[]; // Все данные, загруженные с сервера
   roomCosts: RoomCost[];    // Отфильтрованные данные (фильтр)
   masCategoryName: string[] // Массив названий типов комнат
-  = ["Эконом", "Обычный", "Люкс"];
+    = ["Эконом", "Обычный", "Люкс"];
 
   isLoaded: Boolean = false;// Загружены ли все данные
   sortedBy: SortedBy = SortedBy.Cost;//Критерий сортировки (фильтр)
@@ -38,8 +35,13 @@ export class RoomCostListComponent implements OnInit {
     new Range(0, 999999999),
     new Range(1, 5),
     0, 0);
+  constructor(private dataService: DataServiceRoom) { }
 
-  constructor(private dataService: DataServiceRoomCosts) { }
+  imagesPull: string[] = ["https://cache.marriott.com/marriottassets/marriott/EVNMC/evnmc-guestroom-0107-hor-clsc.jpg?interpolation=progressive-bilinear&downsize=378px:*",
+    "https://marriott-sochi-hotel.ru/public/sites/pages/57/45171.jpg",
+    "https://marriott-sochi-hotel.ru/public/sites/pages/57/4789.jpg",
+    "https://marriott-sochi-hotel.ru/public/sites/pages/57/32331.jpg",
+    "https://marriott-sochi-hotel.ru/public/sites/pages/57/45177.jpg"];
 
   ngOnInit() {
     this.load();
@@ -99,30 +101,26 @@ export class RoomCostListComponent implements OnInit {
       this.isInRange(item.cost, this.roomCostFilter.cost) &&
       (this.roomCostFilter.numberOfSeats.lower == 0 ||
         item.numberOfSeats >= this.roomCostFilter.numberOfSeats.lower) &&
-    (this.roomCostFilter.hasMiniBar == 0 ||
-      ((this.roomCostFilter.hasMiniBar == 1) == item.hasMiniBar)) &&
-    (this.roomCostFilter.idCategory == 0 ||
-      this.roomCostFilter.idCategory == item.categoryId));
+      (this.roomCostFilter.hasMiniBar == 0 ||
+        ((this.roomCostFilter.hasMiniBar == 1) == item.hasMiniBar)) &&
+      (this.roomCostFilter.idCategory == 0 ||
+        this.roomCostFilter.idCategory == item.categoryId));
   }
 
   public load() {
     this.isLoaded = false;
-    this.dataService.getProducts().subscribe((data: RoomCost[]) => {
+    this.dataService.getRooms().subscribe((data: RoomCost[]) => {
       this.allRoomCosts = data;//(фильтр)
       this.mincost = this.maxcost = -1;//(фильтр)
       this.isLoaded = true;
       this.filter();//(фильтр)
       this.sortByOption();//(фильтр)
     });
-   
-  }
 
-  delete(roomCostId: number) {
-    this.dataService.deleteProduct(roomCostId).subscribe(data => this.load());
   }
 
   boolToRus(boolvar: boolean) {
-    return boolvar ? "Присутсвует" : "Отсутствует";
+    return boolvar ? "Есть" : "Нет";
   }
 
   nameOfCategory(idCategory: number) {
@@ -170,4 +168,16 @@ export class RoomCostListComponent implements OnInit {
     return this.isFilter ? "Спрятать фильтр" : "Показать фильтр";
   }
 
+  oldToken: string;
+  reload = true;
+
+  check_auth() {
+    const token = localStorage.getItem('token');
+    if (this.oldToken !== token) {
+      this.oldToken = token;
+      setTimeout(() => this.reload = false);
+      setTimeout(() => this.reload = true);
+    }
+    return localStorage.getItem('token') != null;
+  }
 }

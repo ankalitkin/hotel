@@ -13,8 +13,9 @@ import {UserhomeComponent} from './user/userhome/userhome.component';
 import {CustomersGuard} from './customers-management-pages/_guards/customers.guard';
 import {RoomManagementGuard} from './RoomsManagement/_guards/roomManagement.guard';
 import {RoomCostManagementGuard} from './RoomCostManagement/_guards/roomCostManagement.guard';
-import {StaffGuard} from './staff-management-pages/_guards/staff.guard';
-
+import { StaffGuard } from './staff-management-pages/_guards/staff.guard';
+import { ReservationComponent } from './room_client/reservation/reservation';
+import { CategoryListComponent } from './room_client/category-list/category-list.component';
 
 const routes: Routes = [
   {
@@ -69,7 +70,9 @@ const routes: Routes = [
       { path: 'userprofile', component: UserhomeComponent }
     ]
 
-}
+  },
+  { path: 'categories', component: CategoryListComponent },
+  { path: 'reservation/:id', component: ReservationComponent}
 ];
 
 @NgModule({

@@ -43,6 +43,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\app\room_client\reservation\" />
+    <Folder Include="ClientApp\src\app\room_client\Новая папка\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

@@ -1,16 +1,19 @@
-<div class="wrapper container category">
-  <button routerLink="../createRoomCost" class="mat-fab search-button">Добавить</button>
-  <button mat-button (click)="onFilter()">{{filterName()}}</button>
-  <button class="search-button" mat-fab (click)="onSearchClick()">Поиск</button>
-</div>
-
-<ng-container *ngIf="isLoaded != true">
+<ng-container *ngIf="!isLoaded">
   <div align="center">
     <span> Идёт загрузка данных.Пожалуйста подождите... </span>
     <br />
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
 </ng-container>
+
+<div class="wrapper container category" id="first">
+  <div>&nbsp;</div>
+  <button type="button" class="btn btn-secondary" (click)="onFilter()">{{filterName()}}</button>
+  <button *ngIf="isFilter" type="button" class="btn btn-secondary"(click)="onSearchClick()">Поиск</button>
+
+  <div>&nbsp;</div>
+
+</div>
 
 <!--Начало блока фильтра-->
 <div *ngIf="isLoaded && isFilter">
@@ -51,7 +54,7 @@
     <igx-checkbox [checked]="1" [(ngModel)]="roomCostFilter.hasMiniBar">
       Наличие минибара
     </igx-checkbox>
-    <p id="pCenter"> 
+    <p id="pCenter">
       Отсортировать:
       <mat-button-toggle-group name="orderOfSearch" aria-label="Order of Search" [(ngModel)]="order">
         <mat-button-toggle value="-1" (change)="onSearchClick()">По убыванию</mat-button-toggle>
@@ -59,30 +62,28 @@
       </mat-button-toggle-group>
     </p>
   </div>
- 
+
 </div>
 <!--Конец блока фильтра-->
 
-<table *ngIf="isLoaded" class="table table-striped">
-  <thead>
-    <tr>
-      <td>Категория</td>
-      <td>Кол-во мест</td>
-      <td>Минибар</td>
-      <td>Стоимость</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let r of roomCosts">
-      <td>{{nameOfCategory(r?.categoryId)}}</td>
-      <td>{{r?.numberOfSeats}}</td>
-      <td>{{boolToRus(r?.hasMiniBar)}}</td>
-      <td>{{r?.cost}}</td>
-      <td>
-        <a [routerLink]="['../roomCostEdit', r.roomCostId]" class="btn btn-sm btn-primary">Изменить</a>
-
-        <button (click)="delete(r.roomCostId)" class="btn btn-sm btn-danger">Удалить</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf="isLoaded" class="container d-flex mt-5">
+  <div class="row justify-content-center ">
+    <div class="col-4" *ngFor="let r of roomCosts">
+      <div class="img-class">
+        <img src="{{imagesPull[r?.categoryId - 1 + r?.hasMiniBar + (r?.cost>=10000)]}}" />
+      </div>
+      <div class="About-container pt-2 pl-2 " style="background-color:white">
+        <span class="info">{{"Класс: " + nameOfCategory(r?.categoryId)}}</span><br />
+        <span class="info">{{"Кол-во мест: " + r?.numberOfSeats}}</span><br />
+        <span class="info">{{"Минибар: " + boolToRus(r?.hasMiniBar)}}</span><br />
+        <span class="info">{{"Стоимость: " + r?.cost + "руб."}}</span>
+          <div class="card-footer m-0 pl-0 d-flex justify-content-between" style="background-color:white; border:none">
+            <button type="button" class="btn btn-success">
+              <div *ngIf="check_auth()"  [routerLink]="['../reservation', r.roomCostId]">Выбрать</div>
+              <div *ngIf="!check_auth()" routerLink="../user/login">Войти на сайт</div>
+            </button>
+          </div>
+</div>
+    </div>
+  </div>
+</div>

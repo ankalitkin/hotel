@@ -1,0 +1,50 @@
+<div *ngIf="loaded">
+  <h2>Бронирование комнаты</h2>
+
+  <div class="center-block">
+    <span class="info">Класс: &nbsp;<strong>{{nameOfCategory(roomCost?.categoryId) + "  "}}</strong></span>
+    <span class="info">Кол-во мест: &nbsp;<strong>{{roomCost?.numberOfSeats + "   "}}&nbsp;</strong></span>
+    <span class="info">Минибар: &nbsp;<strong>{{boolToRus(roomCost?.hasMiniBar)}}</strong></span><br />
+    <span class="info">Стоимость: &nbsp;<strong>{{roomCost?.cost + "руб."}}</strong></span>
+  </div>
+  <div class="img-class center-block">
+    <img src="{{imagesPull[roomCost?.categoryId - 1 + roomCost?.hasMiniBar + (roomCost?.cost>=10000)]}}" />
+  </div>
+</div>
+
+<!--Ввод даты заезда, в roomCost - тип комнаты, остается найти свободные на этотт период и всё..-->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div class="data">
+        <p align="center">Выбор даты заезда</p>
+        <ng-container [formGroup]="_filterForm">
+
+          <div align="center" class="form">
+            <mat-form-field class="form1">
+              <input matInput [matDatepicker]="picker" formControlName="start" [(ngModel)]="start">
+              <mat-label>Дата начала </mat-label>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="form1">
+              <input matInput [matDatepicker]="picker1" formControlName="end" [(ngModel)]="end">
+              <mat-label>Дата конца </mat-label>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+        </ng-container>
+
+        <div align="center" class="buttons">
+          <button mat-raised-button (click)="alert(start);">
+            Забронировать
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
