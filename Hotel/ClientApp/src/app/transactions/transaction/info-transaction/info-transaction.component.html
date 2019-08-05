@@ -56,9 +56,9 @@
             <div class="row justify-content-center">
               <div class="col-10">
                 <div align="center">
-                  <button mat-raised-button [disabled]="element.isPaid == true || element.isEvicted == true" (click)="element.isPaid = true; putTransaction(element);"> Оплатить </button>
+                  <button mat-raised-button [disabled]="element.isPaid == true || element.isEvicted == true || element.isCanceled == true" (click)="element.isPaid = true; putTransaction(element);"> Оплатить </button>
 
-                  <button mat-raised-button [disabled]="element.isPaid != true || element.isEvicted == true" (click)="element.isEvicted = true; putTransaction(element);"> Выселить </button>
+                  <button mat-raised-button [disabled]="element.isPaid != true || element.isEvicted == true  || element.isCanceled == true" (click)="element.isEvicted = true; putTransaction(element);"> Выселить </button>
 
                   <button mat-raised-button [routerLink]="'./edit/' + element.transactionId"> Редактировать </button>
 

@@ -48,21 +48,33 @@
             </div>
 
             <div>
-              <mat-checkbox formControlName="hasMiniBar"> Мини-бар </mat-checkbox>
+              <mat-checkbox formControlName="hasMiniBar" id="miniBarBut"> Мини-бар </mat-checkbox>
+            </div>
+
+            <div align="center">
+              <button mat-raised-button [disabled]="_transactionForm.invalid" (click)="SeacrhFreeRooms()">
+                Найти
+              </button>
+            </div>
+
+            <ng-container *ngIf="isOpenFreeRoom">
+              <app-user-edit-transaction-room-list-page [transaction]="patternTrans" [room]="patternRoom" (selectRoomEmitter)="SetSelectRoom($event)"></app-user-edit-transaction-room-list-page>
+            </ng-container>
+
+            <div mat-dialog-actions class="buttons" align="center">
+
+              <button mat-raised-button [disabled]="_transactionForm.invalid || !isSelectedRoom" (click)="closeDialog()">
+                Сохранить
+              </button>
+
+              <button mat-raised-button (click)="CancelClick()">
+                Отмена
+              </button>
             </div>
 
           </ng-container>
         </div>
-        <div mat-dialog-actions class="buttons">
 
-          <button mat-raised-button [disabled]="_transactionForm.invalid" (click)="closeDialog()">
-            Сохранить
-          </button>
-
-          <button mat-raised-button (click)="CancelClick()">
-            Отмена
-          </button>
-        </div>
 
       </div>
     </div>

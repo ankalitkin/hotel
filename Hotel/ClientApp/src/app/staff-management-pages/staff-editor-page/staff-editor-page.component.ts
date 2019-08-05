@@ -1,10 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from '../../_models/user';
 import {Role} from '../../_models/role';
-import {Subscription} from 'rxjs';
-import {RoleListService} from '../../user-management/_services/role-list.service';
+import { Subscription } from 'rxjs';
+import { RoleListService } from '../../user-management/_services/role-list.service';
 import {StaffService} from '../_services/staff.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-staff-editor-page',
@@ -19,7 +20,8 @@ export class StaffEditorPageComponent implements OnInit, OnDestroy {
   constructor(private roleListService: RoleListService,
               private staffService: StaffService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -58,14 +60,14 @@ export class StaffEditorPageComponent implements OnInit, OnDestroy {
 
   private Return() {
     return () => {
-      alert('Сохранено успешно!');
+      this.toastr.success('Сохранено успешно!');
       this.router.navigate(['/staff/']);
     };
   }
 
   private Error() {
     return () => {
-      alert('Произошла ошибка!');
+      this.toastr.error('Произошла ошибка!');
     };
   }
 

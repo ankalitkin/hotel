@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Hotel.Entities;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hotel.Controllers
 {
@@ -22,6 +24,7 @@ namespace Hotel.Controllers
         }
 
         // GET: api/Transactions
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetTransactions()
         {
@@ -29,6 +32,7 @@ namespace Hotel.Controllers
         }
 
         // GET: api/Transactions/5
+        [Authorize]
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Transaction>> GetTransaction(int id)
         {
@@ -43,6 +47,7 @@ namespace Hotel.Controllers
         }
 
         // PUT: api/Transactions/5
+        [Authorize]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> PutTransaction(int id, [FromBody]Transaction transaction)
         {
@@ -75,10 +80,13 @@ namespace Hotel.Controllers
         }
 
         // POST: api/Transactions
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Transaction>> PostTransaction([FromBody]Transaction transaction)
         {
-            if(!ValidTransaction(transaction).Result)
+            int userId = Convert.ToInt16(User.Claims.First(c => c.Type == "userid").Value);
+            transaction.UserId = userId;
+            if (!ValidTransaction(transaction).Result || !ModelState.IsValid)
             {
                 return BadRequest();
             }
@@ -91,9 +99,12 @@ namespace Hotel.Controllers
         }
 
         // DELETE: api/Transactions/5
+        [Authorize]
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<Transaction>> DeleteTransaction(int id)
         {
+            return BadRequest();
+
             var transaction = await _context.Transactions.FindAsync(id);
 
             if (transaction == null)
@@ -112,12 +123,13 @@ namespace Hotel.Controllers
         }
 
         // GET HISTORY: api/Transactions/myHistory
+        [Authorize]
         [HttpGet("myHistory")]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetMyHistory()
         {
-            int userId = Convert.ToInt32(User.Claims.First(c => c.Type == "userid").Value);
+            int userId = Convert.ToInt16(User.Claims.First(c => c.Type == "userid").Value);
 
-            int id = userId; // TODO: когда будет регистрация
+            int id = userId; 
             var list =  await _context.Transactions.AsNoTracking().Where(t => t.UserId == id).ToListAsync();
             return list;
         }
@@ -135,13 +147,14 @@ namespace Hotel.Controllers
         }
 
         // GET INFO: api/transactions/FinancialInformation?start=2019-07-13&end=2019-07-16
+        [Authorize]
         [HttpGet("FinancialInformation")]
         public async Task<ActionResult<IEnumerable<FinancialInfo>>> GetFinancialInformation(DateTime? start, DateTime? end)
         {
             if (start == null)
                 start = DateTime.MinValue;
             if (end == null)
-                end = DateTime.Now;
+                end = DateTime.MaxValue;
             var result = _context.Transactions.AsNoTracking()
             .Where(t => t.CheckInTime >= start && t.CheckInTime <= end && t.IsPaid == true)
             .GroupBy(t => t.CheckInTime.Date)
@@ -186,6 +199,7 @@ namespace Hotel.Controllers
         }
 
         // GET: api/Transactions/ExpandData/3
+        [Authorize]
         [HttpGet("ExpandData/{id:int}")]
         public async Task<ActionResult<ExpandData>> GetExpandData(int id)
         {
@@ -211,10 +225,26 @@ namespace Hotel.Controllers
         }
 
         // GET: api/Transactions/Info?start=2019-07-13&end=2019-07-16&type=all&id=123456789012
+        [Authorize]
         [HttpGet("Info")]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetInfo(DateTime? start, DateTime? end, string type, string id)
         {
             // TODO: если запрос от пользователя, то выдать только его транзакции(т.е. присвоить нужное значение id)
+            int roleId = Convert.ToInt16(User.Claims.First(c => c.Type == ClaimsIdentity.DefaultRoleClaimType).Value);
+            int thisUserId = Convert.ToInt16(User.Claims.First(c => c.Type == "userid").Value);
+
+
+            if (roleId <= 0 || roleId >3)
+            {
+                return BadRequest();
+            }
+
+            int userId = -1;
+
+            if (roleId == 3 || id == "-1") // Обычный пользователь
+            {
+                userId = thisUserId;
+            }
 
             bool isPaid = false, isCanceled = false, all = false, isReadyComeIn = false, isReadyComeOut = false;
 
@@ -249,8 +279,7 @@ namespace Hotel.Controllers
                     }
             }
 
-            int userId = -1;
-            if (id != null)
+            if (id != null && userId == -1)
             {
                 var user = await _context.Users.Where(u => u.ClientId == id).FirstOrDefaultAsync();
                 userId = user != null ? user.UserId : userId;
@@ -263,7 +292,7 @@ namespace Hotel.Controllers
 
 
             var list = await _context.Transactions.AsNoTracking()
-                .Where(t => (id == null) || t.UserId == userId)
+                .Where(t => (id == null && userId==-1) || t.UserId == userId)
                 .Where(t => start == null || t.CheckInTime >= start)
                 .Where(t => end == null || t.CheckOutTime <= end)
                 .Where(t => all ||
@@ -277,6 +306,7 @@ namespace Hotel.Controllers
 
         // GET: api/Transactions/FreeRooms?start=2019-07-13&end=2019-07-16&type=3&seats=2&minibar=true
         [HttpGet("FreeRooms")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Room>>> GetFreeRooms(DateTime start, DateTime end, int? type, int? seats, bool? minibar)
         {
             var queryGoodRooms = from room in _context.Rooms
@@ -299,6 +329,7 @@ namespace Hotel.Controllers
         // При редактировании транзакции
         // POST: api/Transactions/RoomId
         [HttpPost("RoomId")]
+        [Authorize]
         public async Task<ActionResult<int>> GetFreeRoomId([FromBody]RoomAndTransaction roomAndTransaction)
         {   // сейчас у transaction другой RoomId, чем у room, ибо room - новая возможная комната и 
             // если она проходит проверку, то нужно узнать её id
@@ -330,6 +361,7 @@ namespace Hotel.Controllers
         }
 
         [HttpGet("RoomCost/{id:int}")]
+        [Authorize]
         public async Task<ActionResult<int>> GetRoomCost(int id)
         {
             var room = await _context.Rooms.FindAsync(id);
@@ -398,10 +430,11 @@ namespace Hotel.Controllers
         }
 
         // GET: api/Transactions/TransactionsOfDate
+        [Authorize]
         [HttpGet("TransactionsOfDate")]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetTransactionsOfDate(DateTime date)
         {
-            date = date.AddDays(1);
+            date = date.AddDays(1); // из-за часового пояся или из-за летнего времени получается на день меньше (времени уже нет решать по-нормальному) :)
             return await _context.Transactions.AsNoTracking().Where(t => t.CheckInTime.Date == date.Date && t.IsPaid == true).ToListAsync();
         }
     }

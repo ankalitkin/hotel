@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Transaction } from '../../../_models/transaction';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Room } from 'src/app/_models/room';
+import { UserEditTransactionRoomListPageComponent } from '../../user-transaction-manager-pages/user-edit-transaction-room-list-page/user-edit-transaction-room-list-page.component';
 
 @Component({
   selector: 'user-edit-transaction-dialog',
@@ -15,10 +16,19 @@ export class UserEditTransactionDialogComponent implements OnInit {
   EditedTransaction?: Transaction;
   Room?: Room;
 
+  @ViewChild(UserEditTransactionRoomListPageComponent, { static: false }) editlist: UserEditTransactionRoomListPageComponent;
+
+  patternTrans?: Transaction;
+  patternRoom?: Room;
+  selectedRoom?: Room;
+
   @Output() transactionChange = new EventEmitter<Transaction>();
 
   typeList = [{ value: '1', viewValue: 'Эконом' }, { value: '2', viewValue: 'Обычный' }, { value: '3', viewValue: 'Люкс' }];
   _transactionForm: FormGroup;
+
+  isOpenFreeRoom: Boolean = false;
+  isSelectedRoom: Boolean = true;
 
   constructor(
     private fb: FormBuilder,
@@ -52,18 +62,55 @@ export class UserEditTransactionDialogComponent implements OnInit {
   }
 
   closeDialog() {
-    this.dialogRef.close({
-      transaction:
-      {
-        ...this.EditedTransaction,
-        ...this._transactionForm.value
-      },
-      room:
-      {
+    let transaction = {
+      ...this.EditedTransaction,
+      ...this._transactionForm.value
+    };
+
+    let room = this.selectedRoom;
+    if (room == undefined) {
+      room = {
         ...this.Room,
         ...this._transactionForm.value
       }
-    });
+    }
+
+    console.log(room);
+    this.dialogRef.close(
+      {
+        transaction: transaction,
+        room: room
+      }
+    );
+  }
+
+  SeacrhFreeRooms() {
+
+    this.isSelectedRoom = false;
+    this.selectedRoom = undefined;
+    this.isOpenFreeRoom = true;
+
+    this.patternTrans = {
+      ...this.EditedTransaction,
+      ...this._transactionForm.value
+    };
+
+    this.patternRoom = {
+      ...this.Room,
+      ...this._transactionForm.value
+    };
+
+
+
+    if (this.editlist != undefined)
+      this.editlist.update(this.patternTrans, this.patternRoom);
+  }
+
+  SetSelectRoom(room: Room) {
+    console.log("SEET");
+    console.log(room);
+    this.isSelectedRoom = true;
+    this.selectedRoom = room;
   }
 
 

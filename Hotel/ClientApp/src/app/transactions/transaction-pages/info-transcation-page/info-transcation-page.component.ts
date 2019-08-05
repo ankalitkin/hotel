@@ -30,13 +30,9 @@ export class InfoTranscationPageComponent implements OnInit {
 
   loadTransactions(filter?: TransactionFilter) {
     this.isLoaded = false;
-    if (filter == undefined) {
-      this.dataService.GetTransactions()
-        .subscribe((data: Transaction[]) => { this.CompleteLoad(data); });
-    } else {
-      this.dataService.GetInfo(filter)
-        .subscribe((data: Transaction[]) => { this.CompleteLoad(data); });
-    }
+
+    this.dataService.GetInfo(filter)
+      .subscribe((data: Transaction[]) => { this.CompleteLoad(data); });
   }
 
   CompleteLoad(data: Transaction[]) {
